@@ -4,29 +4,36 @@ using UnityEngine;
 
 // This is the main game controller.
 public class Controller : MonoBehaviour {
-    public float timedEventA = 5.0f;
+    public float timedEventA = 3f;
     EventManager eventManager = new EventManager();
 
     // Tracks he currently active event.
     private CustomEvent _currentEvent;
 
-    public GameObject proposalBox;
+    public GameObject proposalBoxPrefab;
 
     // Track the world controller:
     public GameObject worldControllerObj;
 
+    public GameObject scrollView;
+
     // Track the tilemap:
-    
+
+    public List<ProposalEvent> pEvents = new List<ProposalEvent>();
+
 
     void Start () {
-        proposalBox = GameObject.Find("ProposalBox");
-        proposalBox.SetActive(false);
+        proposalBoxPrefab = GameObject.Find("Canvas/Panel");
+        proposalBoxPrefab.SetActive(false);
 
         // Create the world controller:
         worldControllerObj = new GameObject();
         worldControllerObj.AddComponent(typeof(WorldController));
         //worldControllerObj.GetComponent(typeof(WorldController));
 
+        
+
+       
     }
 
     void Update () {
@@ -34,8 +41,10 @@ public class Controller : MonoBehaviour {
 	}
 
     void doProposalEvent() {
-        _currentEvent = eventManager.getProposalEvent();
-        proposalBox.SetActive(true);
+        pEvents.Add(eventManager.getProposalEvent());
+        ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
+        viewAdapter.OnRecieveNewProposals(pEvents);
+        proposalBoxPrefab.SetActive(true);
     }
 
     void Timer() {
@@ -58,6 +67,8 @@ public class Controller : MonoBehaviour {
         else {
             
         }
-        proposalBox.SetActive(false);
+        proposalBoxPrefab.SetActive(false);
     }
+
+
 }
