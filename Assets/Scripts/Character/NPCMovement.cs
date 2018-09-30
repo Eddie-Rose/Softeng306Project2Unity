@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class controls the movement of an NPC.
 public class NPCMovement : MonoBehaviour {
     public float moveSpeed;
 
@@ -14,33 +15,29 @@ public class NPCMovement : MonoBehaviour {
     public float waitTime;
     private float waitCounter;
     private int walkDirection;
-    // Use this for initialization
-    void Start()
-    {
+    
+    void Start() {
         myRigidBody = GetComponent<Rigidbody2D>();
 
         waitCounter = waitTime;
         walkCounter = walkTime;
-
     }
-    public void chooseDirection()
-    {
+
+    public void chooseDirection() {
         walkDirection = Random.Range(0, 4);
         isWalking = true;
         walkCounter = walkTime;
     }
-    // Update is called once per frame
+   
     void Update () {
-        if(isWalking)
-        {
+        if (isWalking) {
             walkCounter -= Time.deltaTime;
-            if(walkCounter <= 0)
-            {
+            if (walkCounter <= 0) {
                 isWalking = false;
                 waitCounter = waitTime;
             }
-            switch(walkDirection)
-            {
+
+            switch (walkDirection) {
                 case 0:
                     myRigidBody.velocity = new Vector2(0, moveSpeed);
                     break;
@@ -55,13 +52,11 @@ public class NPCMovement : MonoBehaviour {
                     break;
             }
         }
-        else
-        {
+        else {
             waitCounter -= Time.deltaTime;
             myRigidBody.velocity = Vector2.zero;
 
-            if(waitCounter < 0 )
-            {
+            if (waitCounter < 0 ) {
                 chooseDirection();
             }
         }
