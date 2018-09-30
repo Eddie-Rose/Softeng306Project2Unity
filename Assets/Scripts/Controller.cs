@@ -5,6 +5,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour {
     public GameObject dot;
     public float timedEventA = 5.0f;
+    EventManager eventManager = new EventManager();
 
     // Use this for initialization
     void Start () {
@@ -17,14 +18,13 @@ public class Controller : MonoBehaviour {
         Timer();
 	}
 
-    void DoDetect()
+    void doProposalEvent()
     {
 
         Debug.Log("Hi there");
-        dot = GameObject.Find("BLUE DOT");
-        SimpleController other = (SimpleController)dot.GetComponent(typeof(SimpleController));
-        other.ChangeColor();
-        
+        ProposalEvent test = eventManager.getProposalEvent();
+        test.consequence();
+
     }
 
     void Timer() {
@@ -34,7 +34,7 @@ public class Controller : MonoBehaviour {
         if (timedEventA <= 0.0f)
         {
             Debug.Log("Bye There");
-            DoDetect();
+            doProposalEvent();
             timedEventA = 5.0f;
         }
 
