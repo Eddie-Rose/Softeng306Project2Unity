@@ -14,13 +14,14 @@ public class ScrollViewAdapter : MonoBehaviour {
 		
 	}
 
-    public void UpdateItems(){
+    public void UpdateItems() {
 
     } 
 	
+    /*
 	void FetchItemModels (int count, Action onDone) {
-		yeild return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(2f);
 	}
-
+    */
    
 }

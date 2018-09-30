@@ -17,6 +17,6 @@ public class WorldObject : MonoBehaviour {
 	}
 	
 	void Update () {
-        sr.sortingOrder = (int) -transform.position.y;
+        sr.sortingOrder = (int) Mathf.Floor(-transform.position.y);
 	}
 }

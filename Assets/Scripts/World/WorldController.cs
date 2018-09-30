@@ -8,8 +8,8 @@ public class WorldController : MonoBehaviour {
 	void Start () {
         Debug.Log("Creating world controller...");
 
-        CreateNPC(32, 0);
-        CreateNPC(32, 16);
+        CreateNPC(1, 0);
+        CreateNPC(1, 1);
 	}
 	
 	void Update () {
@@ -25,11 +25,13 @@ public class WorldController : MonoBehaviour {
         npc.transform.position = new Vector3(x, y, 1);
         npc.AddComponent<SpriteRenderer>();
         npc.AddComponent<WorldObject>();
+        //  npc.AddComponent<Rigidbody2D>();
 
         // Create and add the sprite:
         //@@TODO: randomly generate the NPC.
         Sprite tex = Resources.Load<Sprite>("Placeholder");
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
         npc.GetComponent<SpriteRenderer>().sprite = tex;
+        
     }
 }
