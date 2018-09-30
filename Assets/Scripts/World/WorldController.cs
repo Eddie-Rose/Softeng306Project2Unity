@@ -28,7 +28,8 @@ public class WorldController : MonoBehaviour {
 
         // Create and add the sprite:
         //@@TODO: randomly generate the NPC.
+        Sprite tex = Resources.Load<Sprite>("Placeholder");
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
-        npc.GetComponent<SpriteRenderer>().sprite = tex ;
+        npc.GetComponent<SpriteRenderer>().sprite = tex;
     }
 }
