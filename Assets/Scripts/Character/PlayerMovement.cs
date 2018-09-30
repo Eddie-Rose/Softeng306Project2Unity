@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Event : MonoBehaviour {
+// This class controls the movement of the player.
+public class PlayerMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

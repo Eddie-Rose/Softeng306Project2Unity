@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // This class controls the movement of an NPC.
+// This includes a 'loop' of behaviour, where the NPC will wander around the
+// environment and interact with various items.
 public class NPCMovement : MonoBehaviour {
     public float moveSpeed;
 
