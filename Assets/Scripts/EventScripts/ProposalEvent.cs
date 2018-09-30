@@ -10,8 +10,6 @@ public class ProposalEvent : CustomEvent{
 
     //identifies the chance of a risk/reward consequence occuring
     public float _chance;
-    
-
 
     public ProposalEvent(string name, string description, int risk, int reward,float chance)
     {

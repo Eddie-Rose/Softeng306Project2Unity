@@ -6,24 +6,28 @@ public class Controller : MonoBehaviour {
     public GameObject dot;
     public float timedEventA = 5.0f;
     EventManager eventManager = new EventManager();
+    private CustomEvent _currentEvent;
+    public GameObject proposalBox;
 
     // Use this for initialization
     void Start () {
-        Timer();
-        
+        proposalBox = GameObject.Find("ProposalBox");
+        proposalBox.SetActive(false);
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         Timer();
 	}
 
     void doProposalEvent()
     {
-
         Debug.Log("Hi there");
-        ProposalEvent test = eventManager.getProposalEvent();
-        test.consequence();
+        _currentEvent = eventManager.getProposalEvent();
+        proposalBox.SetActive(true);
+
 
     }
 
@@ -39,4 +43,21 @@ public class Controller : MonoBehaviour {
         }
 
     }
+
+    public void doEvent(bool execute) {
+        Debug.Log("clicked");
+        if (execute){
+
+            _currentEvent.consequence();
+
+        }
+        else{
+
+
+
+        }
+        proposalBox.SetActive(false);
+
+    }
+
 }
