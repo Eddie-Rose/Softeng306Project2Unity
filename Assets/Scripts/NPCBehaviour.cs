@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCbehaviour : MonoBehaviour{
+public class NPCBehaviour : MonoBehaviour {
 
     public float moveSpeed;
 
