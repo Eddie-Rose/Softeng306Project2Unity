@@ -41,6 +41,11 @@ public class Controller : MonoBehaviour {
 	}
 
     void doProposalEvent() {
+        pEvents.Clear();
+        for (int x = 0; x < 5; x++)
+        {
+            pEvents.Add(eventManager.getProposalEvent());
+        }
         pEvents.Add(eventManager.getProposalEvent());
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
@@ -69,6 +74,8 @@ public class Controller : MonoBehaviour {
         }
         proposalBoxPrefab.SetActive(false);
     }
+
+
 
 
 }

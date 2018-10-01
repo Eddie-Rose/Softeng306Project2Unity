@@ -28,9 +28,15 @@ public class ScrollViewAdapter : MonoBehaviour
 
         views.Clear();
 
+        int x = 0;
         foreach (var model in models)
         {
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
+            x++;
+            instance.name = "Proposal Box " + x;
+            ProposalBoxScript boxScript = (ProposalBoxScript)instance.GetComponent(typeof(ProposalBoxScript));
+
+            boxScript.attachedEvent = model;
             instance.transform.SetParent(content, false);
             var view = InitializePrefabView(instance, model);
             views.Add(view);
@@ -44,8 +50,8 @@ public class ScrollViewAdapter : MonoBehaviour
         ProposalPrefabView view = new ProposalPrefabView(viewGameObject.transform);
 
         view.summary.text = model._description;
-        view.benefits.text = model._reward.ToString();
-        view.detriments.text = model._risk.ToString();
+        view.benefits.text = "Potential reward: $" + model._reward + "k";
+        
 
         return view;
     }
@@ -63,7 +69,7 @@ public class ScrollViewAdapter : MonoBehaviour
     public class ProposalPrefabView
     {
 
-        public Text summary, benefits, detriments;
+        public Text summary, benefits;
         public Button accept, reject;
 
         public ProposalPrefabView(Transform rootView)
@@ -71,7 +77,7 @@ public class ScrollViewAdapter : MonoBehaviour
 
             summary = rootView.Find("ProposalSummary").GetComponent<Text>();
             benefits = rootView.Find("Benefits").GetComponent<Text>();
-            detriments = rootView.Find("Detriments").GetComponent<Text>();
+            
 
         }
 

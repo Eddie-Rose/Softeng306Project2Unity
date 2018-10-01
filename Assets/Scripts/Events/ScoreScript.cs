@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour {
 
     public int money;
+    public int happiness;
     public Text scoreText;
     float showMoney = 5f;
 
@@ -13,10 +14,14 @@ public class ScoreScript : MonoBehaviour {
 	void Start () {
         scoreText = GetComponent<Text>();
         money = 0;
+        happiness = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        scoreText.text = money.ToString();
+        scoreText.text = "";
+        scoreText.text +=  "CAPITAL:" + money.ToString() + "        ";
+        scoreText.text += "TEAM HAPPINESS:" + happiness.ToString() + "\n";
+
     }
 }
