@@ -52,9 +52,9 @@ public class Controller : MonoBehaviour {
         timedEventA -= Time.deltaTime;
 
         if (timedEventA <= 0.0f) {
-            Debug.Log("Bye There");
-            doProposalEvent();
-            timedEventA = 5.0f;
+           // Debug.Log("Bye There");
+            //doProposalEvent();
+            //timedEventA = 5.0f;
         }
 
     }
