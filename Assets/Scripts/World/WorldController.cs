@@ -25,13 +25,18 @@ public class WorldController : MonoBehaviour {
         npc.transform.position = new Vector3(x, y, 1);
         npc.AddComponent<SpriteRenderer>();
         npc.AddComponent<WorldObject>();
-        //  npc.AddComponent<Rigidbody2D>();
+        npc.AddComponent<Rigidbody2D>();
+        npc.AddComponent<EdgeCollider2D>();
 
         // Create and add the sprite:
         //@@TODO: randomly generate the NPC.
         Sprite tex = Resources.Load<Sprite>("Placeholder");
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
         npc.GetComponent<SpriteRenderer>().sprite = tex;
+
+        // Set the position of the edge collider to the feet of the sprite.
+        EdgeCollider2D collider = npc.GetComponent<EdgeCollider2D>();
+        collider.offset = new Vector2();
         
     }
 }
