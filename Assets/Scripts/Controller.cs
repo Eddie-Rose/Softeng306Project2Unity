@@ -23,16 +23,6 @@ public class Controller : MonoBehaviour {
 
 
     void Start () {
-        proposalBoxPrefab = GameObject.Find("Canvas/Panel");
-        proposalBoxPrefab.SetActive(false);
-
-        // Create the world controller:
-        //worldControllerObj = new GameObject();
-        //worldControllerObj.AddComponent(typeof(WorldController));
-        //worldControllerObj.GetComponent(typeof(WorldController));
-
-        
-
        
     }
 
