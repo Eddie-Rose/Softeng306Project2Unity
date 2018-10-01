@@ -9,7 +9,6 @@ public class WorldController : MonoBehaviour {
         Debug.Log("Creating world controller...");
 
         CreateNPC(1, 0);
-        CreateNPC(1, 1);
 	}
 	
 	void Update () {
@@ -36,7 +35,13 @@ public class WorldController : MonoBehaviour {
 
         // Set the position of the edge collider to the feet of the sprite.
         EdgeCollider2D collider = npc.GetComponent<EdgeCollider2D>();
-        collider.offset = new Vector2();
-        
+        collider.offset = new Vector2(0, -1.0625f);
+
+        // Set the rigid body to be kinematic.
+        Rigidbody2D rigidbody = npc.GetComponent<Rigidbody2D>();
+        rigidbody.bodyType = RigidbodyType2D.Kinematic;
+
+        //Set the size of the sprite to fit the map.
+        npc.transform.localScale = new Vector2(0.01f, 0.01f);
     }
 }

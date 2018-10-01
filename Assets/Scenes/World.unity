@@ -251,12 +251,12 @@ Prefab:
     - target: {fileID: 224126156481756426, guid: fbb43ba4e302bce4c8021641293e0a0f,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 2.3
+      value: -0.008
       objectReference: {fileID: 0}
     - target: {fileID: 224126156481756426, guid: fbb43ba4e302bce4c8021641293e0a0f,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 2.9
+      value: 0.342
       objectReference: {fileID: 0}
     - target: {fileID: 224126156481756426, guid: fbb43ba4e302bce4c8021641293e0a0f,
         type: 2}
@@ -392,6 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1262763040}
   - component: {fileID: 1262763039}
+  - component: {fileID: 1262763037}
   m_Layer: 0
   m_Name: ControllerObject
   m_TagString: Untagged
@@ -399,6 +400,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1262763037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1262763036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53e281c79bf961848b24c1d73e67be68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1262763039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,8 +424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timedEventA: 5
-  proposalBox: {fileID: 0}
+  proposalBoxPrefab: {fileID: 0}
   worldControllerObj: {fileID: 0}
+  scrollView: {fileID: 0}
 --- !u!4 &1262763040
 Transform:
   m_ObjectHideFlags: 0
