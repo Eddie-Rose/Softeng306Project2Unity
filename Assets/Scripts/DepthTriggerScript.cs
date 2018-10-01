@@ -17,9 +17,7 @@ public class DepthTriggerScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        SpriteRenderer colSPR = other.GetComponent<SpriteRenderer>();
-        spR.sortingOrder = colSPR.sortingOrder;
-        colSPR.sortingOrder = colSPR.sortingOrder + 1;
+        spR.sortingOrder = int.MaxValue - (int)Mathf.Floor(transform.position.y);
 
         Debug.Log("Collision Event Triggered");
     }
