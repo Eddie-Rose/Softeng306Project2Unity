@@ -27,8 +27,8 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
 
         // Create the world controller:
-        worldControllerObj = new GameObject();
-        worldControllerObj.AddComponent(typeof(WorldController));
+        //worldControllerObj = new GameObject();
+        //worldControllerObj.AddComponent(typeof(WorldController));
         //worldControllerObj.GetComponent(typeof(WorldController));
 
         
