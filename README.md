@@ -12,3 +12,9 @@
 | Lucas Sherlock      | lshe485  | LucasSherlock    |
 | Joel Clarke         | jcla776  | joel-clarke      |
 | Matthew Taylor      | mtay741  | cornierspring    |
+
+## Build instructions
+
+1. Clone the repository
+2. Download and install and up-to-date version of the Unity game engine.
+3. Use Unity to build the project (File -> Build and run)
