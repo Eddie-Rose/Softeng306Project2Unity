@@ -49,8 +49,14 @@ public class GridViewAdapter : MonoBehaviour
 
         CVPrefabView view = new CVPrefabView(viewGameObject.transform);
 
-        view.summary.text = model._description;
-        view.benefits.text = "Potential reward: $" + model._reward + "k";
+        view.name.text = model.name;
+        view.age.text = "Age: " + model.age;
+        view.dob.text = "D.O.B.: " + model.dob;
+        view.summary.text = model.summary;
+        view.skill.text = "" + model.skill;
+        view.teamwork.text = "" + model.teamwork;
+        view.gender.text = "" + model.gender;
+        view.nationality.text = "" + model.nationality;
 
 
         return view;
@@ -69,15 +75,20 @@ public class GridViewAdapter : MonoBehaviour
     public class CVPrefabView
     {
 
-        public Text name, ;
+        public Text name, gender, age, nationality, dob, summary, skill, teamwork;
         public Button accept, reject;
 
         public CVPrefabView(Transform rootView)
         {
 
-            summary = rootView.Find("ProposalSummary").GetComponent<Text>();
-            benefits = rootView.Find("Benefits").GetComponent<Text>();
-
+            name = rootView.Find("Name").GetComponent<Text>();
+            gender = rootView.Find("Gender").GetComponent<Text>();
+            age = rootView.Find("Age").GetComponent<Text>();
+            nationality = rootView.Find("Nationality").GetComponent<Text>();
+            dob = rootView.Find("DOB").GetComponent<Text>();
+            summary = rootView.Find("Summary").GetComponent<Text>();
+            skill = rootView.Find("Skill").GetComponent<Text>();
+            teamwork = rootView.Find("Teamwork").GetComponent<Text>();
 
         }
 

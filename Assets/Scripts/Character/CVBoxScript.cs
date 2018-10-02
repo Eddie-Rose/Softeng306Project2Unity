@@ -15,14 +15,14 @@ public class CVBoxScript : MonoBehaviour
         {
             Debug.Log("CLIECKED");
             Debug.Log(attachedEvent.name);
-            cvBoxPrefab = GameObject.Find("Canvas/Panel"); //TODO 
+            cvBoxPrefab = GameObject.Find("Canvas/Panel/CV_Container");
             cvBoxPrefab.SetActive(false);
 
         }
         else
         {
 
-            cvBoxPrefab = GameObject.Find("Canvas/Panel");
+            cvBoxPrefab = GameObject.Find("Canvas/Panel/CV_Container");
             cvBoxPrefab.SetActive(false);
             Debug.Log("CLIECKED");
 

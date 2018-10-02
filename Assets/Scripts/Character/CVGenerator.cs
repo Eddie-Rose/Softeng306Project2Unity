@@ -12,6 +12,12 @@ public class CVGenerator : MonoBehaviour
     public float skill;
     public float teamwork;
 
+    public CVGenerator() {
+
+        rollStats();
+
+    }
+
     private static string[] names = 
     {
         "John Clark",
