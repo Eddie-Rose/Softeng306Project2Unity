@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollViewAdapter : MonoBehaviour
+public class GridViewAdapter : MonoBehaviour
 {
 
     public RectTransform prefab;
     public Text countText;
-    public ScrollRect scrollView;
+    public GridLayout gridView;
     public RectTransform content;
 
-    List<ProposalPrefabView> views = new List<ProposalPrefabView>();
+    List<CVPrefabView> views = new List<CVPrefabView>();
 
     // Use this for initialization
     void Start()
@@ -20,7 +20,7 @@ public class ScrollViewAdapter : MonoBehaviour
 
     }
 
-    public void OnRecieveNewProposals(List<ProposalEvent> models)
+    public void OnRecieveNewProposals(List<CVGenerator> models)
     {
 
         foreach (Transform child in content)
@@ -33,8 +33,8 @@ public class ScrollViewAdapter : MonoBehaviour
         {
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
             x++;
-            instance.name = "Proposal Box " + x;
-            ProposalBoxScript boxScript = (ProposalBoxScript)instance.GetComponent(typeof(ProposalBoxScript));
+            instance.name = "CV " + x;
+            CVBoxScript boxScript = (CVBoxScript)instance.GetComponent(typeof(CVBoxScript));
 
             boxScript.attachedEvent = model;
             instance.transform.SetParent(content, false);
@@ -44,21 +44,21 @@ public class ScrollViewAdapter : MonoBehaviour
         }
     }
 
-    ProposalPrefabView InitializePrefabView(GameObject viewGameObject, ProposalEvent model)
+    CVPrefabView InitializePrefabView(GameObject viewGameObject, CVGenerator model)
     {
 
-        ProposalPrefabView view = new ProposalPrefabView(viewGameObject.transform);
+        CVPrefabView view = new CVPrefabView(viewGameObject.transform);
 
         view.summary.text = model._description;
         view.benefits.text = "Potential reward: $" + model._reward + "k";
-        
+
 
         return view;
     }
 
     public void UpdateItems()
     {
-         
+
     }
 
     void FetchItemModels(int count, Action onDone)
@@ -66,18 +66,18 @@ public class ScrollViewAdapter : MonoBehaviour
         //yeild return new WaitForSeconds(2f);
     }
 
-    public class ProposalPrefabView
+    public class CVPrefabView
     {
 
-        public Text summary, benefits;
+        public Text name, ;
         public Button accept, reject;
 
-        public ProposalPrefabView(Transform rootView)
+        public CVPrefabView(Transform rootView)
         {
 
             summary = rootView.Find("ProposalSummary").GetComponent<Text>();
             benefits = rootView.Find("Benefits").GetComponent<Text>();
-            
+
 
         }
 

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class CVGenerator : MonoBehaviour
 {
-    private string name;
-    private Gender gender;
-    private byte age;
-    private Nationality nationality;
-    private DateTime dob;
-    private string summary;
-    private float skill;
-    private float teamwork;
+    public string name;
+    public Gender gender;
+    public byte age;
+    public Nationality nationality;
+    public DateTime dob;
+    public string summary;
+    public float skill;
+    public float teamwork;
 
     private static string[] names = 
     {
@@ -91,12 +91,12 @@ public class CVGenerator : MonoBehaviour
     }
 }
 
-enum Gender
+public enum Gender
 {
     UNDEFINED, MALE, FEMALE
 }
 
-enum Nationality
+public enum Nationality
 {
     NEW_ZEALANDER, CANADIAN, AMERICAN, FRENCH
 }
