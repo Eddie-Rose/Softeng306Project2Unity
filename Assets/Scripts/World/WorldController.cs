@@ -42,6 +42,6 @@ public class WorldController : MonoBehaviour {
         rigidbody.bodyType = RigidbodyType2D.Kinematic;
 
         //Set the size of the sprite to fit the map.
-        npc.transform.localScale = new Vector2(0.01f, 0.01f);
+        npc.transform.localScale = new Vector2(0.1f, 0.1f);
     }
 }

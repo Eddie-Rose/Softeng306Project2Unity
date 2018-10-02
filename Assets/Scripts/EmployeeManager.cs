@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdeaGeneration : MonoBehaviour {
-    public string IdeaTitle { get; set; }
-    public int CostOfIdea { get; set; }
+public class EmployeeManager : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 		
@@ -14,4 +13,15 @@ public class IdeaGeneration : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void showHirePanel() {
+
+
+
+    }
+
+    public void spawnEmployee() {
+
+
+    }
 }

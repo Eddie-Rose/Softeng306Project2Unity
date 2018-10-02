@@ -50,7 +50,10 @@ TagManager:
   - name: Players
     uniqueID: 2041852931
     locked: 0
-  - name: AboveEnvironment
+  - name: BackChairs
+    uniqueID: 706156135
+    locked: 0
+  - name: FrontChairs
     uniqueID: 2859821575
     locked: 0
   - name: TopMost
