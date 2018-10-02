@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CVGenerator : MonoBehaviour {
+public class CVAdapter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
