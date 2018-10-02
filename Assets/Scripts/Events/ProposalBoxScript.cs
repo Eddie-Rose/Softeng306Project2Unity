@@ -7,29 +7,31 @@ public class ProposalBoxScript : MonoBehaviour
 
     public ProposalEvent attachedEvent;
     GameObject proposalBoxPrefab;
+    GameObject controller;
 
     public void doEvent(bool accept)
     {
 
         if (accept)
         {
-            Debug.Log("CLIECKED");
-            Debug.Log(attachedEvent._name);
+
             attachedEvent.consequence();
-            proposalBoxPrefab = GameObject.Find("Canvas/Panel");
-            proposalBoxPrefab.SetActive(false);
+
            
         }
         else
         {
 
-            proposalBoxPrefab = GameObject.Find("Canvas/Panel");
-            proposalBoxPrefab.SetActive(false);
-            Debug.Log("CLIECKED");
-
 
 
         }
+
+        proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
+        controller = GameObject.Find("ControllerObject");
+        Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
+        controllerScript.timedEventA = 5.0f;
+        proposalBoxPrefab.SetActive(false);
+        Debug.Log("CLIECKED");
 
     }
 

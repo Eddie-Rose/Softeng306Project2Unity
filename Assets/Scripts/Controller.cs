@@ -4,7 +4,7 @@ using UnityEngine;
 
 // This is the main game controller.
 public class Controller : MonoBehaviour {
-    public float timedEventA = 3f;
+    public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
 
     // Tracks he currently active event.
@@ -24,7 +24,7 @@ public class Controller : MonoBehaviour {
 
     void Start () {
 
-        proposalBoxPrefab = GameObject.Find("Canvas/Panel");
+        proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
         proposalBoxPrefab.SetActive(false);
 
         // Create the world controller:
@@ -56,9 +56,11 @@ public class Controller : MonoBehaviour {
 
         if (timedEventA <= 0.0f) {
            // Debug.Log("Bye There");
-            //doProposalEvent();
-            //timedEventA = 5.0f;
+            doProposalEvent();
+            timedEventA = 100000f;
         }
+
+        
 
     }
 
