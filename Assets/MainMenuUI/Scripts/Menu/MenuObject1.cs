@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MenuObject : MonoBehaviour {
+public class MenuObject1 : MonoBehaviour {
 
     //Drag the object which you want to be automatically selected by the keyboard or gamepad when this panel becomes active
     public GameObject firstSelectedObject;
