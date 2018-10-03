@@ -92,10 +92,11 @@ public class Controller : MonoBehaviour {
         npc.AddComponent<WorldObject>();
         npc.AddComponent<Rigidbody2D>();
         npc.AddComponent<EdgeCollider2D>();
+        npc.AddComponent<NPCMovement>();
 
         // Create and add the sprite:
         //@@TODO: randomly generate the NPC.
-        Sprite tex = Resources.Load<Sprite>("Placeholder");
+        Sprite tex = Resources.Load<Sprite>("dude");
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
         npc.GetComponent<SpriteRenderer>().sprite = tex;
 
@@ -105,10 +106,11 @@ public class Controller : MonoBehaviour {
 
         // Set the rigid body to be kinematic.
         Rigidbody2D rigidbody = npc.GetComponent<Rigidbody2D>();
-        rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        rigidbody.bodyType = RigidbodyType2D.Dynamic;
 
         //Set the size of the sprite to fit the map.
-        npc.transform.localScale = new Vector2(0.1f, 0.1f);
+        npc.transform.localScale = new Vector2(1f, 1f);
+
     }
 
 
