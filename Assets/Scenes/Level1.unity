@@ -569,7 +569,7 @@ Prefab:
     - target: {fileID: 224773434509488508, guid: 98d60fa19f1d64d42acb9eedde7afc7e,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -219.50417
+      value: -249.06631
       objectReference: {fileID: 0}
     - target: {fileID: 224356117517916606, guid: 98d60fa19f1d64d42acb9eedde7afc7e,
         type: 2}
@@ -673,7 +673,7 @@ Prefab:
     - target: {fileID: 224856201589287956, guid: 98d60fa19f1d64d42acb9eedde7afc7e,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 6
+      value: 6.0000076
       objectReference: {fileID: 0}
     - target: {fileID: 224247816151327380, guid: 98d60fa19f1d64d42acb9eedde7afc7e,
         type: 2}
@@ -978,12 +978,12 @@ Prefab:
     - target: {fileID: 224843411194112636, guid: e77f3c9002165d148ad3c49150816831,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 31
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 224843411194112636, guid: e77f3c9002165d148ad3c49150816831,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 224843411194112636, guid: e77f3c9002165d148ad3c49150816831,
         type: 2}
@@ -1155,6 +1155,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224218923070161510, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 167.99994
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e77f3c9002165d148ad3c49150816831, type: 2}
@@ -1328,7 +1333,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.305198
+  orthographic size: 1.4132626
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
