@@ -9,6 +9,7 @@ public class NPCMovement : MonoBehaviour {
     public float moveSpeed;
 
     private Rigidbody2D myRigidBody;
+    private SpriteRenderer spriteRenderer;
 
     public bool isWalking;
 
@@ -20,6 +21,7 @@ public class NPCMovement : MonoBehaviour {
     
     void Start() {
         myRigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         waitTime = 1f;
         walkTime = 1f;
         moveSpeed = 1f;
@@ -45,17 +47,26 @@ public class NPCMovement : MonoBehaviour {
             switch (walkDirection) {
                 case 0:
                     myRigidBody.velocity = new Vector2(0, moveSpeed);
+                    
                     break;
                 case 1:
                     myRigidBody.velocity = new Vector2(moveSpeed, 0);
+                    spriteRenderer.flipX = true;
                     break;
                 case 2:
                     myRigidBody.velocity = new Vector2(0, -moveSpeed);
+                    
+
                     break;
                 case 3:
                     myRigidBody.velocity = new Vector2(-moveSpeed, 0);
+                    spriteRenderer.flipX = false;
                     break;
             }
+
+            moveSpeed = 1f * Random.Range(0.8f, 1.2f);
+            walkTime = 1f * Random.Range(0.8f, 1.2f);
+            
         }
         else {
             waitCounter -= Time.deltaTime;

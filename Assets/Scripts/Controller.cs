@@ -6,6 +6,7 @@ using UnityEngine;
 public class Controller : MonoBehaviour {
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
+    int numEmployees = 1;
 
     // Tracks he currently active event.
     private CustomEvent _currentEvent;
@@ -43,7 +44,7 @@ public class Controller : MonoBehaviour {
 
     void doProposalEvent() {
         pEvents.Clear();
-        for (int x = 0; x < 5; x++)
+        for (int x = 0; x < numEmployees; x++)
         {
             pEvents.Add(eventManager.getProposalEvent());
         }
@@ -79,10 +80,12 @@ public class Controller : MonoBehaviour {
     }
 
     // Create a new NPC
-    public void createNPC()
+    public void createNPC(int seed)
     {
+
         int x = 1;
         int y = 0;
+        numEmployees++;
         Debug.Log("Creating NPC at " + x + " " + y);
 
         // Basic setup:
@@ -97,8 +100,20 @@ public class Controller : MonoBehaviour {
         // Create and add the sprite:
         //@@TODO: randomly generate the NPC.
         Sprite tex = Resources.Load<Sprite>("dude");
-        //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
         SpriteRenderer spriteRenderer = npc.GetComponent<SpriteRenderer>();
+
+        if (seed == 0)
+        {
+
+            tex = Resources.Load<Sprite>("DarkFemale");
+
+        }
+        else if(seed == 1) {
+
+            tex = Resources.Load<Sprite>("GingerMale");
+
+        }
+        //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
         spriteRenderer.sprite = tex;
         //spriteRenderer.sortingLayerName = "Players";
 
