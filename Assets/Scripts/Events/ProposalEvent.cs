@@ -54,7 +54,7 @@ public class ProposalEvent : CustomEvent{
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
 
 
-            scoreScript.money -= (int) (1000 * _risk * Random.Range(1f, 2f));
+            ScoreScript.money -= (int) (1000 * _risk * Random.Range(1f, 2f));
             scoreScript.happiness -= (int) (10 * _risk * Random.Range(1f, 2f));
 
 
@@ -67,9 +67,9 @@ public class ProposalEvent : CustomEvent{
         GameObject score = GameObject.Find("Score");
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
 
-        
 
-            scoreScript.money += (int) (1000 * _reward * Random.Range(1f, 2f));
+
+            ScoreScript.money += (int) (1000 * _reward * Random.Range(1f, 2f));
             scoreScript.happiness += (int) (10 * _reward * Random.Range(1f, 2f));
 
 
