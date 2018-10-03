@@ -1,6 +1,6 @@
 # SOFTENG 306 - Project 2: Unity Game Development
 
-## Team members
+## Team members - group 5
 
 | Name                | UPI      | Username         |
 |---------------------|----------|------------------|
