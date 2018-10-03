@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
+// This class fixes button selection so that 2 buttons cant be selected at the same time when using gamepad/keyboard
 [RequireComponent(typeof(Selectable))]
 public class FixButtonHighlight : MonoBehaviour, IPointerEnterHandler, IDeselectHandler
 {

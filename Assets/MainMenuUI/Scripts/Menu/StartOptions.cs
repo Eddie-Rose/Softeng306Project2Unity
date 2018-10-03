@@ -41,7 +41,7 @@ public class StartOptions : MonoBehaviour {
         fadeImage.color = menuSettingsData.sceneChangeFadeColor;
 	}
 
-
+    // function called when start button clicked
 	public void StartButtonClicked()
 	{
 		//If changeMusicOnStart is true, fade out volume of music group of AudioMixer by calling FadeDown function of PlayMusic
@@ -90,7 +90,7 @@ public class StartOptions : MonoBehaviour {
 		}	
 	}
 
-
+    // Carries out the scene change if required
 	public void LoadDelayed()
 	{
 		//Pause button now works if escape is pressed since we are no longer in Main menu.
@@ -104,12 +104,14 @@ public class StartOptions : MonoBehaviour {
 		SceneManager.LoadScene (sceneToStart);
 	}
 
+    // Function to hide the main menu
 	public void HideDelayed()
 	{
 		//Hide the main menu UI element after fading out menu for start game in scene
 		showPanels.HideMenu();
 	}
 
+    // Starts game in current scene if we don't want a scene change
 	public void StartGameInScene()
 	{
 		//Pause button now works if escape is pressed since we are no longer in Main menu.
@@ -125,12 +127,14 @@ public class StartOptions : MonoBehaviour {
         StartCoroutine(FadeCanvasGroupAlpha(1f,0f, menuCanvasGroup));
 	}
 
+    // Carries out the screen fade
     public IEnumerator FadeCanvasGroupAlpha(float startAlpha, float endAlpha, CanvasGroup canvasGroupToFadeAlpha)
     {
 
         float elapsedTime = 0f;
         float totalDuration = menuSettingsData.menuFadeTime;
 
+        // Fade
         while (elapsedTime < totalDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -139,11 +143,12 @@ public class StartOptions : MonoBehaviour {
             yield return null;
         }
 
+        // Removes currently displayed canvas
         HideDelayed();
         Debug.Log("Coroutine done. Game started in same scene! Put your game starting stuff here.");
     }
 
-
+    // Plays new music if set to change when game starts
     public void PlayNewMusic()
 	{
 		//Fade up music nearly instantly without a click 

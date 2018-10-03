@@ -36,7 +36,7 @@ public class Pause : MonoBehaviour {
 	
 	}
 
-
+    // Pauses the game
 	public void DoPause()
 	{
 		//Set isPaused to true
@@ -48,6 +48,7 @@ public class Pause : MonoBehaviour {
 	}
 
 
+    // Unauses the game
 	public void UnPause()
 	{
 		//Set isPaused to false

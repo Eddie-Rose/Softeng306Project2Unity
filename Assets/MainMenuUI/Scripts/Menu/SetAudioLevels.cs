@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
+// This class carries out setting the volume levels for music and sound effects
 public class SetAudioLevels : MonoBehaviour {
 
 	public AudioMixer mainMixer;					//Used to hold a reference to the AudioMixer mainMixer

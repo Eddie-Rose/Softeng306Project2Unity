@@ -604,7 +604,6 @@ GameObject:
   - component: {fileID: 187937112}
   - component: {fileID: 187937115}
   - component: {fileID: 187937114}
-  - component: {fileID: 187937113}
   m_Layer: 5
   m_Name: ResumeText
   m_TagString: Untagged
@@ -631,18 +630,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &187937113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114265775401635630, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 187937111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &187937114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,7 +1118,6 @@ GameObject:
   - component: {fileID: 475313167}
   - component: {fileID: 475313170}
   - component: {fileID: 475313169}
-  - component: {fileID: 475313168}
   m_Layer: 5
   m_Name: QuitText
   m_TagString: Untagged
@@ -1158,18 +1144,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &475313168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114646234369158428, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 475313166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &475313169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,8 +1387,6 @@ GameObject:
   - component: {fileID: 628619781}
   - component: {fileID: 628619785}
   - component: {fileID: 628619784}
-  - component: {fileID: 628619783}
-  - component: {fileID: 628619782}
   m_Layer: 5
   m_Name: TitleText
   m_TagString: Untagged
@@ -1441,30 +1413,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 71}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &628619782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114906757542269322, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 628619780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &628619783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114753036484452026, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 628619780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &628619784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2447,7 +2395,6 @@ GameObject:
   - component: {fileID: 831581856}
   - component: {fileID: 831581859}
   - component: {fileID: 831581858}
-  - component: {fileID: 831581857}
   m_Layer: 5
   m_Name: QuitText
   m_TagString: Untagged
@@ -2474,18 +2421,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &831581857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114646234369158428, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 831581855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &831581858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2802,7 +2737,6 @@ GameObject:
   - component: {fileID: 907935281}
   - component: {fileID: 907935284}
   - component: {fileID: 907935283}
-  - component: {fileID: 907935282}
   m_Layer: 5
   m_Name: ResumeText
   m_TagString: Untagged
@@ -2829,18 +2763,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &907935282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114265775401635630, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 907935280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &907935283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3714,7 +3636,6 @@ GameObject:
   - component: {fileID: 1101379467}
   - component: {fileID: 1101379466}
   - component: {fileID: 1101379465}
-  - component: {fileID: 1101379464}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -3742,18 +3663,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -270}
   m_SizeDelta: {x: 1060.234, y: 222.29999}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1101379464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114647526281953390, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1101379462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!225 &1101379465
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9663,7 +9572,6 @@ GameObject:
   - component: {fileID: 1389556747}
   - component: {fileID: 1389556750}
   - component: {fileID: 1389556749}
-  - component: {fileID: 1389556748}
   m_Layer: 5
   m_Name: QuitText
   m_TagString: Untagged
@@ -9690,18 +9598,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1389556748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114646234369158428, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1389556746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1389556749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9948,7 +9844,6 @@ GameObject:
   - component: {fileID: 1443776233}
   - component: {fileID: 1443776236}
   - component: {fileID: 1443776235}
-  - component: {fileID: 1443776234}
   m_Layer: 5
   m_Name: MusicVolText
   m_TagString: Untagged
@@ -9975,18 +9870,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: 160, y: 44.7}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1443776234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114694584450976692, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1443776232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1443776235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10040,7 +9923,6 @@ GameObject:
   - component: {fileID: 1504258445}
   - component: {fileID: 1504258448}
   - component: {fileID: 1504258447}
-  - component: {fileID: 1504258446}
   m_Layer: 5
   m_Name: MusicVolText
   m_TagString: Untagged
@@ -10067,18 +9949,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 31}
   m_SizeDelta: {x: 160, y: 44.7}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1504258446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114674078657893790, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1504258444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1504258447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11321,7 +11191,6 @@ GameObject:
   - component: {fileID: 1794977144}
   - component: {fileID: 1794977147}
   - component: {fileID: 1794977146}
-  - component: {fileID: 1794977145}
   m_Layer: 5
   m_Name: SfxVolText
   m_TagString: Untagged
@@ -11348,18 +11217,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 9}
   m_SizeDelta: {x: 160, y: 44.7}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1794977145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114695882055887758, guid: 45616935e4fe10f48b62da1347801a16,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1794977143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1794977146
 MonoBehaviour:
   m_ObjectHideFlags: 0

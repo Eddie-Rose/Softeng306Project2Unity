@@ -12,21 +12,19 @@ public class ChangeScene : MonoBehaviour {
 
     private int sceneNum;
 
-    void Awake()
-    {
-
-        //Get a reference to the CanvasGroup attached to the main menu so that we can fade it's alpha
-        //menuCanvasGroup = GetComponent<CanvasGroup>();
-    }
-
+    // Starts a change in scene
     public void GoToScene(int scene) {
         Invoke("LoadDelayed", 1);
         sceneNum = scene;
 
+        // Carries out a fade duing a scene change
         StartCoroutine(FadeCanvasGroupAlpha(0f, 1f, fadeOutImageCanvasGroup));
     }
 
+    // Launches the scene once the fade has completed
     public void LoadDelayed() {
+
+        // Destroys the main-menu scene (index 0) if its being relaunched
         if (sceneNum == 0) {
             Destroy(GameObject.Find("Menu UI"));
         }
@@ -35,12 +33,14 @@ public class ChangeScene : MonoBehaviour {
         SceneManager.LoadScene(sceneNum);
     }
 
+    // Carries out a fade of the screen while removing currently visible canvas
     public IEnumerator FadeCanvasGroupAlpha(float startAlpha, float endAlpha, CanvasGroup canvasGroupToFadeAlpha)
     {
 
         float elapsedTime = 0f;
         float totalDuration = 1;
 
+        // Fade
         while (elapsedTime < totalDuration)
         {
             elapsedTime += Time.deltaTime;
@@ -48,8 +48,8 @@ public class ChangeScene : MonoBehaviour {
             canvasGroupToFadeAlpha.alpha = currentAlpha;
             yield return null;
         }
-        menuCanvasGroup.SetActive(false);
 
-        Debug.Log("Coroutine done. Game started in same scene! Put your game starting stuff here.");
+        // Remove current visible canvas
+        menuCanvasGroup.SetActive(false);
     }
 }

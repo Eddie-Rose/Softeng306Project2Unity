@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+// This class ensures a button / UI objcet is selected when a gamepad/keyboard is being used
 public class SelectOnInput : MonoBehaviour {
 
     public EventSystem eventSystem;

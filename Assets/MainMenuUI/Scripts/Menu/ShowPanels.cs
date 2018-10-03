@@ -20,7 +20,7 @@ public class ShowPanels : MonoBehaviour {
     private EventSystem eventSystem;
 
 
-
+    // Function to indicate the panel currently selected
     private void SetSelection(GameObject panelToSetSelected)
     {
 
@@ -89,7 +89,7 @@ public class ShowPanels : MonoBehaviour {
 
 	}
 
-    //Call this function to activate and display the Pause panel during game play
+    //Call this function to activate and display the end game panel during game play
     public void ShowEndGamePanel()
     {
         endGamePanel.SetActive(true);
@@ -97,7 +97,7 @@ public class ShowPanels : MonoBehaviour {
         SetSelection(endGamePanel);
     }
 
-    //Call this function to deactivate and hide the Pause panel during game play
+    //Call this function to deactivate and hide the end game panel during game play
     public void HideEndGamePanel()
     {
         endGamePanel.SetActive(false);
@@ -105,7 +105,7 @@ public class ShowPanels : MonoBehaviour {
 
     }
 
-    //Call this function to activate and display the Pause panel during game play
+    //Call this function to activate and display the Help panel during game play
     public void ShowHelpPanel()
     {
         helpPanel.SetActive(true);
@@ -114,7 +114,7 @@ public class ShowPanels : MonoBehaviour {
         SetSelection(helpPanel);
     }
 
-    //Call this function to deactivate and hide the Pause panel during game play
+    //Call this function to deactivate and hide the Help panel during game play
     public void HideHelpPanel()
     {
         //menuPanel.SetActive(true);

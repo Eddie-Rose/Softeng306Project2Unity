@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
+// Copy of ButtonHighLightFix (not sure which one was being used so there is this duplicate temporarily)
 [RequireComponent(typeof(Selectable))]
 public class HighlightFix : MonoBehaviour, IPointerEnterHandler, IDeselectHandler
 {

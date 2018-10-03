@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Same functionality as QuitApplication (temporary duplicate)  
 public class QuitGameOnClick : MonoBehaviour {
 
     public void Quit()
