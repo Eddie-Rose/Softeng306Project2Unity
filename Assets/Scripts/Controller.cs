@@ -98,15 +98,29 @@ public class Controller : MonoBehaviour {
         //@@TODO: randomly generate the NPC.
         Sprite tex = Resources.Load<Sprite>("dude");
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
-        npc.GetComponent<SpriteRenderer>().sprite = tex;
+        SpriteRenderer spriteRenderer = npc.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = tex;
+        //spriteRenderer.sortingLayerName = "Players";
 
         // Set the position of the edge collider to the feet of the sprite.
         EdgeCollider2D collider = npc.GetComponent<EdgeCollider2D>();
-        collider.offset = new Vector2(0, -1.0625f);
+        //collider.offset = new Vector2(0, -1.0625f);
+
+        Vector2[] colliderpoints;
+        colliderpoints = collider.points;
+        colliderpoints[0] = new Vector2(-0.05501652f, 0.09463114f);
+        colliderpoints[1] = new Vector2(0.02647161f, 0.1021858f);
+        collider.points = colliderpoints;
+
+        Debug.Log(collider.points[0]);
 
         // Set the rigid body to be kinematic.
         Rigidbody2D rigidbody = npc.GetComponent<Rigidbody2D>();
         rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        rigidbody.gravityScale = 0;
+        rigidbody.angularDrag = 0;
+        rigidbody.mass = 1;
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         //Set the size of the sprite to fit the map.
         npc.transform.localScale = new Vector2(1f, 1f);

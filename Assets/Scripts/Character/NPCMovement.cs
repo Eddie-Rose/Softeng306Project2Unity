@@ -20,6 +20,9 @@ public class NPCMovement : MonoBehaviour {
     
     void Start() {
         myRigidBody = GetComponent<Rigidbody2D>();
+        waitTime = 1f;
+        walkTime = 1f;
+        moveSpeed = 1f;
 
         waitCounter = waitTime;
         walkCounter = walkTime;
