@@ -8,6 +8,7 @@ public class ChangeScene : MonoBehaviour {
 
     public CanvasGroup fadeOutImageCanvasGroup;
     public GameObject menuCanvasGroup;
+    public GameObject menuObject;
 
     private int sceneNum;
 
@@ -25,8 +26,10 @@ public class ChangeScene : MonoBehaviour {
         StartCoroutine(FadeCanvasGroupAlpha(0f, 1f, fadeOutImageCanvasGroup));
     }
 
-    public void LoadDelayed()
-    {
+    public void LoadDelayed() {
+        if (sceneNum == 0) {
+            Destroy(GameObject.Find("Menu UI"));
+        }
 
         //Load the selected scene, by scene index number in build settings
         SceneManager.LoadScene(sceneNum);

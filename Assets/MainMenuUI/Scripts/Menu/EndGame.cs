@@ -9,7 +9,6 @@ public class EndGame : MonoBehaviour
     private ShowPanels showPanels;                      //Reference to the ShowPanels script used to hide and show UI panels
     private bool isPaused;                              //Boolean to check if the game is paused or not
     private StartOptions startScript;                   //Reference to the StartButton script
-    private ScoreScript scoreScript;
 
     //Awake is called before Start()
     void Awake()
@@ -18,11 +17,6 @@ public class EndGame : MonoBehaviour
         showPanels = GetComponent<ShowPanels>();
         //Get a component reference to StartButton attached to this object, store in startScript variable
         startScript = GetComponent<StartOptions>();
-        //GameObject score = GameObject.Find("Score");
-        //scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
-        //scoreScript = FindObjectOfType<ScoreScript>();
-        scoreScript = GameObject.FindObjectOfType(typeof(ScoreScript)) as ScoreScript;
-
     }
 
     // Update is called once per frame
@@ -30,7 +24,7 @@ public class EndGame : MonoBehaviour
     {
 
         //Check if the Cancel button in Input Manager is down this frame (default is Escape key) and that game is not paused, and that we're not in main menu
-        if (ScoreScript.money > 0 && !isPaused && !startScript.inMainMenu)
+        if (ScoreScript.money > 10000 && !isPaused && !startScript.inMainMenu)
         {
             Debug.Log("pausing");
             //Call the DoPause function to pause the game
@@ -65,7 +59,7 @@ public class EndGame : MonoBehaviour
         isPaused = false;
         //Set time.timescale to 1, this will cause animations and physics to continue updating at regular speed
         Time.timeScale = 1;
-        //call the HidePausePanel function of the ShowPanels script
+        
         showPanels.HideEndGamePanel();
     }
 
