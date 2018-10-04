@@ -18,3 +18,7 @@
 1. Clone the repository
 2. Download and install and up-to-date version of the Unity game engine.
 3. Use Unity to build the project (File -> Build and run)
+
+## Running the game
+
+Note that the selected game resolution should be 1600x900. The final prototype can be found under 'releases'.
