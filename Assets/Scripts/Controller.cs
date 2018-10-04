@@ -114,6 +114,18 @@ public class Controller : MonoBehaviour {
             tex = Resources.Load<Sprite>("GingerMale");
 
         }
+        else if (seed == 2)
+        {
+
+            tex = Resources.Load<Sprite>("Goku");
+
+        }
+        else if (seed == 3)
+        {
+
+            tex = Resources.Load<Sprite>("AsianMale");
+
+        }
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
         spriteRenderer.sprite = tex;
         //spriteRenderer.sortingLayerName = "Players";
