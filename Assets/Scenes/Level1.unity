@@ -1188,7 +1188,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1192494359326648, guid: e77f3c9002165d148ad3c49150816831, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114746675957872908, guid: e77f3c9002165d148ad3c49150816831,
         type: 2}
@@ -1200,6 +1200,114 @@ Prefab:
         type: 2}
       propertyPath: m_Type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114090962201205452, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114090962201205452, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743794738122600, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114743794738122600, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114953712529462862, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: Goku
+      objectReference: {fileID: 0}
+    - target: {fileID: 114238748232096016, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: Gender:Male
+      objectReference: {fileID: 0}
+    - target: {fileID: 114148203502500196, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Age: 16'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114704046068228972, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Nationality: Chinese'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860733224329720, guid: e77f3c9002165d148ad3c49150816831, type: 2}
+      propertyPath: m_Name
+      value: Position
+      objectReference: {fileID: 0}
+    - target: {fileID: 114804621942382780, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Position: Advanced'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114858317011737046, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Skill Level: 10'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114386029082947850, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Teamwork Level: 3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114947798302223714, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Summary:
+
+        COmes from china'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114112331333942558, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: Edwin
+      objectReference: {fileID: 0}
+    - target: {fileID: 114692373753484602, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Gender: Non-binary'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114041853348843388, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Age: 19'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114861077712272846, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Nationality: Korean'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114821721477472862, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Position: Entry'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114512802205390212, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Skill Level: 7'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114593872693223934, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Teamwork Level: 6'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114817338154735956, guid: e77f3c9002165d148ad3c49150816831,
+        type: 2}
+      propertyPath: m_Text
+      value: 'Summary:
+
+        Highschool dropout'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e77f3c9002165d148ad3c49150816831, type: 2}
