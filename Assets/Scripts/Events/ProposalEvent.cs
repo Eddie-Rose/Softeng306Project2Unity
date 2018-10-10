@@ -19,14 +19,7 @@ public class ProposalEvent : CustomEvent{
         _reward = reward;
         _description = description;
 
-        if(risk == 1)
-        {
-            _description += "This is preeettty Riiiisky";
-        }
-        else if(risk == 10)
-        {
-            _description += "You're fuked";
-        }
+        
 
     }
 
@@ -37,6 +30,7 @@ public class ProposalEvent : CustomEvent{
         {
 
             risk();
+           
 
         }
         else {

@@ -24,6 +24,11 @@ public class Controller : MonoBehaviour {
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
 
+    public List<string> employeeNames = new List<string>() {"CEO"};
+    
+    
+
+
 
     void Start () {
 
@@ -32,6 +37,7 @@ public class Controller : MonoBehaviour {
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
         hireBoxPrefab.SetActive(false);
 
+        
         // Create the world controller:
         //worldControllerObj = new GameObject();
         //worldControllerObj.AddComponent(typeof(WorldController));
@@ -43,13 +49,25 @@ public class Controller : MonoBehaviour {
         Timer();
 	}
 
+    public void addAvailableEmployee(string employee)
+    {
+        employeeNames.Add(employee);
+    }
+
     void doProposalEvent() {
-        pEvents.Clear();
-        for (int x = 0; x < numEmployees; x++)
+
+        List<string> employeeToBeDeleted = new List<string>();
+        foreach(string employee in employeeNames)
         {
-            pEvents.Add(eventManager.getProposalEvent());
+            pEvents.Add(eventManager.getProposalEvent(employee));
+            employeeToBeDeleted.Add(employee);
+
         }
-        pEvents.Add(eventManager.getProposalEvent());
+        foreach(string employee in employeeToBeDeleted)
+        {
+            employeeNames.Remove(employee);
+        }
+        employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
         proposalBoxPrefab.SetActive(true);
@@ -107,23 +125,31 @@ public class Controller : MonoBehaviour {
         {
 
             tex = Resources.Load<Sprite>("DarkFemale");
+            npc.name = "Employee-DarkFemale";
+            employeeNames.Add("DarkFemale");
 
         }
         else if(seed == 1) {
 
             tex = Resources.Load<Sprite>("GingerMale");
+            npc.name = "Employee-GingerMale";
+            employeeNames.Add("GingerMale");
 
         }
         else if (seed == 2)
         {
 
             tex = Resources.Load<Sprite>("Goku");
+            npc.name = "Employee-Goku";
+            employeeNames.Add("Goku");
 
         }
         else if (seed == 3)
         {
 
             tex = Resources.Load<Sprite>("AsianMale");
+            npc.name = "Employee-AsianMale";
+            employeeNames.Add("AsianMale");
 
         }
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
@@ -154,6 +180,8 @@ public class Controller : MonoBehaviour {
         npc.transform.localScale = new Vector2(1f, 1f);
 
     }
+
+   
 
 
 }

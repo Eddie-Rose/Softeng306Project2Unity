@@ -11,6 +11,7 @@ public class ScrollViewAdapter : MonoBehaviour
     public Text countText;
     public ScrollRect scrollView;
     public RectTransform content;
+    int proposalCounter = 0;
 
     List<ProposalPrefabView> views = new List<ProposalPrefabView>();
 
@@ -20,35 +21,53 @@ public class ScrollViewAdapter : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        
+    }
+
+    public void DeleteProposalFromList(string proposalToBeDeleted)
+    {
+        Destroy(content.Find(proposalToBeDeleted).gameObject);
+        foreach(ProposalPrefabView prefab in views)
+        {
+            if (prefab.name == proposalToBeDeleted)
+            {
+                views.Remove(prefab);
+                break;
+            }
+        }
+    }
+
     public void OnRecieveNewProposals(List<ProposalEvent> models)
     {
 
-        foreach (Transform child in content)
-            Destroy(child.gameObject);
+        //foreach (Transform child in content)
+        //    Destroy(child.gameObject);
 
-        views.Clear();
+        //views.Clear();
 
-        int x = 0;
         foreach (var model in models)
         {
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
-            x++;
-            instance.name = "Proposal Box " + x;
+            proposalCounter++;
+            string name = "Proposal Box " + proposalCounter;
+            instance.name = name;
             ProposalBoxScript boxScript = (ProposalBoxScript)instance.GetComponent(typeof(ProposalBoxScript));
 
             boxScript.attachedEvent = model;
             instance.transform.SetParent(content, false);
-            var view = InitializePrefabView(instance, model);
+            var view = InitializePrefabView(instance, model,name);
             views.Add(view);
 
         }
     }
 
-    ProposalPrefabView InitializePrefabView(GameObject viewGameObject, ProposalEvent model)
+    ProposalPrefabView InitializePrefabView(GameObject viewGameObject, ProposalEvent model, string name)
     {
 
         ProposalPrefabView view = new ProposalPrefabView(viewGameObject.transform);
-
+        view.name = name;
         view.summary.text = model._description;
         view.benefits.text = "Potential reward: $" + model._reward + "k";
         
@@ -56,10 +75,7 @@ public class ScrollViewAdapter : MonoBehaviour
         return view;
     }
 
-    public void UpdateItems()
-    {
-
-    }
+    
 
     void FetchItemModels(int count, Action onDone)
     {
@@ -71,18 +87,14 @@ public class ScrollViewAdapter : MonoBehaviour
 
         public Text summary, benefits;
         public Button accept, reject;
+        public string name;
 
         public ProposalPrefabView(Transform rootView)
         {
-
             summary = rootView.Find("ProposalSummary").GetComponent<Text>();
             benefits = rootView.Find("Benefits").GetComponent<Text>();
-            
-
+         
         }
-
-
-
     }
 
 
