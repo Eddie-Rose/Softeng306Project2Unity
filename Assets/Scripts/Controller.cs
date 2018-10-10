@@ -80,6 +80,25 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
     }
 
+    public void createProceduralNPC()
+    {
+
+        GameObject randomNPC =
+            Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
+            new Vector3(1, 0, 1),
+            Quaternion.identity) as GameObject;
+
+        Transform bodyObject = randomNPC.transform.GetChild(1);
+        Transform hairObject = randomNPC.transform.GetChild(0);
+        Transform shirtObject = randomNPC.transform.GetChild(2);
+
+        bodyObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("DarkFemale");
+
+
+        Debug.Log("asdasd");
+
+    }
+
     // Create a new NPC
     public void createNPC(int seed)
     {
