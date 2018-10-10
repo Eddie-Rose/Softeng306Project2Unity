@@ -27,10 +27,6 @@ public class Controller : MonoBehaviour {
 
     void Start () {
 
-        createProceduralNPC();
-        createProceduralNPC();
-        createProceduralNPC();
-        createProceduralNPC();
         proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
         proposalBoxPrefab.SetActive(false);
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
@@ -82,13 +78,15 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
     }
 
-    public void createProceduralNPC()
+    public void createProceduralNPC(string name, string gender, string ethnicity)
     {
 
         GameObject randomNPC =
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
+
+        randomNPC.name = name;
 
         Transform shirtObject = randomNPC.transform.GetChild(0);
         Transform bodyObject = randomNPC.transform.GetChild(1);
@@ -112,17 +110,27 @@ public class Controller : MonoBehaviour {
         bodyObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + bodyName);
 
 
-        switch (Random.Range(1, 4))
+        if (gender == "Male")
         {
-            case 1:
-                hairName = "hair_anime_dark";
-                break;
-            case 2:
-                hairName = "hair_bob_ginger";
-                break;
-            case 3:
-                hairName = "hair_ponytail_dark";    
-                break;
+            switch (Random.Range(1, 3))
+            {
+                case 1:
+                    hairName = "hair_anime_dark";
+                    break;
+                case 2:
+                    hairName = "hair_bob_ginger";
+                    break;
+            }
+        }
+        else {
+
+            switch (Random.Range(1, 2))
+            {
+                case 1:
+                    hairName = "hair_ponytail_dark";
+                    break;
+            }
+
         }
         hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
 
