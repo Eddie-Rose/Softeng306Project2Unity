@@ -28,6 +28,9 @@ public class Controller : MonoBehaviour {
     void Start () {
 
         createProceduralNPC();
+        createProceduralNPC();
+        createProceduralNPC();
+        createProceduralNPC();
         proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
         proposalBoxPrefab.SetActive(false);
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
@@ -65,8 +68,6 @@ public class Controller : MonoBehaviour {
             doProposalEvent();
             timedEventA = 100000f;
         }
-
-        
 
     }
 

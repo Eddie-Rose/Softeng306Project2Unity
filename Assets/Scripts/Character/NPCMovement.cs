@@ -55,8 +55,6 @@ public class NPCMovement : MonoBehaviour {
                     break;
                 case 2:
                     myRigidBody.velocity = new Vector2(0, -moveSpeed);
-                    
-
                     break;
                 case 3:
                     myRigidBody.velocity = new Vector2(-moveSpeed, 0);
