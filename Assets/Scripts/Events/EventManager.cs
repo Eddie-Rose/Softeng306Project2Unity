@@ -106,7 +106,7 @@ public class EventManager{
             eventDescription += "\n";
         }
 
-        ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance);
+        ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 5.0f, 10.0f);
         return pEvent;
     }  
 }

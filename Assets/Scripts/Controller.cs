@@ -70,6 +70,7 @@ public class Controller : MonoBehaviour {
         employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
+        pEvents.Clear();
         proposalBoxPrefab.SetActive(true);
     }
 
@@ -82,8 +83,6 @@ public class Controller : MonoBehaviour {
             doProposalEvent();
             timedEventA = 100000f;
         }
-
-        
 
     }
 

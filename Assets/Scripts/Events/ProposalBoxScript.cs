@@ -24,7 +24,6 @@ public class ProposalBoxScript : MonoBehaviour
             attachedEvent.consequence();
             controllerScript.employeeNames.Add(attachedEvent._name);
             scrollViewAdapter.DeleteProposalFromList(this.name);
-            controllerScript.timedEventA = 5.0f;
 
 
 
@@ -36,6 +35,7 @@ public class ProposalBoxScript : MonoBehaviour
         {
 
             controllerScript.employeeNames.Add(attachedEvent._name);
+            scrollViewAdapter.DeleteProposalFromList(this.name);
             controllerScript.timedEventA = 10.0f;
 
 
