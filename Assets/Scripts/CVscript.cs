@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ public class CVscript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-
+        GenerateCV();
     }
 
     // Update is called once per frame
@@ -61,6 +62,19 @@ public class CVscript : MonoBehaviour {
             Summary2 = name + " is a very social and out-going person and prefers to work with in teams and project groups ";
 
         }
+
+        string fullSummary = Summary1 + "\n" + Summary2;
+
+        //set values for CV
+
+        transform.Find("Name").GetComponent<Text>().text = name;
+        transform.Find("Position").GetComponent<Text>().text = "Position: " + position;
+        transform.Find("Age").GetComponent<Text>().text = "Age:" + age;
+        transform.Find("Nationality").GetComponent<Text>().text = "Ethnicity: " + ethnicity;
+        transform.Find("Skill").GetComponent<Text>().text = "Skill: " + skill.ToString();
+        transform.Find("Teamwork").GetComponent<Text>().text = "Teamwork: " + teamwork.ToString();
+        transform.Find("Summary").GetComponent<Text>().text = "Summary: \n" + fullSummary;
+
 
     }
 }
