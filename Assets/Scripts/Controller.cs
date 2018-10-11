@@ -14,6 +14,7 @@ public class Controller : MonoBehaviour {
 
     public GameObject proposalBoxPrefab;
     public GameObject hireBoxPrefab;
+    public GameObject currentTaskPrefab;
 
     // Track the world controller:
     public GameObject worldControllerObj;
@@ -36,6 +37,7 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
         hireBoxPrefab.SetActive(false);
+        currentTaskPrefab.SetActive(false);
 
         
         // Create the world controller:
