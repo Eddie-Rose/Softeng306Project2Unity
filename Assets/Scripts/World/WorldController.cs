@@ -6,9 +6,7 @@ using UnityEngine;
 public class WorldController : MonoBehaviour {
 
 	void Start () {
-        Debug.Log("Creating world controller...");
 
-        CreateNPC(1, 0);
 	}
 	
 	void Update () {
@@ -16,7 +14,9 @@ public class WorldController : MonoBehaviour {
 	}
 
     // Create a new NPC
-    void CreateNPC(int x, int y) {
+    public void createNPC() {
+        int x = 1;
+        int y = 0;
         Debug.Log("Creating NPC at " + x + " " + y);
 
         // Basic setup:
@@ -42,6 +42,6 @@ public class WorldController : MonoBehaviour {
         rigidbody.bodyType = RigidbodyType2D.Kinematic;
 
         //Set the size of the sprite to fit the map.
-        npc.transform.localScale = new Vector2(0.01f, 0.01f);
+        npc.transform.localScale = new Vector2(0.1f, 0.1f);
     }
 }

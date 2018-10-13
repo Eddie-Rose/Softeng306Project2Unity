@@ -47,13 +47,13 @@ public class EventManager{
 
 
 
-        if (eventRisk <= 0.33)
+        if (eventRisk <= 3)
         {
 
             eventDescription += "Failure of this project will result in minor damages";
 
         }
-        else if (eventRisk > 0.33 && eventRisk <= 0.66)
+        else if (eventRisk > 3 && eventRisk <= 6)
         {
 
             eventDescription += "Failure of this project will deal considerable damage to the Comapny";
@@ -71,13 +71,13 @@ public class EventManager{
         //-------------------------------------------------------------------------------------------
 
 
-        if (eventReward <= 0.33)
+        if (eventReward <= 3)
         {
 
             eventDescription += "The success of this project will be only slightly benificial to the company";
 
         }
-        else if (eventReward > 0.33 && eventReward <= 0.66)
+        else if (eventReward > 3 && eventReward <= 6)
         {
 
             eventDescription += "The success of this project will be moderatly benificial to the company";

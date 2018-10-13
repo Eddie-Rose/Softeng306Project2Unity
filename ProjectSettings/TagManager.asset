@@ -41,12 +41,24 @@ TagManager:
   - name: Floor
     uniqueID: 4147539817
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: BackWall
+    uniqueID: 162345793
     locked: 0
-  - name: Environment
+  - name: Glass
     uniqueID: 1636717555
     locked: 0
   - name: Players
     uniqueID: 2041852931
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BackChairs
+    uniqueID: 706156135
+    locked: 0
+  - name: FrontChairs
+    uniqueID: 2859821575
+    locked: 0
+  - name: TopMost
+    uniqueID: 3427466993
     locked: 0
