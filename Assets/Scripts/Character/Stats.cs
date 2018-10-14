@@ -12,7 +12,7 @@ public class Stats : MonoBehaviour {
     public string ethnicity;
     public string position;
 
-    void Update() {}
+    //void Update() {}
 
     void Start() {
 
