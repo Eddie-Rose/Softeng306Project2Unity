@@ -99,6 +99,95 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
     }
 
+    public void createProceduralNPC(string name, string gender, string ethnicity)
+    {
+
+        GameObject randomNPC =
+            Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
+            new Vector3(1, 0, 1),
+            Quaternion.identity) as GameObject;
+
+        randomNPC.name = name;
+
+        Transform shirtObject = randomNPC.transform.GetChild(0);
+        Transform bodyObject = randomNPC.transform.GetChild(1);
+        Transform hairObject = randomNPC.transform.GetChild(2);
+        Transform pantsObject = randomNPC.transform.GetChild(3);
+
+        string bodyName = "";
+        string hairName = "";
+        string shirtName = "";
+        string pantsName = "";
+
+        switch (Random.Range(1,3))
+        {
+            case 1:
+                bodyName = "body_pale";
+                break;
+            case 2:
+                bodyName = "body_dark";
+                break;
+        }
+        bodyObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + bodyName);
+
+
+        if (gender == "Male")
+        {
+            switch (Random.Range(1, 3))
+            {
+                case 1:
+                    hairName = "hair_anime_dark";
+                    break;
+                case 2:
+                    hairName = "hair_bob_ginger";
+                    break;
+            }
+        }
+        else {
+
+            switch (Random.Range(1, 2))
+            {
+                case 1:
+                    hairName = "hair_ponytail_dark";
+                    break;
+            }
+
+        }
+        hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
+
+
+        switch (Random.Range(1, 5))
+        {
+            case 1:
+                shirtName = "shirt_blue";
+                break;
+            case 2:
+                shirtName = "shirt_limegreen";
+                break;
+            case 3:
+                shirtName = "shirt_pink";
+                break;
+            case 4:
+                shirtName = "shirt_white";
+                break;
+        }
+        shirtObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Shirts/" + shirtName);
+
+        switch (Random.Range(1, 3))
+        {
+            case 1:
+                pantsName = "pants_blue";
+                break;
+            case 2:
+                pantsName = "pant_dark";
+                break;
+        }
+        pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
+
+        Debug.Log("asdasd");
+
+    }
+
     // Create a new NPC
     public void createNPC(int seed)
     {
