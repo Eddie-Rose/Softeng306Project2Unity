@@ -6,11 +6,15 @@ public class Stats : MonoBehaviour {
 
     public int seed;
     public int happiness;
-    public int skill;
-    public int teamwork;
-    public string gender;
+    public string name;
     public string ethnicity;
+    public string gender;
+    public string age;
     public string position;
+    public int teamwork;
+    public int skill;
+    public List<Stats> friends = new List<Stats>();
+  
 
     //void Update() {}
 
@@ -18,14 +22,33 @@ public class Stats : MonoBehaviour {
 
     }
 
-    public int compatiblility(Stats otherNPC)
-    {
-        return 0;
-    }
 
-    public int generateSeed()
-    {
-        return 0;
+
+    public int compatiblility(Stats otherNPC) {
+
+        int comp = 0;
+        if (ethnicity.Equals(otherNPC.ethnicity)) {
+
+            comp += 5;
+            //comp += Random.Range(-2, 8);
+
+        } else {
+
+            //comp += Random.Range(-4, 6);
+
+        }
+
+        if (gender.Equals(otherNPC.gender)) {
+            comp += 3;
+            //comp += Random.Range(-1, 5);
+        }
+        else {
+            //comp += Random.Range(-2, 4);
+        }
+
+        comp += ((teamwork + otherNPC.teamwork) / 2);
+
+        return comp;
     }
 
 }

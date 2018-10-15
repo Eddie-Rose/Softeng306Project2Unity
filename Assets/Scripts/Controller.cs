@@ -78,13 +78,23 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
     }
 
-    public void createProceduralNPC(string name, string gender, string ethnicity)
+    public void createProceduralNPC(string name, string gender, string ethnicity, string age, string position, int teamwork, int skill)
     {
 
         GameObject randomNPC =
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
+
+        Stats statScript = randomNPC.GetComponent<Stats>();
+        statScript.name = name;
+        statScript.gender = gender;
+        statScript.ethnicity = ethnicity;
+        statScript.age = age;
+        statScript.position = position;
+        statScript.teamwork = teamwork;
+        statScript.skill = skill;
+
 
         randomNPC.name = name;
 
