@@ -37,14 +37,14 @@ public class NPCMovement : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {   
-        if(other.name == "character")
+        if(other.name == "CEO")
         {
-            TurnOnMessage();
+            TurnOnMessage(other);
         }
 
     }
 
-    private void TurnOnMessage()
+    private void TurnOnMessage(Collider2D other)
     {
         messageCanvas.enabled = true;
         string eventDescription = "";
@@ -53,14 +53,14 @@ public class NPCMovement : MonoBehaviour {
         Debug.Log(NPC.name);
         Transform textTr = NPC.transform.Find("MessageCanvas/Text");
         Text text = textTr.GetComponent<Text>();
-        text.text = eventDescription;
+        text.text = eventDescription + ", " + other.name;
         Debug.Log(text);
     }
 
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.name == "character")
+        if (other.name == "CEO")
         {
             TurnOffMessage();
 
