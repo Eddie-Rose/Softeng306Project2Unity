@@ -94,5 +94,10 @@ public class EventManager{
 
         ProposalEvent pEvent = new ProposalEvent("risky Event", eventDescription, eventRisk,eventReward,eventChance);
         return pEvent;
-    }  
+    }
+
+    public ConflictEvent getConflictEvent(List<Stats> employeeStats) {
+        ConflictEvent conflict = new ConflictEvent(employeeStats);
+        return conflict;
+    }
 }

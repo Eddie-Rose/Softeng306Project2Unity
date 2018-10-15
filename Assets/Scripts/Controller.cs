@@ -6,6 +6,7 @@ using UnityEngine.UI;
 // This is the main game controller.
 public class Controller : MonoBehaviour {
     public float timedEventA = 5f;
+    public float conflictTimer = 10f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
 
@@ -23,6 +24,7 @@ public class Controller : MonoBehaviour {
     // Track the tilemap:
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
+    public List<Stats> charStats = new List<Stats>();
 
 
     void Start () {
@@ -55,16 +57,24 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(true);
     }
 
+    void doConflicts() {
+
+    }
+
     void Timer() {
 
         timedEventA -= Time.deltaTime;
+        conflictTimer -= Time.deltaTime;
 
         if (timedEventA <= 0.0f) {
            // Debug.Log("Bye There");
             doProposalEvent();
             timedEventA = 100000f;
         }
-
+        if(conflictTimer <= 0.0f) {
+            doConflicts();
+            conflictTimer = 10f;
+        }
     }
 
     public void doEvent(bool execute) {
