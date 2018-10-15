@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 // This is the main game controller.
 public class Controller : MonoBehaviour {
+
+    public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
@@ -189,7 +191,7 @@ public class Controller : MonoBehaviour {
         pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
         pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
 
-        Debug.Log("asdasd");
+        NPCList.Add(randomNPC);
 
     }
 
