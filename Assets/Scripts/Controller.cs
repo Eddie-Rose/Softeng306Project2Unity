@@ -155,6 +155,7 @@ public class Controller : MonoBehaviour {
 
         }
         hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
+        hairObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
 
 
         switch (Random.Range(1, 5))
@@ -173,6 +174,8 @@ public class Controller : MonoBehaviour {
                 break;
         }
         shirtObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Shirts/" + shirtName);
+        shirtObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+
 
         switch (Random.Range(1, 3))
         {
@@ -184,6 +187,7 @@ public class Controller : MonoBehaviour {
                 break;
         }
         pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
+        pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
 
         Debug.Log("asdasd");
 
