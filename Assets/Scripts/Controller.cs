@@ -114,6 +114,7 @@ public class Controller : MonoBehaviour {
         Transform hairObject = randomNPC.transform.GetChild(2);
         Transform pantsObject = randomNPC.transform.GetChild(3);
 
+
         string bodyName = "";
         string hairName = "";
         string shirtName = "";

@@ -49,11 +49,12 @@ public class NPCMovement : MonoBehaviour {
         messageCanvas.enabled = true;
         string eventDescription = "";
         eventDescription += projectArray[Random.Range(0, projectArray.Length)] + "\n";
-        GameObject NPC = GameObject.Find("GingerMale");
-
+        GameObject NPC = GameObject.Find(this.gameObject.name);
+        Debug.Log(NPC.name);
         Transform textTr = NPC.transform.Find("MessageCanvas/Text");
         Text text = textTr.GetComponent<Text>();
         text.text = eventDescription;
+        Debug.Log(text);
     }
 
 
