@@ -7,6 +7,7 @@ public class Stats : MonoBehaviour
 
     public int seed;
     public int happiness;
+    public Color haircolor;
     public string name = "tom";
     public string ethnicity = "african";
     public string gender = "male";

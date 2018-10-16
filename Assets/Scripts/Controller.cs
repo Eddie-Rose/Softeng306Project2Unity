@@ -152,10 +152,10 @@ public class Controller : MonoBehaviour {
             switch (Random.Range(1, 3))
             {
                 case 1:
-                    hairName = "hair_anime_dark";
+                    hairName = "hair_anime_white";
                     break;
                 case 2:
-                    hairName = "hair_bob_ginger";
+                    hairName = "hair_bob_white";
                     break;
             }
         }
@@ -164,14 +164,14 @@ public class Controller : MonoBehaviour {
             switch (Random.Range(1, 2))
             {
                 case 1:
-                    hairName = "hair_ponytail_dark";
+                    hairName = "hair_ponytail_white";
                     break;
             }
 
         }
         hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
-        hairObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-
+        Color random = new Color(Random.value, Random.value, Random.value, 1.0f);
+        hairObject.GetComponent<SpriteRenderer>().color = random;
 
         switch (Random.Range(1, 5))
         {
@@ -207,6 +207,7 @@ public class Controller : MonoBehaviour {
         //set data into npc stats
         Stats statsScript = randomNPC.GetComponent<Stats>();
         statsScript.name = name;
+        statsScript.haircolor = random;
         statsScript.gender = gender;
         statsScript.age = age;
         statsScript.ethnicity = ethnicity;
