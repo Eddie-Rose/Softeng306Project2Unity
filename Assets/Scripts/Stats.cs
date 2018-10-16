@@ -7,13 +7,13 @@ public class Stats : MonoBehaviour
 
     public int seed;
     public int happiness;
-    public string name;
-    public string ethnicity;
-    public string gender;
-    public string age;
-    public string position;
-    public int teamwork;
-    public int skill;
+    public string name = "tom";
+    public string ethnicity = "african";
+    public string gender = "male";
+    public string age = "29";
+    public string position = "entry";
+    public int teamwork = 5;
+    public int skill = 5;
 
     public List<InteractionGraph.Relationship> relationships = new List<InteractionGraph.Relationship>();
 
@@ -61,8 +61,15 @@ public class Stats : MonoBehaviour
         Debug.Log(controllerScript.NPCList.Count);
         controllerScript.NPCList.Remove(this.gameObject);
         Debug.Log(controllerScript.NPCList.Count);
-        Destroy(this.gameObject);
+        DestroyImmediate(this.gameObject,true);
 
 
+    }
+
+    public void TransferNPC() {
+
+        GameObject transfer = GameObject.Find("TransferEvent");
+        TransferManager transferScript = transfer.GetComponent<TransferManager>();
+        transferScript.transferToHost(name,ethnicity,gender,age,position,teamwork,skill);
     }
 }
