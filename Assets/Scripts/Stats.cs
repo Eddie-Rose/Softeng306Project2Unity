@@ -15,6 +15,7 @@ public class Stats : MonoBehaviour
     public int teamwork;
     public int skill;
 
+    public List<InteractionGraph.Relationship> relationships = new List<InteractionGraph.Relationship>();
 
     //void Update() {}
 
