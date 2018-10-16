@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour {
 
-    public int money;
+    public static int money;
     public int happiness;
     public Text scoreText;
     float showMoney = 5f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
+        //showPanels = GetComponent<ShowPanels>();
         scoreText = GetComponent<Text>();
         money = 0;
         happiness = 0;
@@ -22,6 +23,5 @@ public class ScoreScript : MonoBehaviour {
         scoreText.text = "";
         scoreText.text +=  "CAPITAL:" + money.ToString() + "        ";
         scoreText.text += "TEAM HAPPINESS:" + happiness.ToString() + "\n";
-
     }
 }
