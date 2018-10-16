@@ -101,7 +101,7 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
     }
 
-    public void createProceduralNPC(string name, string gender, string ethnicity)
+    public void createProceduralNPC(string name, string gender, string age, string ethnicity, string position, int skill, int teamwork)
     {
 
         GameObject randomNPC =
@@ -190,6 +190,16 @@ public class Controller : MonoBehaviour {
         }
         pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
         pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+
+        //set data into npc stats
+        Stats statsScript = randomNPC.GetComponent<Stats>();
+        statsScript.name = name;
+        statsScript.gender = gender;
+        statsScript.age = age;
+        statsScript.ethnicity = ethnicity;
+        statsScript.position = position;
+        statsScript.skill = skill;
+        statsScript.teamwork = teamwork;
 
         NPCList.Add(randomNPC);
 

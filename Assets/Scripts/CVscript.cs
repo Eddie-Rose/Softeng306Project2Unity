@@ -13,6 +13,12 @@ public class CVscript : MonoBehaviour {
     string name = "";
     string ethnicity = "";
     string gender = " ";
+    string position = "";
+    string age = "";
+    int skill = 0;
+    int teamwork = 0;
+
+
     // Use this for initialization
     void Start () {
 
@@ -31,10 +37,10 @@ public class CVscript : MonoBehaviour {
 
         name = names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)];
         ethnicity = ethnicites[Random.Range(0, ethnicites.Length)];
-        string age = Random.Range(18, 50).ToString();
-        string position = positions[Random.Range(0, positions.Length)];
-        int teamwork = Random.Range(2, 10);
-        int skill = Random.Range(2, 10);
+        age = Random.Range(18, 50).ToString();
+        position = positions[Random.Range(0, positions.Length)];
+        teamwork = Random.Range(2, 10);
+        skill = Random.Range(2, 10);
         gender = genders[Random.Range(0, genders.Length)];
         this.gameObject.name = "CV_" + name;
 
@@ -91,7 +97,7 @@ public class CVscript : MonoBehaviour {
         {
             GameObject controller = GameObject.Find("ControllerObject");
             Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
-            controllerScript.createProceduralNPC(name,gender,ethnicity);
+            controllerScript.createProceduralNPC(name,gender,age,ethnicity,position,skill,teamwork);
             this.gameObject.SetActive(false);
 
         }

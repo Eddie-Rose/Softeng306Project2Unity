@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
+    public string name;
+    public string gender;
+    public string age;
+    public string ethnicity;
+    public string position;
+    public int skill;
+    public int teamwork;
 
     public void killNPC()
     {
