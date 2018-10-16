@@ -3,7 +3,13 @@ guid: 909e9e287006dd64a9f703ccfbf18ff5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - proposalBoxPrefab: {instanceID: 0}
+  - hireBoxPrefab: {instanceID: 0}
+  - currentTaskPrefab: {instanceID: 0}
+  - conflictPrefab: {instanceID: 0}
+  - worldControllerObj: {instanceID: 0}
+  - scrollView: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

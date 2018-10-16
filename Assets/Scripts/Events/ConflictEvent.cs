@@ -20,9 +20,9 @@ public class ConflictEvent : CustomEvent
         for (int i = 0; i < numEmployees; i++) {
             InteractionGraph.Relationship edge = edges[Random.Range(0, edges.Count)];
 
-            /* disposition is in range 0-100 */
+            /* disposition is in range 0-25 */
             int prob = edge.disposition; // higher disposition means less likely to have a conflict
-            if(Random.Range(0, 101) > prob) {
+            if(Random.Range(0, 26) > prob) {
                 // Open some sort of conflict popup
 
                 /*

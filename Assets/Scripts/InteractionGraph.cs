@@ -99,16 +99,20 @@ public class InteractionGraph {
 
 
         public void setDisposition(int disp) {
-            if (disp > 100) {
-                disp = 100;
+            if (disp > 25) {
+                disp = 25;
+            } else if (disp < 0) {
+                disp = 0;
             }
             this.disposition = disp;
         }
 
         public void incrementDisposition(int disp) {
             this.disposition += disp;
-            if (this.disposition > 100) {
-                this.disposition = 100;
+            if (this.disposition > 25) {
+                this.disposition = 25;
+            } else if (this.disposition < 0) {
+                this.disposition = 0;
             }
         }
     }

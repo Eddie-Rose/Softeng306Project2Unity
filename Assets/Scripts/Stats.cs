@@ -50,9 +50,14 @@ public class Stats : MonoBehaviour
 
         comp += ((teamwork + otherNPC.teamwork) / 2);
 
-        if (comp > 100)
+        /* constrain to 0-25 range */
+        if (comp > 25)
         {
-            comp = 100;
+            comp = 25;
+        }
+        else if (comp < 0)
+        {
+            comp = 0;
         }
         return comp;
     }

@@ -17,6 +17,8 @@ public class Controller : MonoBehaviour {
     public GameObject proposalBoxPrefab;
     public GameObject hireBoxPrefab;
     public GameObject currentTaskPrefab;
+    public GameObject conflictPrefab;
+    public GameObject transferPrefab;
 
     // Track the world controller:
     public GameObject worldControllerObj;
@@ -28,8 +30,9 @@ public class Controller : MonoBehaviour {
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
 
     public List<string> employeeNames = new List<string>() {"CEO"};
-    
-    
+
+    public InteractionGraph employeeRelationships = new InteractionGraph();
+
 
 
 
@@ -39,9 +42,14 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
         hireBoxPrefab.SetActive(false);
+        conflictPrefab = GameObject.Find("EventCanvas/ConflictPrefab");
+        conflictPrefab.SetActive(false);
+        transferPrefab = GameObject.Find("EventCanvas/TransferPanel");
+        transferPrefab.SetActive(false);
         currentTaskPrefab.SetActive(false);
 
-        
+
+
         // Create the world controller:
         //worldControllerObj = new GameObject();
         //worldControllerObj.AddComponent(typeof(WorldController));
@@ -65,6 +73,24 @@ public class Controller : MonoBehaviour {
             lossTime = 4;
         }
     }
+
+    float conflictTime = 20;
+
+    void ConflictTimer()
+    {
+        conflictTime -= Time.deltaTime;
+        if (conflictTime < 0)
+        {
+            doConflictEvent();
+            conflictTime = 20;
+        }
+    }
+
+    void doConflictEvent()
+    {
+
+    }
+
 
     public void addAvailableEmployee(string employee)
     {
@@ -219,6 +245,8 @@ public class Controller : MonoBehaviour {
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
+        employeeRelationships.addNode(statsScript);
+
 
     }
 
