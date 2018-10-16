@@ -50,6 +50,10 @@ public class Stats : MonoBehaviour
 
         comp += ((teamwork + otherNPC.teamwork) / 2);
 
+        if (comp > 100)
+        {
+            comp = 100;
+        }
         return comp;
     }
 

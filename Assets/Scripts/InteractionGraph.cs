@@ -71,6 +71,16 @@ public class InteractionGraph {
     }
 
 
+    public List<Relationship> getEdges() {
+        return this.edges;
+    }
+
+
+    public int numNodes() {
+        return nodes.Count;
+    }
+
+
 
     public class Relationship {
         public int disposition; // how much the source employee likes the target employee
@@ -89,11 +99,17 @@ public class InteractionGraph {
 
 
         public void setDisposition(int disp) {
+            if (disp > 100) {
+                disp = 100;
+            }
             this.disposition = disp;
         }
 
         public void incrementDisposition(int disp) {
             this.disposition += disp;
+            if (this.disposition > 100) {
+                this.disposition = 100;
+            }
         }
     }
 
