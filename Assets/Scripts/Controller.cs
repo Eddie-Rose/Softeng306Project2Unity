@@ -51,7 +51,21 @@ public class Controller : MonoBehaviour {
 
     void Update () {
         Timer();
+        DeductMoney();
 	}
+
+    float lastTime = Time.time;
+
+    void DeductMoney()
+    {
+        float newTime = Time.time;
+        int economyCounter = (int)(newTime - lastTime);
+        if(economyCounter == 2)
+        {
+            ScoreScript.money -= numEmployees * 200;
+            lastTime = newTime;
+        }
+    }
 
     public void addAvailableEmployee(string employee)
     {
