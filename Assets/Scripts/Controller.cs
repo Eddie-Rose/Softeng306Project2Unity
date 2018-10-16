@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 // This is the main game controller.
 public class Controller : MonoBehaviour {
+
+    public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
@@ -14,6 +16,7 @@ public class Controller : MonoBehaviour {
 
     public GameObject proposalBoxPrefab;
     public GameObject hireBoxPrefab;
+    public GameObject currentTaskPrefab;
 
     // Track the world controller:
     public GameObject worldControllerObj;
@@ -24,6 +27,11 @@ public class Controller : MonoBehaviour {
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
 
+    public List<string> employeeNames = new List<string>() {"CEO"};
+    
+    
+
+
 
     void Start () {
 
@@ -31,7 +39,9 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
         hireBoxPrefab.SetActive(false);
+        currentTaskPrefab.SetActive(false);
 
+        
         // Create the world controller:
         //worldControllerObj = new GameObject();
         //worldControllerObj.AddComponent(typeof(WorldController));
@@ -41,17 +51,44 @@ public class Controller : MonoBehaviour {
 
     void Update () {
         Timer();
+        DeductMoney();
 	}
 
-    void doProposalEvent() {
-        pEvents.Clear();
-        for (int x = 0; x < numEmployees; x++)
+    float lastTime = Time.time;
+
+    void DeductMoney()
+    {
+        float newTime = Time.time;
+        int economyCounter = (int)(newTime - lastTime);
+        if(economyCounter == 2)
         {
-            pEvents.Add(eventManager.getProposalEvent());
+            ScoreScript.money -= numEmployees * 200;
+            lastTime = newTime;
         }
-        pEvents.Add(eventManager.getProposalEvent());
+    }
+
+    public void addAvailableEmployee(string employee)
+    {
+        employeeNames.Add(employee);
+    }
+
+    void doProposalEvent() {
+
+        List<string> employeeToBeDeleted = new List<string>();
+        foreach(string employee in employeeNames)
+        {
+            pEvents.Add(eventManager.getProposalEvent(employee));
+            employeeToBeDeleted.Add(employee);
+
+        }
+        foreach(string employee in employeeToBeDeleted)
+        {
+            employeeNames.Remove(employee);
+        }
+        employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
+        pEvents.Clear();
         proposalBoxPrefab.SetActive(true);
     }
 
@@ -65,8 +102,6 @@ public class Controller : MonoBehaviour {
             timedEventA = 100000f;
         }
 
-        
-
     }
 
     public void doEvent(bool execute) {
@@ -78,6 +113,110 @@ public class Controller : MonoBehaviour {
             
         }
         proposalBoxPrefab.SetActive(false);
+    }
+
+    public void createProceduralNPC(string name, string gender, string age, string ethnicity, string position, int skill, int teamwork)
+    {
+
+        GameObject randomNPC =
+            Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
+            new Vector3(1, 0, 1),
+            Quaternion.identity) as GameObject;
+
+        randomNPC.name = name;
+
+        Transform shirtObject = randomNPC.transform.GetChild(0);
+        Transform bodyObject = randomNPC.transform.GetChild(1);
+        Transform hairObject = randomNPC.transform.GetChild(2);
+        Transform pantsObject = randomNPC.transform.GetChild(3);
+
+
+        string bodyName = "";
+        string hairName = "";
+        string shirtName = "";
+        string pantsName = "";
+
+        switch (Random.Range(1,3))
+        {
+            case 1:
+                bodyName = "body_pale";
+                break;
+            case 2:
+                bodyName = "body_dark";
+                break;
+        }
+        bodyObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + bodyName);
+
+
+        if (gender == "Male")
+        {
+            switch (Random.Range(1, 3))
+            {
+                case 1:
+                    hairName = "hair_anime_dark";
+                    break;
+                case 2:
+                    hairName = "hair_bob_ginger";
+                    break;
+            }
+        }
+        else {
+
+            switch (Random.Range(1, 2))
+            {
+                case 1:
+                    hairName = "hair_ponytail_dark";
+                    break;
+            }
+
+        }
+        hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
+        hairObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+
+
+        switch (Random.Range(1, 5))
+        {
+            case 1:
+                shirtName = "shirt_blue";
+                break;
+            case 2:
+                shirtName = "shirt_limegreen";
+                break;
+            case 3:
+                shirtName = "shirt_pink";
+                break;
+            case 4:
+                shirtName = "shirt_white";
+                break;
+        }
+        shirtObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Shirts/" + shirtName);
+        shirtObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+
+
+        switch (Random.Range(1, 3))
+        {
+            case 1:
+                pantsName = "pants_blue";
+                break;
+            case 2:
+                pantsName = "pant_dark";
+                break;
+        }
+        pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
+        pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+
+        //set data into npc stats
+        Stats statsScript = randomNPC.GetComponent<Stats>();
+        statsScript.name = name;
+        statsScript.gender = gender;
+        statsScript.age = age;
+        statsScript.ethnicity = ethnicity;
+        statsScript.position = position;
+        statsScript.skill = skill;
+        statsScript.teamwork = teamwork;
+
+        NPCList.Add(randomNPC);
+
     }
 
     // Create a new NPC
@@ -107,11 +246,31 @@ public class Controller : MonoBehaviour {
         {
 
             tex = Resources.Load<Sprite>("DarkFemale");
+            npc.name = "Employee-DarkFemale";
+            employeeNames.Add("DarkFemale");
 
         }
         else if(seed == 1) {
 
             tex = Resources.Load<Sprite>("GingerMale");
+            npc.name = "Employee-GingerMale";
+            employeeNames.Add("GingerMale");
+
+        }
+        else if (seed == 2)
+        {
+
+            tex = Resources.Load<Sprite>("Goku");
+            npc.name = "Employee-Goku";
+            employeeNames.Add("Goku");
+
+        }
+        else if (seed == 3)
+        {
+
+            tex = Resources.Load<Sprite>("AsianMale");
+            npc.name = "Employee-AsianMale";
+            employeeNames.Add("AsianMale");
 
         }
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
@@ -142,6 +301,8 @@ public class Controller : MonoBehaviour {
         npc.transform.localScale = new Vector2(1f, 1f);
 
     }
+
+   
 
 
 }

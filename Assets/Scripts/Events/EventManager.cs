@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EventManager{
 
-    public ProposalEvent getProposalEvent() {
+    public ProposalEvent getProposalEvent(string employee) {
 
         int eventRisk = Random.Range(1, 10);
         int eventReward = Random.Range(1, 10);
@@ -91,8 +91,22 @@ public class EventManager{
         }
 
         eventDescription += "\n";
+        eventDescription += "\n";
 
-        ProposalEvent pEvent = new ProposalEvent("risky Event", eventDescription, eventRisk,eventReward,eventChance);
+        //-------------------------------------------------------------------------------------------
+        
+        if (employee != null)
+        {
+            eventDescription += "Proposed by: " + employee;
+            eventDescription += "\n";
+        }
+        else
+        {
+            eventDescription += "Proposed by: CEO";
+            eventDescription += "\n";
+        }
+
+        ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 5.0f, 10.0f);
         return pEvent;
     }  
 }

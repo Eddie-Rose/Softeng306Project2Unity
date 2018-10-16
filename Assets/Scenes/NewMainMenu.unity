@@ -732,9 +732,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ' asd asd asd asd asd asdvvasd asdvasd asdasd v asd asd v asd v v asdv asdasd
-    asdasd asd asdasdasdasd asd asdasd asdasd asdasdasd asdasd asd asdasd asdasdasd
-    asdasdasd asd asd asd asd asdasdasd asdasd asd asd asdasd asd asd asd asd asd'
+  m_Text: The goal of this game is to reach $10,000 evaluation (prototype goal). This
+    done through selecting project proposals, each proposal has various risks and
+    advantages. Additionally you can choose to hire characters which expand the company
+    and the number of proposals.
 --- !u!222 &73190312
 CanvasRenderer:
   m_ObjectHideFlags: 0

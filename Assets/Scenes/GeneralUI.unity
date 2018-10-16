@@ -1944,9 +1944,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ' asd asd asd asd asd asdvvasd asdvasd asdasd v asd asd v asd v v asdv asdasd
-    asdasd asd asdasdasdasd asd asdasd asdasd asdasdasd asdasd asd asdasd asdasdasd
-    asdasdasd asd asd asd asd asdasdasd asdasd asd asd asdasd asd asd asd asd asd'
+  m_Text: "As the CEO of an exciting new serious game startup, it is your job to help
+    the company grow by hiring new employees and making decisions about which projects
+    to pursue. You will face many challenges in your role. Can you effectively manage
+    your team and create the next great game studio?\r\n"
 --- !u!222 &1237277520
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -7,26 +7,24 @@ public class ProposalEvent : CustomEvent{
     //identifies which risk/reward consenquences are weighted
     public int _risk;
     public int _reward;
+    public float _timeToLive;
+    public float _timeToCompleteProposal;
 
     //identifies the chance of a risk/reward consequence occuring
     public float _chance;
 
-    public ProposalEvent(string name, string description, int risk, int reward,float chance)
+    public ProposalEvent(string name, string description, int risk, int reward,float chance, float timeToLive, float timeToCompleteProposal)
     {
         _chance = chance;
         _name = name;
         _risk = risk;
         _reward = reward;
         _description = description;
+        _timeToLive = timeToLive;
+        _timeToCompleteProposal = timeToCompleteProposal;
 
-        if(risk == 1)
-        {
-            _description += "This is preeettty Riiiisky";
-        }
-        else if(risk == 10)
-        {
-            _description += "You're fuked";
-        }
+
+        
 
     }
 
@@ -37,6 +35,7 @@ public class ProposalEvent : CustomEvent{
         {
 
             risk();
+           
 
         }
         else {
