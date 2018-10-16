@@ -61,8 +61,9 @@ public class EndGame : MonoBehaviour
 
         //Set time.timescale to 1, this will cause animations and physics to continue updating at regular speed
         Time.timeScale = 1;
-        
+
         // Removies the end game panels
+        showPanels.HidePausePanel();
         showPanels.HideEndGamePanel();
     }
 
