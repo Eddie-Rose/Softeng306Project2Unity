@@ -54,16 +54,15 @@ public class Controller : MonoBehaviour {
         DeductMoney();
 	}
 
-    float lastTime = Time.time;
+    float lossTime = 4;
 
     void DeductMoney()
     {
-        float newTime = Time.time;
-        int economyCounter = (int)(newTime - lastTime);
-        if(economyCounter == 2)
+        lossTime -= Time.deltaTime;
+        if(lossTime < 0)
         {
-            ScoreScript.money -= numEmployees * 200;
-            lastTime = newTime;
+            ScoreScript.money -= (NPCList.Count + 1) * 200;
+            lossTime = 4;
         }
     }
 
