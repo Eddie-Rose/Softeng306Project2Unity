@@ -22,7 +22,7 @@ public class Stats : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
 
@@ -61,6 +61,7 @@ public class Stats : MonoBehaviour
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
         Debug.Log(controllerScript.NPCList.Count);
         controllerScript.NPCList.Remove(this.gameObject);
+        controllerScript.employeeNames.Remove(this.name);
         Debug.Log(controllerScript.NPCList.Count);
         DestroyImmediate(this.gameObject,true);
 

@@ -71,6 +71,8 @@ public class Controller : MonoBehaviour {
         employeeNames.Add(employee);
     }
 
+  
+
     void doProposalEvent() {
 
         List<string> employeeToBeDeleted = new List<string>();
@@ -216,6 +218,7 @@ public class Controller : MonoBehaviour {
         statsScript.teamwork = teamwork;
 
         NPCList.Add(randomNPC);
+        employeeNames.Add(name);
 
     }
 

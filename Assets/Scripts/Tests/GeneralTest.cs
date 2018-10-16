@@ -1,14 +1,44 @@
 ﻿using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using NUnit.Framework;
 using System.Collections;
-
 
 public class GeneralTest {
 
     [Test]
-    public void GeneralTestSimplePasses() {
+    public void StartUp_HireAndTransfer_Inactive() {
         // Use the Assert class to test conditions.
+        Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        GameObject[] allGameObjects = mainScene.GetRootGameObjects();
+        GameObject eventCanvas = null;
+        foreach(GameObject obj in allGameObjects)
+        {
+            
+            if (obj.name == "EventCanvas")
+            {
+                eventCanvas = obj;
+            }
+
+        }
+
+        GameObject result = eventCanvas.transform.Find("HirePanel").gameObject;
+        bool hirePanelIsActive = result.activeSelf;
+        
+
+        
+        GameObject hirePanel = GameObject.Find("EventCanvas/HirePanel");
+        //GameObject transferPanel = GameObject.Find("EventCanvas/TransferPanel");
+        
+
+        
+        //bool transferPanelIsActive = transferPanel.activeSelf;
+
+        Assert.IsFalse(hirePanelIsActive);
+        //Assert.IsFalse(transferPanelIsActive);
+
     }
 
     [Test]
