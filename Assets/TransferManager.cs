@@ -5,15 +5,67 @@ using UnityEngine;
 
 public class TransferManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+
+    GameObject TransferPanel;
+
+    // Use this for initialization
+    void Start () {
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+    
+    public void transferFromHost()
+    {
+        TransferPanel = GameObject.Find("TransferPanel");
+        int cvCount = TransferPanel.transform.childCount;
+        for (int x = 1; x < cvCount; x++) {
+
+            CVscript cv = TransferPanel.transform.GetChild(x).GetComponent<CVscript>();
+            cv.injectGenerationData("loading...", "loading...", "loading...", "loading...", "loading...", -1, -1);
+
+        }
+
+        string url = "https://kerwinsuniscoolafamirite.000webhostapp.com/retrieveTransfer.php";
+        WWWForm form = new WWWForm();
+        WWW www = new WWW(url, form);
+        StartCoroutine(WaitForRetrieve(www));
+    }
+
+    IEnumerator WaitForRetrieve(WWW www)
+    {
+        yield return www;
+
+        // check for errors
+        if (www.error == null)
+        {
+            int cvCount = TransferPanel.transform.childCount;
+            int index = 1;
+
+            string[] linesInFile = www.text.Split('\n');
+            foreach (string line in linesInFile)
+            {
+                if (line != "" && index < cvCount)
+                {
+                    Debug.Log(line);
+                    CVscript cv = TransferPanel.transform.GetChild(index).GetComponent<CVscript>();
+                    string[] data = line.Split(':');
+                    cv.injectGenerationData(data[0],data[3],data[1],data[2], data[4], int.Parse(data[5]), int.Parse(data[6]));
+                    TransferPanel.transform.GetChild(index).gameObject.SetActive(true);
+                    index++;
+                }
+            }
+
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+
+    }
 
     public void transferToHost(string name, string ethnicity, string gender, string age, string position, int teamwork, int skill)
     {
@@ -45,5 +97,6 @@ public class TransferManager : MonoBehaviour {
         {
             Debug.Log("WWW Error: " + www.error);
         }
+
     }
 }

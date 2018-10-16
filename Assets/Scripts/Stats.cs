@@ -71,5 +71,6 @@ public class Stats : MonoBehaviour
         GameObject transfer = GameObject.Find("TransferEvent");
         TransferManager transferScript = transfer.GetComponent<TransferManager>();
         transferScript.transferToHost(name,ethnicity,gender,age,position,teamwork,skill);
+        killNPC();
     }
 }

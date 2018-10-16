@@ -12,7 +12,7 @@ public class CVscript : MonoBehaviour {
     string[] universities = { "Auckland", "Stanford", "Cambridge", "Edwinborg", "Sydney", "Taiwan", "Seol" };
     string name = "";
     string ethnicity = "";
-    string gender = " ";
+    string gender = "";
     string position = "";
     string age = "";
     int skill = 0;
@@ -22,8 +22,10 @@ public class CVscript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        GenerateCV();
-
+        if (name == "")
+        {
+            GenerateCV();
+        }
 
     }
 
@@ -88,6 +90,38 @@ public class CVscript : MonoBehaviour {
         transform.Find("Teamwork").GetComponent<Text>().text = "Teamwork: " + teamwork.ToString();
         transform.Find("Summary").GetComponent<Text>().text = "Summary: \n" + fullSummary;
 
+
+    }
+
+    public void injectGenerationData(string name, string ethnicity, string gender, string age, string position, int skill, int teamwork) {
+
+        this.position = position;
+        this.name = name;
+        this.ethnicity = ethnicity;
+        this.gender = gender;
+        this.age = age;
+        this.skill = skill;
+        this.teamwork = teamwork;
+        string fullSummary = "";
+        if (name == "loading...") {
+
+            fullSummary = "loading...";
+        }
+        else{
+            fullSummary = name + " was recently refered by another company, they are now looking to apply for a " + position + "level position";
+        }
+        //set values for CV
+
+        transform.Find("Name").GetComponent<Text>().text = name;
+        transform.Find("Gender").GetComponent<Text>().text = "Gender: " + gender;
+        transform.Find("Position").GetComponent<Text>().text = "Position: " + position;
+        transform.Find("Age").GetComponent<Text>().text = "Age:" + age;
+        transform.Find("Nationality").GetComponent<Text>().text = "Ethnicity: " + ethnicity;
+        transform.Find("Skill").GetComponent<Text>().text = "Skill: " + skill.ToString();
+        transform.Find("Teamwork").GetComponent<Text>().text = "Teamwork: " + teamwork.ToString();
+
+        
+        transform.Find("Summary").GetComponent<Text>().text = "Summary: \n" + fullSummary;
 
     }
 
