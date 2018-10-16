@@ -14,14 +14,14 @@ public class ScoreScript : MonoBehaviour {
     void Start () {
         //showPanels = GetComponent<ShowPanels>();
         scoreText = GetComponent<Text>();
-        money = 0;
+        money = 100000;
         happiness = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         scoreText.text = "";
-        scoreText.text +=  "CAPITAL:" + money.ToString() + "        ";
-        scoreText.text += "TEAM HAPPINESS:" + happiness.ToString() + "\n";
+        scoreText.text +=  "CAPITAL: " + money.ToString() + "        ";
+        scoreText.text += "TEAM HAPPINESS: " + happiness.ToString() + "\n";
     }
 }

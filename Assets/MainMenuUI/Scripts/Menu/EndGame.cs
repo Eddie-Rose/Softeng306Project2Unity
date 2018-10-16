@@ -23,7 +23,7 @@ public class EndGame : MonoBehaviour
     {
 
         //Check if the user has earned enough money to "win"
-        if (ScoreScript.money > 10000 && !isPaused && !startScript.inMainMenu)
+        if (ScoreScript.money > 1000000 && !isPaused && !startScript.inMainMenu)
         {
             //Call the DoEndGame function to end the game
             DoEndGame();
