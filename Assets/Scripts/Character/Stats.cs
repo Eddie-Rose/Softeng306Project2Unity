@@ -5,7 +5,7 @@ using UnityEngine;
 public class Stats : MonoBehaviour {
 
     public int seed;
-    public int happiness;
+    public int happiness = 100;
     public string name;
     public string ethnicity;
     public string gender;
@@ -39,7 +39,7 @@ public class Stats : MonoBehaviour {
         }
 
         if (gender.Equals(otherNPC.gender)) {
-            comp += 3;
+            comp += 1;
             //comp += Random.Range(-1, 5);
         }
         else {

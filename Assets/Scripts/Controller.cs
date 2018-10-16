@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // This is the main game controller.
-public class Controller : MonoBehaviour {
+public class Controller : MonoBehaviour
+{
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
@@ -20,12 +21,19 @@ public class Controller : MonoBehaviour {
 
     public GameObject scrollView;
 
+    public int diversity;
+    public int happinessIncrement = 1;
+
+
     // Track the tilemap:
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
 
+    public List<Stats> charStats = new List<Stats>();
 
-    void Start () {
+
+    void Start()
+    {
 
         proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
         proposalBoxPrefab.SetActive(false);
@@ -39,11 +47,13 @@ public class Controller : MonoBehaviour {
 
     }
 
-    void Update () {
+    void Update()
+    {
         Timer();
-	}
+    }
 
-    void doProposalEvent() {
+    void doProposalEvent()
+    {
         pEvents.Clear();
         for (int x = 0; x < numEmployees; x++)
         {
@@ -53,27 +63,36 @@ public class Controller : MonoBehaviour {
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
         proposalBoxPrefab.SetActive(true);
+
+
+
     }
 
-    void Timer() {
+    void Timer()
+    {
 
         timedEventA -= Time.deltaTime;
 
-        if (timedEventA <= 0.0f) {
-           // Debug.Log("Bye There");
+        if (timedEventA <= 0.0f)
+        {
+            // Debug.Log("Bye There");
             doProposalEvent();
+            updateHappiness();
             timedEventA = 100000f;
         }
 
     }
 
-    public void doEvent(bool execute) {
+    public void doEvent(bool execute)
+    {
         Debug.Log("clicked");
-        if (execute) {
+        if (execute)
+        {
             _currentEvent.consequence();
         }
-        else {
-            
+        else
+        {
+
         }
         proposalBoxPrefab.SetActive(false);
     }
@@ -94,7 +113,9 @@ public class Controller : MonoBehaviour {
         statScript.position = position;
         statScript.teamwork = teamwork;
         statScript.skill = skill;
-
+        charStats.Add(statScript);
+        updateDiversity();
+        setHapinessIncrement();
 
         randomNPC.name = name;
 
@@ -108,7 +129,7 @@ public class Controller : MonoBehaviour {
         string shirtName = "";
         string pantsName = "";
 
-        switch (Random.Range(1,3))
+        switch (Random.Range(1, 3))
         {
             case 1:
                 bodyName = "body_pale";
@@ -132,7 +153,8 @@ public class Controller : MonoBehaviour {
                     break;
             }
         }
-        else {
+        else
+        {
 
             switch (Random.Range(1, 2))
             {
@@ -206,7 +228,8 @@ public class Controller : MonoBehaviour {
             tex = Resources.Load<Sprite>("DarkFemale");
 
         }
-        else if(seed == 1) {
+        else if (seed == 1)
+        {
 
             tex = Resources.Load<Sprite>("GingerMale");
 
@@ -252,5 +275,57 @@ public class Controller : MonoBehaviour {
 
     }
 
+    private void updateHappiness() {
 
+        if (happinessIncrement > 50) {
+            happinessIncrement = 50;
+        } else {
+            happinessIncrement += diversity / 4;
+        }
+        
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness += happinessIncrement;
+
+    }
+
+    public void updateDiversity() {
+
+        diversity = 0;
+        Dictionary<string, int> diversities = new Dictionary<string, int>();
+        diversities.Add("Male", 0);
+        diversities.Add("Femaile", 0);
+        CVscript cv = new CVscript();
+
+        foreach (string country in cv.ethnicites) {
+            diversities.Add(country, 0);
+        }
+
+
+        foreach (Stats stat in charStats) {
+
+            if (diversities[stat.gender] == 0) {
+                diversities[stat.gender] = 1;
+                diversity += 1;
+            }
+
+        }
+
+        foreach (Stats stat in charStats) {
+
+            if (diversities[stat.ethnicity] == 0) {
+                diversities[stat.ethnicity] = 1;
+                diversity += 1;
+            }
+
+        }
+
+    }
+
+    public void setHapinessIncrement() {
+
+        happinessIncrement += 1;
+        happinessIncrement += (12 - diversity);
+        
+    }
 }
