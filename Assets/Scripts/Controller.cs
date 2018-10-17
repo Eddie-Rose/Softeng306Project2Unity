@@ -254,8 +254,6 @@ public class Controller : MonoBehaviour {
         updateDiversity();
 
         randomNPC.name = name;
-        statsScript.haircolor = random;
-
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
@@ -368,6 +366,7 @@ public class Controller : MonoBehaviour {
 
         CVscript cv = new CVscript();
 
+        /*
         foreach (Stats stat in charStats) {
 
             if (diversities[stat.gender] == 0) {
@@ -385,7 +384,7 @@ public class Controller : MonoBehaviour {
             }
 
         }
-
+        */
     }
 
     public void setHappinessIncrement() {

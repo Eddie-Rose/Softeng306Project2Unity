@@ -12,6 +12,9 @@ public class CharacterSprites : MonoBehaviour {
     Transform hairObject;
     Transform pantsObject;
 
+    // animation
+    float currentTime = 0;
+
     void Start () {
         character = this.gameObject;
 
@@ -25,14 +28,16 @@ public class CharacterSprites : MonoBehaviour {
         bodyObject = character.transform.GetChild(1);
         hairObject = character.transform.GetChild(2);
         pantsObject = character.transform.GetChild(3);
-
-        Debug.Log(stats);
-        Debug.Log(spriteRenderer);
     }
 
     void Update () {
-		
-	}
+        currentTime += Time.deltaTime;
+
+        if (currentTime > 0.4)
+        {
+            currentTime = 0;
+        }
+    }
 
     public void SetDownSprite()
     {
@@ -41,9 +46,7 @@ public class CharacterSprites : MonoBehaviour {
         hairObject.GetComponent<SpriteRenderer>().sprite 
             = Resources.Load<Sprite>("CharacterGeneration/Hair/" + stats.hairName + "_front");
         hairObject.GetComponent<SpriteRenderer>().color = stats.hairColor;
-
-        Debug.Log("CharacterGeneration/Hair/" + stats.hairName + "_front");
-
+        
         bodyObject.GetComponent<SpriteRenderer>().sprite 
             = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName + "_front");
 
@@ -66,9 +69,19 @@ public class CharacterSprites : MonoBehaviour {
         hairObject.GetComponent<SpriteRenderer>().color = stats.hairColor;
         hairObject.GetComponent<SpriteRenderer>().flipX = false;
 
-        bodyObject.GetComponent<SpriteRenderer>().sprite
+        // Animation
+        if (currentTime < 0.2)
+        {
+            bodyObject.GetComponent<SpriteRenderer>().sprite
             = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName);
-        bodyObject.GetComponent<SpriteRenderer>().flipX = false;
+            bodyObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+        else
+        {
+            bodyObject.GetComponent<SpriteRenderer>().sprite
+            = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName + "_2");
+            bodyObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
 
         shirtObject.GetComponent<SpriteRenderer>().sprite
             = Resources.Load<Sprite>("CharacterGeneration/Shirts/shirt_white");
@@ -90,9 +103,19 @@ public class CharacterSprites : MonoBehaviour {
         hairObject.GetComponent<SpriteRenderer>().color = stats.hairColor;
         hairObject.GetComponent<SpriteRenderer>().flipX = true;
 
-        bodyObject.GetComponent<SpriteRenderer>().sprite
+        // Animation
+        if (currentTime < 0.2)
+        {
+            bodyObject.GetComponent<SpriteRenderer>().sprite
             = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName);
-        bodyObject.GetComponent<SpriteRenderer>().flipX = true;
+            bodyObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            bodyObject.GetComponent<SpriteRenderer>().sprite
+            = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName + "_2");
+            bodyObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
 
         shirtObject.GetComponent<SpriteRenderer>().sprite
             = Resources.Load<Sprite>("CharacterGeneration/Shirts/shirt_white");

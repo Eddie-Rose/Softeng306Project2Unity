@@ -1235,6 +1235,10 @@ Prefab:
       propertyPath: m_Name
       value: OptionsText
       objectReference: {fileID: 0}
+    - target: {fileID: 1161651300302328, guid: 8efaa002c1fa17a44b4eb26e00a60cbb, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efaa002c1fa17a44b4eb26e00a60cbb, type: 2}
   m_IsPrefabAsset: 0
