@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EventManager{
 
+    List<string> employeesToBeDeleted = new List<string>();
+
     public ProposalEvent getProposalEvent(string employee) {
 
         int eventRisk = Random.Range(1, 10);
@@ -108,6 +110,20 @@ public class EventManager{
 
         ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
         return pEvent;
+    }
+
+    public ProposalEvent getProposalEvent(List<string> employees)
+    {
+        employeesToBeDeleted.Add(employees[0]);
+        return getProposalEvent(employees[0]);
+    }
+
+    public List<string> getEmployeesToBeRemoved(List<string> employees)
+    {
+        foreach(string employee in employeesToBeDeleted)
+            employees.Remove(employee);
+
+        return employees;
     }
 
     public ConflictEvent getConflictEvent(int cost)
