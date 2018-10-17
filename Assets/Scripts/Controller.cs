@@ -108,10 +108,12 @@ public class Controller : MonoBehaviour {
             employeeToBeDeleted.Add(employee);
 
         }
+
         foreach(string employee in employeeToBeDeleted)
         {
             employeeNames.Remove(employee);
         }
+
         employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
@@ -138,7 +140,29 @@ public class Controller : MonoBehaviour {
         lossTime -= Time.deltaTime;
         if (lossTime < 0)
         {
-            ScoreScript.money -= (NPCList.Count + 1) * 20;
+            //Lose in captial over time
+            foreach (GameObject npc in NPCList)
+            {
+                Stats statsScript = npc.GetComponent<Stats>();
+                switch(statsScript.position.ToString())
+                {
+                    case "Intern" :
+                        ScoreScript.money -= 10;
+                        break;
+                    case "Entry":
+                        ScoreScript.money -= 20;
+                        break;
+                    case "Junior":
+                        ScoreScript.money -= 40;
+                        break;
+                    case "Senior":
+                        ScoreScript.money -= 60;
+                        break;
+                    case "Specialist":
+                        ScoreScript.money -= 80;
+                        break;
+                }
+            }
             lossTime = 4;
         }
 
