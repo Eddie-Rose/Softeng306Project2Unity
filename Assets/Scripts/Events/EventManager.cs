@@ -177,6 +177,9 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
+        eventDescription += "Estimated reward: $" + eventReward + "k\n";
+        eventDescription += "Estimated loss: $" + eventRisk + "k\n";
+
         if (employee != null)
         {
             eventDescription += "Proposed by: " + employee;
@@ -188,8 +191,7 @@ public class EventManager{
             eventDescription += "\n";
         }
 
-        eventDescription += "Estimated reward: $" + eventReward + "k\n";
-        eventDescription += "Estimated loss: $" + eventRisk + "k\n";
+
 
 
         ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
