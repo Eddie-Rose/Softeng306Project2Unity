@@ -7,7 +7,15 @@ public class Stats : MonoBehaviour
 
     public int seed;
     public int happiness;
-    public Color haircolor;
+
+    // Sprite data
+    public Color hairColor;
+    public Color pantsColor;
+    public Color shirtColor;
+    public string bodyName = "";
+    public string hairName = "";
+
+    // Display data
     public string name = "tom";
     public string ethnicity = "african";
     public string gender = "male";
@@ -17,15 +25,11 @@ public class Stats : MonoBehaviour
     public int skill = 5;
 
     public List<InteractionGraph.Relationship> relationships = new List<InteractionGraph.Relationship>();
-
-    //void Update() {}
-
+    
     void Start()
     {
         
     }
-
-
 
     public int compatiblility(Stats otherNPC) {
 
@@ -63,9 +67,7 @@ public class Stats : MonoBehaviour
     }
 
     public void killNPC()
-    {
-
-        
+    {   
         GameObject controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
         Debug.Log(controllerScript.NPCList.Count);
@@ -73,8 +75,6 @@ public class Stats : MonoBehaviour
         controllerScript.employeeNames.Remove(this.name);
         Debug.Log(controllerScript.NPCList.Count);
         DestroyImmediate(this.gameObject,true);
-
-
     }
 
     public void TransferNPC() {
