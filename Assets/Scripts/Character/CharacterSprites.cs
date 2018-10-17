@@ -32,7 +32,18 @@ public class CharacterSprites : MonoBehaviour {
         this.SetLeftSprite();
     }
 
-    public void SetDownSprite()
+
+    void Update()
+    {
+        currentTime += Time.deltaTime;
+        if (currentTime > 0.4)
+        {
+            currentTime = 0;
+        }
+    
+    }
+
+public void SetDownSprite()
     {
         // Swap the sprite to 'front'
 
