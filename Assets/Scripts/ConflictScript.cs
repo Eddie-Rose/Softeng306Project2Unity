@@ -115,7 +115,7 @@ public class ConflictScript : MonoBehaviour {
         }
         GameObject controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
-        controllerScript.conflictEventTimer = 20f;
+        controllerScript.conflictEventTimer = 40f;
     }
 
 
