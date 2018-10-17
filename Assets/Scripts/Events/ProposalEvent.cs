@@ -33,15 +33,12 @@ public class ProposalEvent : CustomEvent{
         float diceRoll = Random.Range(0f, 1f);
         if (diceRoll > _chance)
         {
-
-            risk();
-           
-
-        }
-        else {
-
             reward();
 
+         }
+        else {
+
+            risk();
 
         }
     }
