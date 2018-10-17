@@ -101,18 +101,24 @@ public class Controller : MonoBehaviour {
 
     void doProposalEvent() {
 
-        List<string> employeeToBeDeleted = new List<string>();
-        foreach(string employee in employeeNames)
-        {
-            pEvents.Add(eventManager.getProposalEvent(employee));
-            employeeToBeDeleted.Add(employee);
+        //List<string> employeeToBeDeleted = new List<string>();
+        //foreach(string employee in employeeNames)
+        //{
+        //    pEvents.Add(eventManager.getProposalEvent(employee));
+        //    employeeToBeDeleted.Add(employee);
 
-        }
-        foreach(string employee in employeeToBeDeleted)
+        //}
+        //foreach(string employee in employeeToBeDeleted)
+        //{
+        //    employeeNames.Remove(employee);
+        //}
+        //employeeToBeDeleted.Clear();
+
+        while (employeeNames.Count != 0) 
         {
-            employeeNames.Remove(employee);
+            pEvents.Add(eventManager.getProposalEvent(employeeNames));
+            employeeNames = eventManager.deleteEmployeesUsed(employeeNames);
         }
-        employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
         pEvents.Clear();

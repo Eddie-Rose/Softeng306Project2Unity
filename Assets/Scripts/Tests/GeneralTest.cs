@@ -12,6 +12,8 @@ public class GeneralTest {
     public void StartUp_HireAndTransfer_Inactive() {
         // Use the Assert class to test conditions.
         Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        
+
         GameObject[] allGameObjects = mainScene.GetRootGameObjects();
         GameObject eventCanvas = null;
         foreach(GameObject obj in allGameObjects)

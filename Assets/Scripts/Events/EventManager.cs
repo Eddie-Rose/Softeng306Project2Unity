@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventManager{
+public class EventManager
+{
 
-    public ProposalEvent getProposalEvent(string employee) {
+    string[] ethnicites = { "Japanese", "Chinese", "American", "European", "African", "Korean", "Australian", "Brazilian", "Palestinian" };
+
+    List<string> employeesUsed = new List<string>();
+
+    public ProposalEvent getProposalEvent(string employee)
+    {
 
         int eventRisk = Random.Range(1, 10);
         int eventReward = Random.Range(1, 10);
@@ -35,7 +41,8 @@ public class EventManager{
             eventDescription += "this is moderatly risky project with a good chance of failing";
 
         }
-        else {
+        else
+        {
 
             eventDescription += "this is a very risky project, the chances of failure are high";
 
@@ -94,7 +101,7 @@ public class EventManager{
         eventDescription += "\n";
 
         //-------------------------------------------------------------------------------------------
-        
+
         if (employee != null)
         {
             eventDescription += "Proposed by: " + employee;
@@ -106,7 +113,49 @@ public class EventManager{
             eventDescription += "\n";
         }
 
-        ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
+        ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk, eventReward, eventChance, 15.0f, 10.0f);
         return pEvent;
-    }  
-}
+    }
+
+    public ProposalEvent getProposalEvent(List<string> employees)
+    {
+        List<Stats> statsList = new List<Stats>();
+
+        foreach (string employee in employees)
+        {
+            if (employee == "CEO")
+                continue;
+            Debug.Log(employee);
+            statsList.Add(GameObject.Find(employee).GetComponent<Stats>());
+        }
+
+        if(statsList.Count == 0)
+        {
+            employeesUsed.Add(employees[0]);
+            return getProposalEvent(employees[0]);
+        }
+        Debug.Log(statsList.Count);
+        InteractionGraph statsGraph = new InteractionGraph(statsList);
+        List<InteractionGraph.Relationship> allEdges = statsGraph.getEdgesRelatingToEmployee(statsList[0]);
+
+
+
+
+        employeesUsed.Add(employees[0]);
+        return getProposalEvent(employees[0]);
+
+       
+
+    }
+
+
+    public List<string> deleteEmployeesUsed(List<string> employees)
+    {
+        foreach (string employee in employeesUsed)
+        {
+            employees.Remove(employee);
+        }
+        employeesUsed.Clear();
+        return employees;
+    }
+}    

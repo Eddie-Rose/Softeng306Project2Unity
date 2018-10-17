@@ -76,6 +76,27 @@ public class InteractionGraph {
     }
 
 
+    /**
+     * This method returns how all the dispositions of the other employees in relation to the 
+     * inputted one
+     */
+    public List<Relationship> getEdgesRelatingToEmployee(Stats employee)
+    {
+        List<Relationship> employeeRelationships = new List<Relationship>();
+        
+        //Loops through all the edges to filter the source being the input
+        foreach (Relationship r in edges)
+        {
+            if (r.source.name == employee.name)
+                employeeRelationships.Add(r);
+
+        }
+        return employeeRelationships;
+    }
+
+    /**
+     * Returns the number of nodes (employees) in the graph
+     */ 
     public int numNodes() {
         return nodes.Count;
     }
