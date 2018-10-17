@@ -177,6 +177,7 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
+
         eventDescription += "Proposed by:";
         foreach (string employee in employees)
         {
@@ -186,6 +187,8 @@ public class EventManager{
 
         eventDescription += "Estimated reward: $" + eventReward + "k\n";
         eventDescription += "Estimated loss: $" + eventRisk + "k\n";
+
+
 
 
         ProposalEvent pEvent = new ProposalEvent(employees, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
@@ -264,6 +267,7 @@ public class EventManager{
         {
             employees.Remove(employee);
         }
+
 
         employeesToBeDeleted.Clear();
         return employees;

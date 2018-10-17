@@ -28,7 +28,7 @@ public class ConflictScript : MonoBehaviour {
         "Find a suitable compromise for the issue."
     };
 
-    public void generateConflict()
+    public bool generateConflict()
     {
         GameObject controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
@@ -42,27 +42,39 @@ public class ConflictScript : MonoBehaviour {
         {
             conflictEdge = edges[Random.Range(0, edges.Count)];
 
+            //Debug.Log(conflictEdge.source.name + " -> " + conflictEdge.target.name);
+
             /* disposition is in range 0-25 */
-            int prob = conflictEdge.disposition; // higher disposition means less likely to have a conflict
+            int prob = conflictEdge.getDisposition(); // higher disposition means less likely to have a conflict
 
-            
 
-            if (Random.Range(0, 26) > prob)
+            //Debug.Log("Prob = " + conflictEdge.source.name + " -> " + conflictEdge.target.name + prob);
+
+            int rand = Random.Range(0, 26);
+            //Debug.Log("rand = " + rand);
+
+            if (rand > prob)
             {
-                cost = (25 - prob) * Random.Range(50, 101); // cost for option 1
+                int invProb = 25 - prob;
+                int mult = Random.Range(50, 101);
+                cost = invProb * mult; // cost for option 1
+                //Debug.Log("25 - prob = " + invProb);
+                //Debug.Log("Mult = " + mult);
+                //Debug.Log("Cost = "+ cost);
                 // Set conflict popup
                 transform.Find("Context").GetComponent<Text>().text = conflictEdge.source.name + " and " + conflictEdge.target.name + " are having a conflict.\n" 
                     + conflictEdge.source.name + conflictReasons[Random.Range(0, conflictReasons.Length)] + conflictEdge.target.name;
                 transform.Find("OptionsText").GetComponent<Text>().text = "Option 1: " + resolutionOptions[Random.Range(0, resolutionOptions.Length)] 
-                    + "\n\t(Costs: $" + cost + " but " + conflictEdge.source.name  + " and " + conflictEdge.target.name  + " like each other more)";
+                    + "\n\t(Costs: $" + cost + " but " + conflictEdge.source.name  + " and " + conflictEdge.target.name  + " like each other more so overall happiness increases)";
 
-                
 
-                
 
-                break; // only one popup per occurence, more chances to get one with a larger workforce.
+
+
+                return true; // only one popup per occurence, more chances to get one with a larger workforce.
             }
         }
+        return false;
     }
 
     public void processOption(bool option1)
@@ -74,13 +86,25 @@ public class ConflictScript : MonoBehaviour {
             ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
 
             ScoreScript.money -= cost;
+            cost = 0;
 
+            InteractionGraph.Relationship invEdge = employeeRelationships.getRelationship(conflictEdge.target, conflictEdge.source);
+
+            //Debug.Log("Dispo = " + conflictEdge.source.name + " -> " + conflictEdge.target.name + " = " + conflictEdge.disposition);
+            //Debug.Log("Dispo = " + invEdge.source.name + " -> " + invEdge.target.name + " = " + invEdge.disposition);
 
             conflictEdge.incrementDisposition(5);
-            employeeRelationships.getRelationship(conflictEdge.target, conflictEdge.source).incrementDisposition(5);
+            invEdge.incrementDisposition(5);
+
+            //Debug.Log("Dispo = " + conflictEdge.source.name + " -> " + conflictEdge.target.name + " = " + conflictEdge.disposition);
+            //Debug.Log("Dispo = " + invEdge.source.name + " -> " + invEdge.target.name + " = " + invEdge.disposition);
+                
+
             this.gameObject.SetActive(false);
 
-    
+
+
+
 
         }
         else
@@ -89,6 +113,9 @@ public class ConflictScript : MonoBehaviour {
             this.gameObject.SetActive(false);
 
         }
+        GameObject controller = GameObject.Find("ControllerObject");
+        Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
+        controllerScript.conflictEventTimer = 20f;
     }
 
 

@@ -23,8 +23,6 @@ public class Stats : MonoBehaviour
     public string position = "Entry";
     public int teamwork = 5;
     public int skill = 5;
-
-    public List<InteractionGraph.Relationship> relationships = new List<InteractionGraph.Relationship>();
     
     void Start()
     {
@@ -63,6 +61,7 @@ public class Stats : MonoBehaviour
         {
             comp = 0;
         }
+        //Debug.Log("Compat = " + this.name + " -> " + otherNPC.name + " = " + comp);
         return comp;
     }
 

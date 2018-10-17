@@ -77,13 +77,20 @@ public class Controller : MonoBehaviour {
 
     void doConflict()
     {
+        bool conflict = false;
         if(employeeRelationships.numNodes() > 1)
         {
             ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
-            script.generateConflict();
-            conflictPrefab.SetActive(true);
+            if (script.generateConflict())
+            {
+                conflict = true;
+                conflictPrefab.SetActive(true);
+            }
         }
-        
+        if(!conflict)
+        {
+            conflictEventTimer = 20f;
+        }
     }
 
 
@@ -96,11 +103,12 @@ public class Controller : MonoBehaviour {
     }
 
   
-
+    
     void doProposalEvent() {
-
+        int i = 0;
         while (employeeNames.Count != 0)
         {
+            Debug.Log("" + i);
             pEvents.Add(eventManager.getProposalEvent(employeeNames));
             employeeNames = eventManager.getEmployeesToBeRemoved(employeeNames);
         }
@@ -122,6 +130,7 @@ public class Controller : MonoBehaviour {
         if (timedEventA <= 0.0f)
         {
             // Debug.Log("Bye There");
+            updateHappinessDispositions();
             doProposalEvent();
             updateHappiness();
             timedEventA = 100000f;
@@ -132,7 +141,7 @@ public class Controller : MonoBehaviour {
         if (conflictEventTimer <= 0.0f)
         {
             doConflict();
-            conflictEventTimer = 20f;
+            conflictEventTimer = 100000f;
         }
 
 
@@ -208,9 +217,8 @@ public class Controller : MonoBehaviour {
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
-
         //Stats statScript = randomNPC.GetComponent<Stats>();
-        
+       
 
         string bodyName = "";
         string hairName = "";
@@ -286,6 +294,16 @@ public class Controller : MonoBehaviour {
         setSkillTeamwork();
 
         randomNPC.name = name;
+
+        randomNPC.transform.Find("Opperations Panel/Panel/Text").GetComponent<Text>().text =
+            "Name: " + name + "\n" +
+            "Gender " + gender + "\n" +
+            "Age: " + age + "\n" +
+            "Ethnicity: " + ethnicity + "\n" +
+            "Position: " + position + "\n" +
+            "Skill: " + skill.ToString() + "\n" +
+            "Teamwork: " + teamwork.ToString() + "\n";
+            
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
@@ -373,6 +391,25 @@ public class Controller : MonoBehaviour {
 
         //Set the size of the sprite to fit the map.
         npc.transform.localScale = new Vector2(1f, 1f);
+
+    }
+
+    private void updateHappinessDispositions()
+    {
+        int avgDisp = 0;
+        foreach(InteractionGraph.Relationship edge in employeeRelationships.getEdges())
+        {
+            avgDisp += edge.getDisposition();
+        }
+        avgDisp = avgDisp / employeeRelationships.getEdges().Count;
+
+        int incHappiness = avgDisp - 10;
+
+        Debug.Log("inc = " + incHappiness);
+
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness += incHappiness;
 
     }
 
