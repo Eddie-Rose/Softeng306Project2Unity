@@ -103,19 +103,12 @@ public class Controller : MonoBehaviour {
 
     void doProposalEvent() {
 
-        List<string> employeeToBeDeleted = new List<string>();
-        foreach(string employee in employeeNames)
-
+        while (employeeNames.Count != 0)
         {
-            pEvents.Add(eventManager.getProposalEvent(employee));
-            employeeToBeDeleted.Add(employee);
+            pEvents.Add(eventManager.getProposalEvent(employeeNames));
+            employeeNames = eventManager.getEmployeesToBeRemoved(employeeNames);
+        }
 
-        }
-        foreach(string employee in employeeToBeDeleted)
-        {
-            employeeNames.Remove(employee);
-        }
-        employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
         pEvents.Clear();
@@ -150,7 +143,29 @@ public class Controller : MonoBehaviour {
         lossTime -= Time.deltaTime;
         if (lossTime < 0)
         {
-            ScoreScript.money -= (NPCList.Count + 1) * 20;
+            //Lose in captial over time
+            foreach (GameObject npc in NPCList)
+            {
+                Stats statsScript = npc.GetComponent<Stats>();
+                switch(statsScript.position.ToString())
+                {
+                    case "Intern" :
+                        ScoreScript.money -= 10;
+                        break;
+                    case "Entry":
+                        ScoreScript.money -= 20;
+                        break;
+                    case "Junior":
+                        ScoreScript.money -= 40;
+                        break;
+                    case "Senior":
+                        ScoreScript.money -= 60;
+                        break;
+                    case "Specialist":
+                        ScoreScript.money -= 80;
+                        break;
+                }
+            }
             lossTime = 4;
         }
 

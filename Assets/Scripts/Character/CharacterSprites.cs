@@ -132,18 +132,18 @@ public class CharacterSprites : MonoBehaviour {
     public void SetUpSprite()
     {
         hairObject.GetComponent<SpriteRenderer>().sprite
-            = Resources.Load<Sprite>("CharacterGeneration/Hair/" + stats.hairName);
+            = Resources.Load<Sprite>("CharacterGeneration/Hair/" + stats.hairName + "_back");
         hairObject.GetComponent<SpriteRenderer>().color = stats.hairColor;
 
         bodyObject.GetComponent<SpriteRenderer>().sprite
-            = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName);
+            = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + stats.bodyName + "_front");
 
         shirtObject.GetComponent<SpriteRenderer>().sprite
-            = Resources.Load<Sprite>("CharacterGeneration/Shirts/shirt_white");
+            = Resources.Load<Sprite>("CharacterGeneration/Shirts/shirt_white_back");
         shirtObject.GetComponent<SpriteRenderer>().color = stats.shirtColor;
 
         pantsObject.GetComponent<SpriteRenderer>().sprite
-            = Resources.Load<Sprite>("CharacterGeneration/Pants/pants_white");
+            = Resources.Load<Sprite>("CharacterGeneration/Pants/pants_white_front");
         pantsObject.GetComponent<SpriteRenderer>().color = stats.pantsColor;
     }
 }

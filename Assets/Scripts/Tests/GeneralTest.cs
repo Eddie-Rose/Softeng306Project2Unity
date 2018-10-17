@@ -16,28 +16,21 @@ public class GeneralTest {
         GameObject eventCanvas = null;
         foreach(GameObject obj in allGameObjects)
         {
-            
             if (obj.name == "EventCanvas")
             {
                 eventCanvas = obj;
             }
-
         }
 
         GameObject result = eventCanvas.transform.Find("HirePanel").gameObject;
+        GameObject result1 = eventCanvas.transform.Find("TransferPanel").gameObject;
         bool hirePanelIsActive = result.activeSelf;
-        
+        bool transferPanelIsActive = result1.activeSelf;
 
-        
-        GameObject hirePanel = GameObject.Find("EventCanvas/HirePanel");
-        //GameObject transferPanel = GameObject.Find("EventCanvas/TransferPanel");
-        
 
-        
-        //bool transferPanelIsActive = transferPanel.activeSelf;
 
-        Assert.IsFalse(hirePanelIsActive);
-        //Assert.IsFalse(transferPanelIsActive);
+        Assert.IsTrue(transferPanelIsActive);
+        Assert.IsTrue(hirePanelIsActive);
 
     }
 
