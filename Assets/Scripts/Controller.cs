@@ -441,4 +441,9 @@ public class Controller : MonoBehaviour {
             diversities.Add(country, 0);
         }
     }
+
+    public InteractionGraph getGraph()
+    {
+        return employeeRelationships;
+    }
 }
