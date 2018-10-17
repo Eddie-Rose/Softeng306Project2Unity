@@ -1,5 +1,9 @@
 # SOFTENG 306 - Project 2: Unity Game Development
 
+##
+
+The final build can be found under 'releases'.
+
 ## Team members - group 5
 
 | Name                | UPI      | Username         |
