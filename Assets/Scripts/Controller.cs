@@ -416,4 +416,11 @@ public class Controller : MonoBehaviour {
         happinessIncrement = happinessIncrement + (12 - diversity);
         
     }
+
+    public void fireHappiness()
+    {
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness -= 50;
+    }
 }

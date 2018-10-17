@@ -73,7 +73,7 @@ public class Stats : MonoBehaviour
         controllerScript.employeeNames.Remove(this.name);
         Debug.Log(controllerScript.NPCList.Count);
         DestroyImmediate(this.gameObject,true);
-
+        controllerScript.fireHappiness();
 
     }
 
