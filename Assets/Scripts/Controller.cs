@@ -93,7 +93,7 @@ public class Controller : MonoBehaviour {
     }
 
   
-
+    
     void doProposalEvent() {
 
         while (employeeNames.Count != 0)

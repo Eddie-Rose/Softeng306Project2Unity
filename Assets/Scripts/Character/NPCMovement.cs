@@ -21,8 +21,10 @@ public class NPCMovement : MonoBehaviour
     public float waitTime;
     private float waitCounter;
     private int walkDirection;
-
-
+    private float passiveWalkTime;
+    //If >0 passive , if 0 active
+    enum walking {passive,active};
+    private walking Status;
     string[] projectArray = new string[] {
         "How's it going?",
         "This project is difficult",
@@ -49,13 +51,54 @@ public class NPCMovement : MonoBehaviour
         walkCounter = walkTime;
     }
 
+    private void OnCollisionEnter2D( Collision2D collision)
+    {
+        int chosenNumber = 0;
+        var tag = collision.gameObject.tag;
+        if(tag == "Right/Left Walls")
+        {
+  
+            if (Random.value < 0.5f)
+                chosenNumber = 0;
+            else
+                chosenNumber = 2;
+
+            walkDirection = chosenNumber;
+        }
+        if(tag == "BackWall")
+        {
+            if (Random.value < 0.5f)
+                chosenNumber = 1;
+            else
+                chosenNumber = 4;
+
+        }
+        if (tag == "FrontWall")
+        {
+            if (Random.value < 0.5f)
+                chosenNumber = 1;
+            else
+                chosenNumber = 4;
+
+        }
+    }
+
+
     void OnTriggerEnter2D(Collider2D other)
-    {   
+    {
+        Debug.Log(other.name);
         if (other.name == "CEO")
         {
             TurnOnMessage(other);
         }
-
+        else if(other.name.Contains("ChairTrigger")) 
+        {
+            this.gameObject.transform.position = other.transform.position;
+            characterSprites.SetDownSprite();
+            this.spriteRenderer.sortingLayerName = "OnChair";
+            Status = walking.passive;
+            passiveWalkTime = 5f;
+        }
     }
 
     private void TurnOnMessage(Collider2D other)
@@ -64,7 +107,6 @@ public class NPCMovement : MonoBehaviour
         string eventDescription = "";
         eventDescription += projectArray[Random.Range(0, projectArray.Length)] + "\n";
         GameObject NPC = GameObject.Find(this.gameObject.name);
-        Debug.Log(NPC.name);
         Transform textTr = NPC.transform.Find("MessageCanvas/Text");
         Text text = textTr.GetComponent<Text>();
         text.text = eventDescription + ", " + other.name;
@@ -94,7 +136,7 @@ public class NPCMovement : MonoBehaviour
    
     void Update ()
     {
-        if (isWalking)
+        if (isWalking && Status == walking.active)
         {
             walkCounter -= Time.deltaTime;
             if (walkCounter <= 0)
@@ -127,8 +169,8 @@ public class NPCMovement : MonoBehaviour
                     break;
             }
 
-            moveSpeed = 1f * Random.Range(0.8f, 1.2f);
-            walkTime = 1f * Random.Range(0.8f, 1.2f);
+            moveSpeed = 1f * Random.Range(0.5f, 0.8f);
+            walkTime = 1f * Random.Range(0.5f, 0.8f);
         }
         else
         {
@@ -137,6 +179,15 @@ public class NPCMovement : MonoBehaviour
 
             if (waitCounter < 0 ) {
                 chooseDirection();
+            }
+        }
+
+        if (Status == walking.passive)
+        {
+            passiveWalkTime -= Time.deltaTime;
+            if(passiveWalkTime < 0)
+            {
+                Status = walking.active;
             }
         }
 		

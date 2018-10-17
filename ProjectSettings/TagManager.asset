@@ -62,6 +62,9 @@ TagManager:
   - name: FrontChairs
     uniqueID: 2859821575
     locked: 0
+  - name: OnChair
+    uniqueID: 2791933239
+    locked: 0
   - name: TopMost
     uniqueID: 3427466993
     locked: 0
