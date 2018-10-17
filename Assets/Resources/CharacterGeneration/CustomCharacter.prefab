@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 68479421327929508}
   - component: {fileID: 61613107552275112}
   - component: {fileID: 114784125724505152}
+  - component: {fileID: 114299806905178670}
   m_Layer: 0
   m_Name: CustomCharacter
   m_TagString: Untagged
@@ -804,6 +805,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114299806905178670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1851431199105774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69aa210995d016640ad5f7f337610a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114310860404527580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -989,6 +1001,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 0
   happiness: 0
+  hairColor: {r: 0, g: 0, b: 0, a: 0}
+  pantsColor: {r: 0, g: 0, b: 0, a: 0}
+  shirtColor: {r: 0, g: 0, b: 0, a: 0}
+  bodyName: 
+  hairName: 
   name: tom
   ethnicity: african
   gender: male
