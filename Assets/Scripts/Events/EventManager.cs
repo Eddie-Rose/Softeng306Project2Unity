@@ -110,9 +110,9 @@ public class EventManager{
         return pEvent;
     }
 
-    public ConflictEvent getConflictEvent(InteractionGraph emps)
+    public ConflictEvent getConflictEvent(int cost)
     {
-        ConflictEvent ce = new ConflictEvent(emps);
+        ConflictEvent ce = new ConflictEvent(cost);
         return ce;
     }
 

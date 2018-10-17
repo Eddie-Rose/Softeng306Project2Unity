@@ -10,7 +10,11 @@ public class ConflictScript : MonoBehaviour {
 
     public ConflictEvent conflictEvent;
 
-    string[] conflictReasons = {" has a differing political opinion to ",
+
+
+    string[] conflictReasons = 
+    {
+        " has a differing political opinion to ",
         " feels their culture is being disrespected by ",
         " thinks that they are experiencing rudeness from "
 
@@ -46,8 +50,10 @@ public class ConflictScript : MonoBehaviour {
             {
                 int cost = (25 - prob) * Random.Range(50, 101); // cost for option 1
                 // Set conflict popup
-                transform.Find("Context").GetComponent<Text>().text = edge.source.name + conflictReasons[Random.Range(0, conflictReasons.Length)] + edge.target.name;
-                transform.Find("OptionsText").GetComponent<Text>().text = resolutionOptions[Random.Range(0, resolutionOptions.Length)] + "\n\t(Costs: $" + cost + " but " + edge.source.name  + " and " + edge.target.name  + " like each other more";
+                transform.Find("Context").GetComponent<Text>().text = edge.source.name + " and " + edge.target.name + " are having a conflict.\n" 
+                    + edge.source.name + conflictReasons[Random.Range(0, conflictReasons.Length)] + edge.target.name;
+                transform.Find("OptionsText").GetComponent<Text>().text = resolutionOptions[Random.Range(0, resolutionOptions.Length)] 
+                    + "\n\t(Costs: $" + cost + " but " + edge.source.name  + " and " + edge.target.name  + " like each other more)";
 
                 // do event..
 
