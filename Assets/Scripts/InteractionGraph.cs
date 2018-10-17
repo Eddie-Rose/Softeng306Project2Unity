@@ -52,6 +52,7 @@ public class InteractionGraph {
             tgt.relationships.Add(inDisp);
 
         }
+        nodes.Add(employee);
     }
     
     /**
@@ -78,6 +79,18 @@ public class InteractionGraph {
 
     public int numNodes() {
         return nodes.Count;
+    }
+
+    public Relationship getRelationship(Stats src, Stats tgt)
+    {
+        foreach (Relationship rel in edges)
+        {
+            if(rel.source.Equals(src) && rel.target.Equals(tgt))
+            {
+                return rel;
+            }
+        }
+        return null;
     }
 
 
@@ -115,6 +128,8 @@ public class InteractionGraph {
                 this.disposition = 0;
             }
         }
+
+        
     }
 
 	

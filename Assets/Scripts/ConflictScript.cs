@@ -7,8 +7,9 @@ public class ConflictScript : MonoBehaviour {
 
     /* The digraph showing employee dispositions */
     public InteractionGraph employeeRelationships;
-
     public ConflictEvent conflictEvent;
+    public int cost = 0;
+    InteractionGraph.Relationship conflictEdge; 
 
 
 
@@ -27,7 +28,7 @@ public class ConflictScript : MonoBehaviour {
         "Find a suitable compromise for the issue."
     };
 
-    void generateConflict()
+    public void generateConflict()
     {
         GameObject controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
@@ -39,28 +40,54 @@ public class ConflictScript : MonoBehaviour {
         /* number of conflicts checked = to numEmployees */
         for (int i = 0; i < numEmployees; i++)
         {
-            InteractionGraph.Relationship edge = edges[Random.Range(0, edges.Count)];
+            conflictEdge = edges[Random.Range(0, edges.Count)];
 
             /* disposition is in range 0-25 */
-            int prob = edge.disposition; // higher disposition means less likely to have a conflict
+            int prob = conflictEdge.disposition; // higher disposition means less likely to have a conflict
 
             
 
             if (Random.Range(0, 26) > prob)
             {
-                int cost = (25 - prob) * Random.Range(50, 101); // cost for option 1
+                cost = (25 - prob) * Random.Range(50, 101); // cost for option 1
                 // Set conflict popup
-                transform.Find("Context").GetComponent<Text>().text = edge.source.name + " and " + edge.target.name + " are having a conflict.\n" 
-                    + edge.source.name + conflictReasons[Random.Range(0, conflictReasons.Length)] + edge.target.name;
-                transform.Find("OptionsText").GetComponent<Text>().text = resolutionOptions[Random.Range(0, resolutionOptions.Length)] 
-                    + "\n\t(Costs: $" + cost + " but " + edge.source.name  + " and " + edge.target.name  + " like each other more)";
+                transform.Find("Context").GetComponent<Text>().text = conflictEdge.source.name + " and " + conflictEdge.target.name + " are having a conflict.\n" 
+                    + conflictEdge.source.name + conflictReasons[Random.Range(0, conflictReasons.Length)] + conflictEdge.target.name;
+                transform.Find("OptionsText").GetComponent<Text>().text = "Option 1: " + resolutionOptions[Random.Range(0, resolutionOptions.Length)] 
+                    + "\n\t(Costs: $" + cost + " but " + conflictEdge.source.name  + " and " + conflictEdge.target.name  + " like each other more)";
 
-                // do event..
+                
 
-                edge.incrementDisposition(5);
+                
 
                 break; // only one popup per occurence, more chances to get one with a larger workforce.
             }
+        }
+    }
+
+    public void processOption(bool option1)
+    {
+        if (option1)
+        {
+
+            GameObject score = GameObject.Find("Score");
+            ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+
+            ScoreScript.money -= cost;
+
+
+            conflictEdge.incrementDisposition(5);
+            employeeRelationships.getRelationship(conflictEdge.target, conflictEdge.source).incrementDisposition(5);
+            this.gameObject.SetActive(false);
+
+    
+
+        }
+        else
+        {
+
+            this.gameObject.SetActive(false);
+
         }
     }
 

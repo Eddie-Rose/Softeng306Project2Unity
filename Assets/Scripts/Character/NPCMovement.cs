@@ -6,13 +6,15 @@ using UnityEngine.UI;
 // This class controls the movement of an NPC.
 // This includes a 'loop' of behaviour, where the NPC will wander around the
 // environment and interact with various items.
-public class NPCMovement : MonoBehaviour {
+public class NPCMovement : MonoBehaviour
+{
 
     [SerializeField]
     Canvas messageCanvas;
     public float moveSpeed;
     private Rigidbody2D myRigidBody;
     private SpriteRenderer spriteRenderer;
+    private CharacterSprites characterSprites;
     public bool isWalking;
     public float walkTime;
     private float walkCounter;
@@ -21,12 +23,24 @@ public class NPCMovement : MonoBehaviour {
     private int walkDirection;
 
 
-    string[] projectArray = new string[] {"How's it going", "This project is difficult", "I need more sick days",
-        "Hello", "Hi", "What's Up?", "Let's go","What's the plan?", "When will this project end", "Can't wait for the birthday party"
-        };
-    void Start() {
+    string[] projectArray = new string[] {
+        "How's it going?",
+        "This project is difficult",
+        "I need more sick days",
+        "Hello",
+        "Hi",
+        "What's up?",
+        "Let's go",
+        "What's the plan?",
+        "When will this project end?",
+        "Can't wait for the birthday party"
+    };
+
+    void Start()
+    {
         myRigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        characterSprites = gameObject.GetComponent<CharacterSprites>();
         waitTime = 1f;
         walkTime = 1f;
         moveSpeed = 1f;
@@ -37,7 +51,7 @@ public class NPCMovement : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {   
-        if(other.name == "CEO")
+        if (other.name == "CEO")
         {
             TurnOnMessage(other);
         }
@@ -57,7 +71,6 @@ public class NPCMovement : MonoBehaviour {
         Debug.Log(text);
     }
 
-
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.name == "CEO")
@@ -66,47 +79,59 @@ public class NPCMovement : MonoBehaviour {
 
         }
     }
+
     private void TurnOffMessage()
     {
         messageCanvas.enabled = false;
     }
-    public void chooseDirection() {
+
+    public void chooseDirection()
+    {
         walkDirection = Random.Range(0, 4);
         isWalking = true;
         walkCounter = walkTime;
     }
    
-    void Update () {
-        if (isWalking) {
+    void Update ()
+    {
+        if (isWalking)
+        {
             walkCounter -= Time.deltaTime;
-            if (walkCounter <= 0) {
+            if (walkCounter <= 0)
+            {
                 isWalking = false;
                 waitCounter = waitTime;
             }
 
-            switch (walkDirection) {
+            switch (walkDirection)
+            {
+                // Up
                 case 0:
                     myRigidBody.velocity = new Vector2(0, moveSpeed);
-                    
+                    characterSprites.SetUpSprite();
                     break;
+                // Right
                 case 1:
                     myRigidBody.velocity = new Vector2(moveSpeed, 0);
-                    spriteRenderer.flipX = true;
+                    characterSprites.SetRightSprite();
                     break;
+                // Down
                 case 2:
                     myRigidBody.velocity = new Vector2(0, -moveSpeed);
+                    characterSprites.SetDownSprite();
                     break;
+                // Left
                 case 3:
                     myRigidBody.velocity = new Vector2(-moveSpeed, 0);
-                    spriteRenderer.flipX = false;
+                    characterSprites.SetLeftSprite();
                     break;
             }
 
             moveSpeed = 1f * Random.Range(0.8f, 1.2f);
             walkTime = 1f * Random.Range(0.8f, 1.2f);
-            
         }
-        else {
+        else
+        {
             waitCounter -= Time.deltaTime;
             myRigidBody.velocity = Vector2.zero;
 

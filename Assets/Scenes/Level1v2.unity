@@ -1127,6 +1127,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1977138214}
     m_Modifications:
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114864071521926336, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 224934383360222822, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -1234,6 +1244,91 @@ Prefab:
     - target: {fileID: 1702196805693982, guid: 8efaa002c1fa17a44b4eb26e00a60cbb, type: 2}
       propertyPath: m_Name
       value: OptionsText
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1986985009}
+    - target: {fileID: 114499702580950796, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_FontData.m_AlignByGeometry
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499702580950796, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_FontData.m_RichText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499702580950796, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114499702580950796, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306310010595814, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114306310010595814, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: processOption
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 114075068618223912, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114864071521926336, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114864071521926336, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114864071521926336, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1986985009}
+    - target: {fileID: 114864071521926336, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: processOption
+      objectReference: {fileID: 0}
+    - target: {fileID: 114864071521926336, guid: 8efaa002c1fa17a44b4eb26e00a60cbb,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efaa002c1fa17a44b4eb26e00a60cbb, type: 2}
@@ -4486,6 +4581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCList: []
   timedEventA: 5
+  conflictEventTimer: 20
   proposalBoxPrefab: {fileID: 1071893883206998, guid: 819ec9948e5a0594b952b086cb3c5109,
     type: 2}
   hireBoxPrefab: {fileID: 860129532}
@@ -9588,8 +9684,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -35}
-  m_SizeDelta: {x: -100, y: -130}
+  m_AnchoredPosition: {x: 0, y: -50}
+  m_SizeDelta: {x: -100, y: -200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1494755343
 MonoBehaviour:
@@ -9613,18 +9709,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 10
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\n\t\n\n Option 2: Ignore the problem\n\t(No cost but no benefit)\n "
+  m_Text: "Option 2: Ignore the problem\n\t(No cost but no benefit)\n "
 --- !u!222 &1494755344
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11879,6 +11975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6afc15b9e0ac34b9263c69b12f4d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 0
 --- !u!1 &1987103919
 GameObject:
   m_ObjectHideFlags: 0

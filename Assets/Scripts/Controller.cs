@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
+    public float conflictEventTimer = 20f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
     float lossTime = 4;
@@ -30,7 +31,8 @@ public class Controller : MonoBehaviour {
 
     public int diversity;
     public int happinessIncrement;
-
+    public int skillAve;
+    public int teamWorkAve;
 
     // Track the tilemap:
 
@@ -73,21 +75,12 @@ public class Controller : MonoBehaviour {
 	}
 
 
-    float conflictTime = 20;
-
-    void ConflictTimer()
-    {
-        conflictTime -= Time.deltaTime;
-        if (conflictTime < 0)
-        {
-            doConflictEvent();
-            conflictTime = 20;
-        }
-    }
-
-    void doConflictEvent()
+    void doConflict()
     {
 
+        ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
+        script.generateConflict();
+        conflictPrefab.SetActive(true);
     }
 
 
@@ -136,6 +129,15 @@ public class Controller : MonoBehaviour {
             updateHappiness();
             timedEventA = 100000f;
         }
+
+
+        conflictEventTimer -= Time.deltaTime;
+        if (conflictEventTimer <= 0.0f)
+        {
+            doConflict();
+            conflictEventTimer = 20f;
+        }
+
 
         lossTime -= Time.deltaTime;
         if (lossTime < 0)
@@ -213,18 +215,11 @@ public class Controller : MonoBehaviour {
         //Stats statScript = randomNPC.GetComponent<Stats>();
         
 
-        Transform shirtObject = randomNPC.transform.GetChild(0);
-        Transform bodyObject = randomNPC.transform.GetChild(1);
-        Transform hairObject = randomNPC.transform.GetChild(2);
-        Transform pantsObject = randomNPC.transform.GetChild(3);
-
-
         string bodyName = "";
         string hairName = "";
-        string shirtName = "";
-        string pantsName = "";
 
-        switch (Random.Range(1, 3))
+        // Load the body
+        switch (Random.Range(1,3))
         {
             case 1:
                 bodyName = "body_pale";
@@ -233,9 +228,8 @@ public class Controller : MonoBehaviour {
                 bodyName = "body_dark";
                 break;
         }
-        bodyObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + bodyName);
-
-
+        
+        // Load the hair
         if (gender == "Male")
         {
             switch (Random.Range(1, 3))
@@ -259,44 +253,22 @@ public class Controller : MonoBehaviour {
             }
 
         }
-        hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
-        Color random = new Color(Random.value, Random.value, Random.value, 1.0f);
-        hairObject.GetComponent<SpriteRenderer>().color = random;
-
-        switch (Random.Range(1, 5))
-        {
-            case 1:
-                shirtName = "shirt_blue";
-                break;
-            case 2:
-                shirtName = "shirt_limegreen";
-                break;
-            case 3:
-                shirtName = "shirt_pink";
-                break;
-            case 4:
-                shirtName = "shirt_white";
-                break;
-        }
-        shirtObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Shirts/" + shirtName);
-        shirtObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-
-
-        switch (Random.Range(1, 3))
-        {
-            case 1:
-                pantsName = "pants_blue";
-                break;
-            case 2:
-                pantsName = "pant_dark";
-                break;
-        }
-        pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
-        pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-
-        //set data into npc stats
+        Color hairColor = new Color(Random.value, Random.value, Random.value, 1.0f);
+        
+        //  Setup the shirt
+        Color shirtColor = new Color(Random.value, Random.value, Random.value, 1.0f);
+        
+        // Setup the pants
+        Color pantsColor = new Color(Random.value, Random.value, Random.value, 1.0f);
+        
+        // Set data into character stats
         Stats statsScript = randomNPC.GetComponent<Stats>();
         statsScript.name = name;
+        statsScript.pantsColor = pantsColor;
+        statsScript.shirtColor = shirtColor;
+        statsScript.hairColor = hairColor;
+        statsScript.bodyName = bodyName;
+        statsScript.hairName = hairName;
         statsScript.gender = gender;
         statsScript.ethnicity = ethnicity;
         statsScript.age = age;
@@ -306,15 +278,13 @@ public class Controller : MonoBehaviour {
         charStats.Add(statsScript);
         setHappinessIncrement();
         updateDiversity();
+        setSkillTeamwork();
 
         randomNPC.name = name;
-        statsScript.haircolor = random;
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
         employeeRelationships.addNode(statsScript);
-
-
     }
 
     // Create a new NPC
@@ -423,6 +393,7 @@ public class Controller : MonoBehaviour {
 
         CVscript cv = new CVscript();
 
+        
         foreach (Stats stat in charStats) {
 
             if (diversities[stat.gender] == 0) {
@@ -432,15 +403,16 @@ public class Controller : MonoBehaviour {
 
         }
 
-        foreach (Stats stat in charStats) {
+        foreach (Stats stat in charStats)
+        {
 
-            if (diversities[stat.ethnicity] == 0) {
+            if (diversities[stat.ethnicity] == 0)
+            {
                 diversities[stat.ethnicity] += 1;
                 diversity += 1;
             }
 
         }
-
     }
 
     public void setHappinessIncrement() {
@@ -467,6 +439,8 @@ public class Controller : MonoBehaviour {
         {
             diversity -= 1;
         }
+
+        setSkillTeamwork();
     }
 
     private void setDiversities()  {
@@ -486,5 +460,16 @@ public class Controller : MonoBehaviour {
     public InteractionGraph getGraph()
     {
         return employeeRelationships;
+    }
+
+    public void setSkillTeamwork() {
+        int skill = 0;
+        int teamwork = 0;
+        foreach (Stats stat in charStats) {
+            skill += stat.skill;
+            teamwork += stat.teamwork;
+        }
+        skillAve = skill / charStats.Count;
+        teamWorkAve = teamwork / charStats.Count;
     }
 }
