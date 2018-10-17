@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 // This is the main game controller.
 public class Controller : MonoBehaviour {
+
+    public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
@@ -14,6 +16,9 @@ public class Controller : MonoBehaviour {
 
     public GameObject proposalBoxPrefab;
     public GameObject hireBoxPrefab;
+    public GameObject currentTaskPrefab;
+    public GameObject conflictPrefab;
+    public GameObject transferPrefab;
 
     // Track the world controller:
     public GameObject worldControllerObj;
@@ -24,6 +29,12 @@ public class Controller : MonoBehaviour {
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
 
+    public List<string> employeeNames = new List<string>() {"CEO"};
+
+    public InteractionGraph employeeRelationships = new InteractionGraph();
+
+
+
 
     void Start () {
 
@@ -31,6 +42,13 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
         hireBoxPrefab = GameObject.Find("EventCanvas/HirePanel");
         hireBoxPrefab.SetActive(false);
+        conflictPrefab = GameObject.Find("EventCanvas/ConflictPrefab");
+        conflictPrefab.SetActive(false);
+        transferPrefab = GameObject.Find("EventCanvas/TransferPanel");
+        transferPrefab.SetActive(false);
+        currentTaskPrefab.SetActive(false);
+
+
 
         // Create the world controller:
         //worldControllerObj = new GameObject();
@@ -41,17 +59,63 @@ public class Controller : MonoBehaviour {
 
     void Update () {
         Timer();
+        DeductMoney();
 	}
 
-    void doProposalEvent() {
-        pEvents.Clear();
-        for (int x = 0; x < numEmployees; x++)
+    float lossTime = 4;
+
+    void DeductMoney()
+    {
+        lossTime -= Time.deltaTime;
+        if(lossTime < 0)
         {
-            pEvents.Add(eventManager.getProposalEvent());
+            ScoreScript.money -= (NPCList.Count + 1) * 200;
+            lossTime = 4;
         }
-        pEvents.Add(eventManager.getProposalEvent());
+    }
+
+    float conflictTime = 20;
+
+    void ConflictTimer()
+    {
+        conflictTime -= Time.deltaTime;
+        if (conflictTime < 0)
+        {
+            doConflictEvent();
+            conflictTime = 20;
+        }
+    }
+
+    void doConflictEvent()
+    {
+
+    }
+
+
+    public void addAvailableEmployee(string employee)
+    {
+        employeeNames.Add(employee);
+    }
+
+  
+
+    void doProposalEvent() {
+
+        List<string> employeeToBeDeleted = new List<string>();
+        foreach(string employee in employeeNames)
+        {
+            pEvents.Add(eventManager.getProposalEvent(employee));
+            employeeToBeDeleted.Add(employee);
+
+        }
+        foreach(string employee in employeeToBeDeleted)
+        {
+            employeeNames.Remove(employee);
+        }
+        employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
+        pEvents.Clear();
         proposalBoxPrefab.SetActive(true);
     }
 
@@ -78,7 +142,7 @@ public class Controller : MonoBehaviour {
         proposalBoxPrefab.SetActive(false);
     }
 
-    public void createProceduralNPC(string name, string gender, string ethnicity)
+    public void createProceduralNPC(string name, string gender, string age, string ethnicity, string position, int skill, int teamwork)
     {
 
         GameObject randomNPC =
@@ -92,6 +156,7 @@ public class Controller : MonoBehaviour {
         Transform bodyObject = randomNPC.transform.GetChild(1);
         Transform hairObject = randomNPC.transform.GetChild(2);
         Transform pantsObject = randomNPC.transform.GetChild(3);
+
 
         string bodyName = "";
         string hairName = "";
@@ -115,10 +180,10 @@ public class Controller : MonoBehaviour {
             switch (Random.Range(1, 3))
             {
                 case 1:
-                    hairName = "hair_anime_dark";
+                    hairName = "hair_anime_white";
                     break;
                 case 2:
-                    hairName = "hair_bob_ginger";
+                    hairName = "hair_bob_white";
                     break;
             }
         }
@@ -127,13 +192,14 @@ public class Controller : MonoBehaviour {
             switch (Random.Range(1, 2))
             {
                 case 1:
-                    hairName = "hair_ponytail_dark";
+                    hairName = "hair_ponytail_white";
                     break;
             }
 
         }
         hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
-
+        Color random = new Color(Random.value, Random.value, Random.value, 1.0f);
+        hairObject.GetComponent<SpriteRenderer>().color = random;
 
         switch (Random.Range(1, 5))
         {
@@ -151,6 +217,8 @@ public class Controller : MonoBehaviour {
                 break;
         }
         shirtObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Shirts/" + shirtName);
+        shirtObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
+
 
         switch (Random.Range(1, 3))
         {
@@ -162,8 +230,23 @@ public class Controller : MonoBehaviour {
                 break;
         }
         pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
+        pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
 
-        Debug.Log("asdasd");
+        //set data into npc stats
+        Stats statsScript = randomNPC.GetComponent<Stats>();
+        statsScript.name = name;
+        statsScript.haircolor = random;
+        statsScript.gender = gender;
+        statsScript.age = age;
+        statsScript.ethnicity = ethnicity;
+        statsScript.position = position;
+        statsScript.skill = skill;
+        statsScript.teamwork = teamwork;
+
+        NPCList.Add(randomNPC);
+        employeeNames.Add(name);
+        employeeRelationships.addNode(statsScript);
+
 
     }
 
@@ -194,23 +277,31 @@ public class Controller : MonoBehaviour {
         {
 
             tex = Resources.Load<Sprite>("DarkFemale");
+            npc.name = "Employee-DarkFemale";
+            employeeNames.Add("DarkFemale");
 
         }
         else if(seed == 1) {
 
             tex = Resources.Load<Sprite>("GingerMale");
+            npc.name = "Employee-GingerMale";
+            employeeNames.Add("GingerMale");
 
         }
         else if (seed == 2)
         {
 
             tex = Resources.Load<Sprite>("Goku");
+            npc.name = "Employee-Goku";
+            employeeNames.Add("Goku");
 
         }
         else if (seed == 3)
         {
 
             tex = Resources.Load<Sprite>("AsianMale");
+            npc.name = "Employee-AsianMale";
+            employeeNames.Add("AsianMale");
 
         }
         //Sprite s = Sprite.Create(tex, new Rect(0, 0, 100, 100), new Vector2(0, 0));
@@ -241,6 +332,8 @@ public class Controller : MonoBehaviour {
         npc.transform.localScale = new Vector2(1f, 1f);
 
     }
+
+   
 
 
 }
