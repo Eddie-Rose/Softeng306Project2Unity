@@ -21,7 +21,7 @@ public class ScoreScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         scoreText.text = "";
-        scoreText.text +=  "CAPITAL:" + money.ToString() + "        ";
-        scoreText.text += "TEAM HAPPINESS:" + happiness.ToString() + "\n";
+        scoreText.text +=  "CAPITAL: " + money.ToString() + "        ";
+        scoreText.text += "TEAM HAPPINESS: " + happiness.ToString() + "\n";
     }
 }
