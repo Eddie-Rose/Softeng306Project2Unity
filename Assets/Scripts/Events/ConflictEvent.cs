@@ -9,6 +9,8 @@ public class ConflictEvent : CustomEvent
 {
     /* The digraph showing employee dispositions */
     InteractionGraph employeeRelationships;
+    
+
 
     public ConflictEvent(InteractionGraph digraph) {
         employeeRelationships = digraph;

@@ -110,8 +110,10 @@ public class EventManager{
         return pEvent;
     }
 
-    public ConflictEvent getConflictEvent(List<Stats> employeeStats) {
-        ConflictEvent conflict = new ConflictEvent(employeeStats);
-        return conflict;
+    public ConflictEvent getConflictEvent(InteractionGraph emps)
+    {
+        ConflictEvent ce = new ConflictEvent(emps);
+        return ce;
     }
+
 }
