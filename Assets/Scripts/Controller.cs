@@ -24,12 +24,11 @@ public class Controller : MonoBehaviour {
     public GameObject currentTaskPrefab;
     public GameObject conflictPrefab;
     public GameObject transferPrefab;
-
     // Track the world controller:
     public GameObject worldControllerObj;
 
     public GameObject scrollView;
-
+    public bool secondoffice = false;
     public int diversity;
     public int happinessIncrement;
     public int skillAve;
@@ -194,7 +193,17 @@ public class Controller : MonoBehaviour {
             }
             lossTime = 4;
         }
-
+        GameObject upgrid = GameObject.Find("UpgradeGrid");
+        if (ScoreScript.money >= 30000 || secondoffice)
+        {
+            secondoffice = true;
+            upgrid.transform.position = new Vector3(0, 0, 0);
+        }
+       else if( upgrid != null)
+        {
+            secondoffice = false;
+            upgrid.transform.position = new Vector3(0, 0, 2000);
+        }
         CVupdate -= Time.deltaTime;
         if (CVupdate < 0 && hireBoxPrefab != null)
         {
