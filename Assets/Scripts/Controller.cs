@@ -77,13 +77,20 @@ public class Controller : MonoBehaviour {
 
     void doConflict()
     {
+        bool conflict = false;
         if(employeeRelationships.numNodes() > 1)
         {
             ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
-            script.generateConflict();
-            conflictPrefab.SetActive(true);
+            if (script.generateConflict())
+            {
+                conflict = true;
+                conflictPrefab.SetActive(true);
+            }
         }
-        
+        if(!conflict)
+        {
+            conflictEventTimer = 20f;
+        }
     }
 
 
@@ -129,7 +136,7 @@ public class Controller : MonoBehaviour {
         if (conflictEventTimer <= 0.0f)
         {
             doConflict();
-            conflictEventTimer = 20f;
+            conflictEventTimer = 100000f;
         }
 
 
@@ -205,9 +212,8 @@ public class Controller : MonoBehaviour {
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
-
         //Stats statScript = randomNPC.GetComponent<Stats>();
-        
+       
 
         string bodyName = "";
         string hairName = "";
@@ -275,6 +281,16 @@ public class Controller : MonoBehaviour {
         setSkillTeamwork();
 
         randomNPC.name = name;
+
+        randomNPC.transform.Find("Opperations Panel/Panel/Text").GetComponent<Text>().text =
+            "Name: " + name + "\n" +
+            "Gender " + gender + "\n" +
+            "Age: " + age + "\n" +
+            "Ethnicity: " + ethnicity + "\n" +
+            "Position: " + position + "\n" +
+            "Skill: " + skill.ToString() + "\n" +
+            "Teamwork: " + teamwork.ToString() + "\n";
+            
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);

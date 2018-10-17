@@ -24,22 +24,26 @@ public class CharacterSprites : MonoBehaviour {
         // Get the character stats
         stats = GetComponent<Stats>();
 
-        shirtObject = character.transform.GetChild(0);
-        bodyObject = character.transform.GetChild(1);
-        hairObject = character.transform.GetChild(2);
-        pantsObject = character.transform.GetChild(3);
+        shirtObject = character.transform.Find("Shirt");
+        bodyObject = character.transform.Find("Body");
+        hairObject = character.transform.Find("Hair");
+        pantsObject = character.transform.Find("Pants");
+
+        this.SetLeftSprite();
     }
 
-    void Update () {
-        currentTime += Time.deltaTime;
 
+    void Update()
+    {
+        currentTime += Time.deltaTime;
         if (currentTime > 0.4)
         {
             currentTime = 0;
         }
+    
     }
 
-    public void SetDownSprite()
+public void SetDownSprite()
     {
         // Swap the sprite to 'front'
 
