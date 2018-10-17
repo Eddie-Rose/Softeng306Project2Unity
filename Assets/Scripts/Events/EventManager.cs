@@ -108,5 +108,12 @@ public class EventManager{
 
         ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
         return pEvent;
-    }  
+    }
+
+    public ConflictEvent getConflictEvent(InteractionGraph emps)
+    {
+        ConflictEvent ce = new ConflictEvent(emps);
+        return ce;
+    }
+
 }
