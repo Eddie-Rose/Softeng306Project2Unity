@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EventManager{
 
+    //Employees that propose a task, to be removed after each iteration
     List<string> employeesToBeDeleted = new List<string>();
 
+
+    //Main get proposal event, randomly generates an event
     public ProposalEvent getActualProposalEvent(List<string> employees) {
 
         int eventRisk = Random.Range(1, 10);
@@ -13,6 +16,8 @@ public class EventManager{
         int eventTeam = Random.Range(0, 3);
         int eventSkill = Random.Range(0, 3);
         
+
+        //Main project description
         string[] projectArray = new string[] { "Release new innovative project.",
             "Outsource all phone opperations.",
             "Redesign current products.",
@@ -30,6 +35,8 @@ public class EventManager{
         GameObject controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
 
+
+        // Chance of failure
         if (eventChance <= 0.33f)
         {
 
@@ -77,6 +84,7 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
+        //Chance of sucess based on teamwork ability
         if (eventTeam == 2)
         {
 
@@ -115,6 +123,7 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
+        //  Chance of success based of ability
         if (eventSkill == 2)
         {
 
@@ -154,6 +163,8 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
+
+        //Describe event risk's effect to the company
         if (eventRisk <= 3)
         {
 
@@ -177,7 +188,7 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
-
+        //Name who is it proposed by
         eventDescription += "Proposed by:";
         int count = 0;
         foreach (string employee in employees)
@@ -190,19 +201,21 @@ public class EventManager{
         }
         eventDescription += "\n";
 
+        //Name the potential reward/ loss
         eventDescription += "Estimated reward: $" + eventReward + "k\n";
         eventDescription += "Estimated loss: $" + eventRisk + "k\n";
 
 
 
-
+        //Create and return the new event
         ProposalEvent pEvent = new ProposalEvent(employees, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
         return pEvent;
     }
 
+    //Generate proposal based on employee diersity
     public ProposalEvent getProposalEvent(List<string> employees)
     {
-
+        //CEO does not depend on team diversity, he is different entity
         foreach(string employee in employees)
         {
             if (employee == "CEO")
@@ -212,37 +225,49 @@ public class EventManager{
             }
         }
 
+        //If only one employee left generate his own event
         if (employees.Count == 1)
         {
             employeesToBeDeleted.Add(employees[0]);
             return getActualProposalEvent(employeesToBeDeleted);
         }
+
+        //See team diversity and generate proposals based on diversty
         else
         {
+
+            //Get the employee to be compared's stats 
             GameObject employeeGameObject1 = GameObject.Find(employees[0]).gameObject;
             Stats employeeScript1 = employeeGameObject1.GetComponent<Stats>();
 
             employeesToBeDeleted.Add(employees[0]);
             employees.Remove(employees[0]);
 
+            //Loop through all employee in team to compare similarity between 2 employees
             foreach(string employee in employees)
             {
-                
+
+                //Get the next employee stats script
                 GameObject employeeGameObject2 = GameObject.Find(employee).gameObject;
                 Stats employeeScript2 = employeeGameObject2.GetComponent<Stats>();
 
+                //Random generator, higher priority on diversity(60%), age(30%), gender(10%)
                 int chance = Random.Range(1, 11);
+
+                //Compare similarity based off gender
                 if (chance == 1)
                 {
-                    Debug.Log(employeeScript1.genderSeed + "   " + employeeScript2.genderSeed);
+                    //Compare gender similarity seed
                     if (employeeScript1.genderSeed == employeeScript2.genderSeed)
                     {
                         employeesToBeDeleted.Add(employee);
                     }
                 }
+
+                //Compare similarity based off age
                 else if ((chance > 1) && (chance <= 4))
                 {
-                    Debug.Log(employeeScript1.ageSeed + "   " + employeeScript2.ageSeed);
+                    //Compare gender age seed
                     if (employeeScript1.ageSeed == employeeScript2.ageSeed)
                     {
                         employeesToBeDeleted.Add(employee);
@@ -250,9 +275,10 @@ public class EventManager{
 
                 }
 
+                //Compare similarity based off employee
                 else
                 {
-                    Debug.Log(employeeScript1.ethnicitySeed + "   " + employeeScript2.ethnicitySeed);
+                    //Compare gender ethnicity seed
                     if (employeeScript1.ethnicitySeed == employeeScript2.ethnicitySeed)
                     {
                         employeesToBeDeleted.Add(employee);
@@ -261,6 +287,7 @@ public class EventManager{
 
             }
 
+            //Generate actual proposal based
             return getActualProposalEvent(employeesToBeDeleted);
         }
 
@@ -268,6 +295,7 @@ public class EventManager{
         
     }
 
+    //Clear list after each iteration
     public List<string> getEmployeesToBeRemoved(List<string> employees)
     {
         foreach (string employee in employeesToBeDeleted)

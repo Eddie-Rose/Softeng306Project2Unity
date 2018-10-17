@@ -9,7 +9,8 @@ using System.Collections;
 public class GeneralTest {
 
     [Test]
-    public void StartUp_HireAndTransfer_Inactive() {
+    //Ensure Hire panel active on startup or else errors occur on actual play time
+    public void StartUp_Hire_IsActive() {
         // Use the Assert class to test conditions.
         Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
         GameObject[] allGameObjects = mainScene.GetRootGameObjects();
@@ -23,22 +24,125 @@ public class GeneralTest {
         }
 
         GameObject result = eventCanvas.transform.Find("HirePanel").gameObject;
-        GameObject result1 = eventCanvas.transform.Find("TransferPanel").gameObject;
+
         bool hirePanelIsActive = result.activeSelf;
-        bool transferPanelIsActive = result1.activeSelf;
 
-
-
-        Assert.IsTrue(transferPanelIsActive);
         Assert.IsTrue(hirePanelIsActive);
 
     }
 
     [Test]
-    public void TestProposalGeneration()
+    //Ensure Transfer panel active on startup or else errors occur on actual play time
+    public void StartUp_Transfer_IsActive()
     {
-        
+        // Use the Assert class to test conditions.
+        Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        GameObject[] allGameObjects = mainScene.GetRootGameObjects();
+        GameObject eventCanvas = null;
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj.name == "EventCanvas")
+            {
+                eventCanvas = obj;
+            }
+        }
 
+        GameObject result = eventCanvas.transform.Find("TransferPanel").gameObject;
+
+        bool transferPanelIsActive = result.activeSelf;
+
+        Assert.IsTrue(transferPanelIsActive);
+
+    }
+
+    [Test]
+    //Ensure Current Task panel active on startup or else errors occur on actual play time
+    public void StartUp_CurrentTask_IsActive()
+    {
+        // Use the Assert class to test conditions.
+        Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        GameObject[] allGameObjects = mainScene.GetRootGameObjects();
+        GameObject eventCanvas = null;
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj.name == "EventCanvas")
+            {
+                eventCanvas = obj;
+            }
+        }
+
+        GameObject result = eventCanvas.transform.Find("CurrentTaskPrefab").gameObject;
+
+        bool currentTaskPanelIsActive = result.activeSelf;
+
+        Assert.IsTrue(currentTaskPanelIsActive);
+
+    }
+
+    [Test]
+    //Ensure Conflict prefab panel active on startup or else errors occur on actual play time
+    public void StartUp_ConflictPrefab_IsActive()
+    {
+        // Use the Assert class to test conditions.
+        Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        GameObject[] allGameObjects = mainScene.GetRootGameObjects();
+        GameObject eventCanvas = null;
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj.name == "EventCanvas")
+            {
+                eventCanvas = obj;
+            }
+        }
+
+        GameObject result = eventCanvas.transform.Find("ConflictPrefab").gameObject;
+
+        bool conflictPrefabPanelIsActive = result.activeSelf;
+
+        Assert.IsTrue(conflictPrefabPanelIsActive);
+
+    }
+
+    [Test]
+    //Ensure CEO (maincharacter) prefab panel available
+    public void CheckForMainCharacter()
+    {
+        // Use the Assert class to test conditions.
+        Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        GameObject[] allGameObjects = mainScene.GetRootGameObjects();
+        bool isAvailable = false;
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj.name == "CEO")
+            {
+                isAvailable = true;
+            }
+        }
+
+
+        Assert.IsTrue(isAvailable);
+
+    }
+
+    [Test]
+    //Ensure CEO (maincharacter) prefab panel available
+    public void CheckForsMainCharacter()
+    {
+        // Use the Assert class to test conditions.
+        Scene mainScene = EditorSceneManager.OpenScene("Assets/Scenes/Level1v2.unity");
+        GameObject[] allGameObjects = mainScene.GetRootGameObjects();
+        GameObject controller = null;
+        foreach (GameObject obj in allGameObjects)
+        {
+            if (obj.name == "ControllerObject")
+            {
+                controller = obj;
+            }
+        }
+
+      
+
+        
 
     }
 

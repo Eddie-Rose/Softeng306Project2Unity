@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//Script that controlls the current task prefab
 public class CurrentTaskController : MonoBehaviour {
 
     public Text Summary;
@@ -20,12 +22,13 @@ public class CurrentTaskController : MonoBehaviour {
 		
 	}
 
+    //public method to update the prefab with the attached propsal event
     public void setEvent(ProposalEvent attachedEvent)
     {
         string str = attachedEvent._description;
         string mainDescriptionLine = new System.IO.StringReader(str).ReadLine();
         Summary.text = mainDescriptionLine;
-        PotentialReward.text = "Potential Reward = " + attachedEvent._reward;
+        PotentialReward.text = "Potential Reward = $" + attachedEvent._reward + "k";
         ProposedBy.text = "Proposed by:";
         if (attachedEvent._name.Count == 1)
             ProposedBy.text = "Proposed by: " + attachedEvent._name[0];
@@ -33,6 +36,7 @@ public class CurrentTaskController : MonoBehaviour {
             ProposedBy.text = "Proposed by: Many Employees";
     }
 
+    //Public method to update the progress bar
     public void setSlider(float timeLeft, float initTime)
     {
         float progressLeft = Mathf.Clamp01(timeLeft / initTime);

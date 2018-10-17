@@ -26,6 +26,7 @@ public class ProposalEvent : CustomEvent{
     }
 
 
+    //Reward or deficit depends on random generator and the chance of successes of the project
     public override void consequence() {
 
         float diceRoll = Random.Range(0.2f, 1f);
@@ -38,6 +39,7 @@ public class ProposalEvent : CustomEvent{
         }
     }
 
+    //Unlucky roll
     private void risk() {
 
 
@@ -53,6 +55,7 @@ public class ProposalEvent : CustomEvent{
 
     }
 
+    //Lucky roll
     private void reward() {
 
         GameObject score = GameObject.Find("Score");

@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Script for the scrollable proposal event list
 public class ScrollViewAdapter : MonoBehaviour
 {
-
+    //Init gameobjects
     public RectTransform prefab;
     public Text countText;
     public ScrollRect scrollView;
@@ -27,17 +28,23 @@ public class ScrollViewAdapter : MonoBehaviour
         controllerScript = (Controller)controller.GetComponent(typeof(Controller));
     }
 
+    //Updates the countdown bar 
     void Update()
     {
         if (views.Count == 0)
             return;
         List<ProposalPrefabView> ProposalsToBeDeleted = new List<ProposalPrefabView>();
+
+        //Loops through each event in the proposal event list
         foreach(ProposalPrefabView prefab in views)
         {
+
+            //updates countdown bar
             prefab.proposalEvent._timeToLive -= Time.deltaTime;
             float progress = Mathf.Clamp01(prefab.proposalEvent._timeToLive / prefab.initialTime);
             prefab.slider.value = progress; 
 
+            //if timetolive less than 0, destroy event
             if (prefab.proposalEvent._timeToLive < 0)
             {
                 Destroy(content.Find(prefab.name).gameObject);
@@ -45,6 +52,8 @@ public class ScrollViewAdapter : MonoBehaviour
                 ProposalsToBeDeleted.Add(prefab);
             }
         }
+
+        //Delete proposals taht have less than 0 time to live
         foreach (ProposalPrefabView prefab in ProposalsToBeDeleted)
             views.Remove(prefab);
 
@@ -57,6 +66,7 @@ public class ScrollViewAdapter : MonoBehaviour
         }
     }
 
+    //public method to delete proposal from list, used when proposal is accepted/ declined
     public void DeleteProposalFromList(string proposalToBeDeleted)
     {
         Destroy(content.Find(proposalToBeDeleted).gameObject);
@@ -74,12 +84,12 @@ public class ScrollViewAdapter : MonoBehaviour
         }
     }
 
+    //Updates the list when new proposals comes in 
     public void OnRecieveNewProposals(List<ProposalEvent> models)
     {
-
+        //Adds each proposals in the imput list to the the proposal list 
         foreach (var model in models)
         {
-            //Debug.Log("loop");
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
             proposalCounter++;
             string name = "Proposal Box " + proposalCounter;
@@ -88,12 +98,17 @@ public class ScrollViewAdapter : MonoBehaviour
 
             boxScript.attachedEvent = model;
             instance.transform.SetParent(content, false);
+
+            //Initialise the view
             var view = InitializePrefabView(instance, model,name);
+
+            //Add to the UI
             views.Add(view);
 
         }
     }
 
+    //Method to create new prefab with the proposal details
     ProposalPrefabView InitializePrefabView(GameObject viewGameObject, ProposalEvent model, string name)
     {
 
@@ -102,33 +117,26 @@ public class ScrollViewAdapter : MonoBehaviour
         view.name = name;
         view.initialTime = model._timeToLive;
         view.summary.text = model._description;
-        //view.benefits.text = "Potential reward: $" + model._reward + "k";
         view.slider.value = 1f;
         
 
         return view;
     }
 
-    
-
-    void FetchItemModels(int count, Action onDone)
-    {
-        //yeild return new WaitForSeconds(2f);
-    }
-
+ 
+    //New class for the prefab view
     public class ProposalPrefabView
     {
         public ProposalEvent proposalEvent;
         public float initialTime;
         public string name;
-        public Text summary; //, benefits;
-       // public Button accept, reject;
+        public Text summary; 
         public Slider slider;
 
+        //Constructor to generate and locate the components of the prefab
         public ProposalPrefabView(Transform rootView)
         {
             summary = rootView.Find("ProposalSummary").GetComponent<Text>();
-            //benefits = rootView.Find("Benefits").GetComponent<Text>();
             slider = rootView.Find("Slider").GetComponent<Slider>();
          
         }
