@@ -269,7 +269,7 @@ public class EventManager{
         }
 
 
-        employeesToBeDeleted.Clear();
+        employeesToBeDeleted = new List<string>();
         return employees;
     }
 
