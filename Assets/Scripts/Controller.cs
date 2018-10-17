@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // This is the main game controller.
+
 public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
+    float lossTime = 4;
+    float CVupdate = 7;
 
     // Tracks he currently active event.
     private CustomEvent _currentEvent;
@@ -25,6 +28,10 @@ public class Controller : MonoBehaviour {
 
     public GameObject scrollView;
 
+    public int diversity;
+    public int happinessIncrement;
+
+
     // Track the tilemap:
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
@@ -33,10 +40,12 @@ public class Controller : MonoBehaviour {
 
     public InteractionGraph employeeRelationships = new InteractionGraph();
 
+    public Dictionary<string, int> diversities = new Dictionary<string, int>();
+    public List<Stats> charStats = new List<Stats>();
 
 
-
-    void Start () {
+    void Start()
+    {
 
         proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
         proposalBoxPrefab.SetActive(false);
@@ -48,7 +57,8 @@ public class Controller : MonoBehaviour {
         transferPrefab.SetActive(false);
         currentTaskPrefab.SetActive(false);
 
-
+        setDiversities();
+        happinessIncrement = 1;
 
         // Create the world controller:
         //worldControllerObj = new GameObject();
@@ -57,22 +67,11 @@ public class Controller : MonoBehaviour {
 
     }
 
-    void Update () {
+    void Update()
+    {
         Timer();
-        DeductMoney();
 	}
 
-    float lossTime = 4;
-
-    void DeductMoney()
-    {
-        lossTime -= Time.deltaTime;
-        if(lossTime < 0)
-        {
-            ScoreScript.money -= (NPCList.Count + 1) * 200;
-            lossTime = 4;
-        }
-    }
 
     float conflictTime = 20;
 
@@ -103,6 +102,7 @@ public class Controller : MonoBehaviour {
 
         List<string> employeeToBeDeleted = new List<string>();
         foreach(string employee in employeeNames)
+
         {
             pEvents.Add(eventManager.getProposalEvent(employee));
             employeeToBeDeleted.Add(employee);
@@ -117,40 +117,77 @@ public class Controller : MonoBehaviour {
         viewAdapter.OnRecieveNewProposals(pEvents);
         pEvents.Clear();
         proposalBoxPrefab.SetActive(true);
+
+
+
     }
 
-    void Timer() {
+    void Timer()
+    {
 
         timedEventA -= Time.deltaTime;
 
-        if (timedEventA <= 0.0f) {
-           // Debug.Log("Bye There");
+        if (timedEventA <= 0.0f)
+        {
+            // Debug.Log("Bye There");
             doProposalEvent();
+            updateHappiness();
             timedEventA = 100000f;
         }
 
+        lossTime -= Time.deltaTime;
+        if (lossTime < 0)
+        {
+            ScoreScript.money -= (NPCList.Count + 1) * 20;
+            lossTime = 4;
+        }
+
+        CVupdate -= Time.deltaTime;
+        if (CVupdate < 0 && hireBoxPrefab != null)
+        {
+
+            int CVcount = hireBoxPrefab.transform.childCount;
+            for (int x = 1; x < CVcount; x++) {
+
+                GameObject cvChild = hireBoxPrefab.transform.GetChild(x).gameObject;
+
+                if (cvChild.activeInHierarchy == false) {
+
+                    cvChild.GetComponent<CVscript>().GenerateCV();
+                    cvChild.SetActive(true);
+                    break;
+
+                }
+
+            }
+            CVupdate = 7;
+        }
     }
 
-    public void doEvent(bool execute) {
+    public void doEvent(bool execute)
+    {
         Debug.Log("clicked");
-        if (execute) {
+        if (execute)
+        {
             _currentEvent.consequence();
         }
-        else {
-            
+        else
+        {
+
         }
         proposalBoxPrefab.SetActive(false);
     }
 
     public void createProceduralNPC(string name, string gender, string age, string ethnicity, string position, int skill, int teamwork)
     {
-
+        hireBoxPrefab = GameObject.Find("HirePanel");
         GameObject randomNPC =
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
 
-        randomNPC.name = name;
+        //Stats statScript = randomNPC.GetComponent<Stats>();
+        
 
         string bodyName = "";
         string hairName = "";
@@ -179,7 +216,8 @@ public class Controller : MonoBehaviour {
                     break;
             }
         }
-        else {
+        else
+        {
 
             switch (Random.Range(1, 2))
             {
@@ -206,11 +244,17 @@ public class Controller : MonoBehaviour {
         statsScript.bodyName = bodyName;
         statsScript.hairName = hairName;
         statsScript.gender = gender;
-        statsScript.age = age;
         statsScript.ethnicity = ethnicity;
+        statsScript.age = age;
         statsScript.position = position;
-        statsScript.skill = skill;
         statsScript.teamwork = teamwork;
+        statsScript.skill = skill;
+        charStats.Add(statsScript);
+        setHappinessIncrement();
+        updateDiversity();
+
+        randomNPC.name = name;
+        statsScript.haircolor = random;
 
 
         NPCList.Add(randomNPC);
@@ -249,7 +293,8 @@ public class Controller : MonoBehaviour {
             employeeNames.Add("DarkFemale");
 
         }
-        else if(seed == 1) {
+        else if (seed == 1)
+        {
 
             tex = Resources.Load<Sprite>("GingerMale");
             npc.name = "Employee-GingerMale";
@@ -301,7 +346,90 @@ public class Controller : MonoBehaviour {
 
     }
 
-   
+    private void updateHappiness() {
 
+        if (happinessIncrement > 50) {
+            happinessIncrement = 50;
+        } else if (diversity / 4 == 0) {
+            happinessIncrement += 1;
+        } else {
+            happinessIncrement += diversity / 4;
+        }
+        
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness += happinessIncrement;
 
+    }
+
+    public void updateDiversity() {
+
+        diversity = 0;
+
+        CVscript cv = new CVscript();
+
+        foreach (Stats stat in charStats) {
+
+            if (diversities[stat.gender] == 0) {
+                diversities[stat.gender] += 1;
+                diversity += 1;
+            }
+
+        }
+
+        foreach (Stats stat in charStats) {
+
+            if (diversities[stat.ethnicity] == 0) {
+                diversities[stat.ethnicity] += 1;
+                diversity += 1;
+            }
+
+        }
+
+    }
+
+    public void setHappinessIncrement() {
+
+        happinessIncrement = happinessIncrement + 1;
+        happinessIncrement = happinessIncrement + (12 - diversity);
+        
+    }
+
+    public void fireEmployee(Stats firee)
+    {
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness -= 50;
+
+        diversities[firee.gender] -= 1;
+        diversities[firee.ethnicity] -= 1;
+
+        if (diversities[firee.gender] == 0) {
+            diversity -= 1;
+        }
+
+        if (diversities[firee.ethnicity] == 0)
+        {
+            diversity -= 1;
+        }
+    }
+
+    private void setDiversities()  {
+        CVscript cv = new CVscript();
+
+        foreach (string gender in cv.genders)
+        {
+            diversities.Add(gender, 0);
+        }
+
+        foreach (string country in cv.ethnicites)
+        {
+            diversities.Add(country, 0);
+        }
+    }
+
+    public InteractionGraph getGraph()
+    {
+        return employeeRelationships;
+    }
 }

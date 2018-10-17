@@ -108,5 +108,12 @@ public class EventManager{
 
         ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
         return pEvent;
-    }  
+    }
+
+    public ConflictEvent getConflictEvent(int cost)
+    {
+        ConflictEvent ce = new ConflictEvent(cost);
+        return ce;
+    }
+
 }
