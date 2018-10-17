@@ -50,9 +50,9 @@ public class ProposalBoxScript : MonoBehaviour
         else
         {
             currentTaskPrefab.SetActive(false);
-            controllerScript.employeeNames.Add(attachedEvent._name);
+            controllerScript.addAvailableEmployee(attachedEvent._name);
             scrollViewAdapter.DeleteProposalFromList(this.name);
-            controllerScript.timedEventA = 10.0f;
+            controllerScript.proposalTimer = 10.0f;
 
 
 
@@ -79,11 +79,11 @@ public class ProposalBoxScript : MonoBehaviour
 
         }
         attachedEvent.consequence();
-        controllerScript.employeeNames.Add(attachedEvent._name);
+        controllerScript.addAvailableEmployee(attachedEvent._name);
         scrollViewAdapter.DeleteProposalFromList(this.name);
         proposalCanvas.transform.localScale = new Vector3(0.87586f, 0.87586f, 0.87586f);
 
-        controllerScript.timedEventA = 5.0f;
+        controllerScript.proposalTimer = 5.0f;
 
         currentTaskPrefab.SetActive(false);
         

@@ -53,7 +53,7 @@ public class ScrollViewAdapter : MonoBehaviour
         if (views.Count == 0)
         {
             controllerScript.proposalBoxPrefab.SetActive(false);
-            controllerScript.timedEventA = 5f;
+            controllerScript.proposalTimer = 5f;
         }
     }
 
@@ -79,6 +79,7 @@ public class ScrollViewAdapter : MonoBehaviour
 
         foreach (var model in models)
         {
+            //Debug.Log("loop");
             var instance = GameObject.Instantiate(prefab.gameObject) as GameObject;
             proposalCounter++;
             string name = "Proposal Box " + proposalCounter;

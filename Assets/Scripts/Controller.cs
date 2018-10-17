@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
-    public float timedEventA = 5f;
+    public float proposalTimer = 5f;
+    public float happinessTimer = 5f;
     public float conflictEventTimer = 20f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
@@ -94,17 +95,21 @@ public class Controller : MonoBehaviour {
     }
 
 
-    public void addAvailableEmployee(string employee)
+    public void addAvailableEmployee(List<string> employees)
     {
-        employeeNames.Add(employee);
+        foreach (string employee in employees)
+        {
+            employeeNames.Add(employee);
+        }
     }
 
   
     
     void doProposalEvent() {
-
+        int i = 0;
         while (employeeNames.Count != 0)
         {
+            Debug.Log("" + i);
             pEvents.Add(eventManager.getProposalEvent(employeeNames));
             employeeNames = eventManager.getEmployeesToBeRemoved(employeeNames);
         }
@@ -121,15 +126,24 @@ public class Controller : MonoBehaviour {
     void Timer()
     {
 
-        timedEventA -= Time.deltaTime;
+        proposalTimer -= Time.deltaTime;
 
-        if (timedEventA <= 0.0f)
+        if (proposalTimer <= 0.0f)
+        {
+            // Debug.Log("Bye There");
+            doProposalEvent();
+            proposalTimer = 100000f;
+        }
+
+
+        happinessTimer -= Time.deltaTime;
+
+        if (happinessTimer <= 0.0f)
         {
             // Debug.Log("Bye There");
             updateHappinessDispositions();
-            doProposalEvent();
-            updateHappiness();
-            timedEventA = 100000f;
+            //updateHappiness();
+            happinessTimer = 5f;
         }
 
 
@@ -276,6 +290,14 @@ public class Controller : MonoBehaviour {
         statsScript.position = position;
         statsScript.teamwork = teamwork;
         statsScript.skill = skill;
+
+        CVscript cv = new CVscript();
+        var seed = statsScript.seed;
+        seed.Add("gender", statsScript.getGenderSeed());
+        seed.Add("age", statsScript.getAgeSeed());
+        seed.Add("ethnicity", statsScript.getEthnicitySeed(cv.ethnicites));
+        statsScript.seed = seed;
+
         charStats.Add(statsScript);
         setHappinessIncrement();
         updateDiversity();
@@ -384,20 +406,25 @@ public class Controller : MonoBehaviour {
 
     private void updateHappinessDispositions()
     {
-        int avgDisp = 0;
-        foreach(InteractionGraph.Relationship edge in employeeRelationships.getEdges())
+        
+        if(employeeRelationships.numNodes() > 0)
         {
-            avgDisp += edge.getDisposition();
+            int avgDisp = 0;
+            foreach (InteractionGraph.Relationship edge in employeeRelationships.getEdges())
+            {
+                avgDisp += edge.getDisposition();
+            }
+            avgDisp = avgDisp / employeeRelationships.getEdges().Count;
+
+            int incHappiness = avgDisp - 10;
+
+            //Debug.Log("inc = " + incHappiness);
+
+            GameObject score = GameObject.Find("Score");
+            ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+            scoreScript.happiness += incHappiness;
         }
-        avgDisp = avgDisp / employeeRelationships.getEdges().Count;
-
-        int incHappiness = avgDisp - 10;
-
-        Debug.Log("inc = " + incHappiness);
-
-        GameObject score = GameObject.Find("Score");
-        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
-        scoreScript.happiness += incHappiness;
+        
 
     }
 
