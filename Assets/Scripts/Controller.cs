@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour {
     }
 
   
-
+    
     void doProposalEvent() {
         int i = 0;
         while (employeeNames.Count != 0)
@@ -127,6 +127,7 @@ public class Controller : MonoBehaviour {
         if (timedEventA <= 0.0f)
         {
             // Debug.Log("Bye There");
+            updateHappinessDispositions();
             doProposalEvent();
             updateHappiness();
             timedEventA = 100000f;
@@ -379,6 +380,25 @@ public class Controller : MonoBehaviour {
 
         //Set the size of the sprite to fit the map.
         npc.transform.localScale = new Vector2(1f, 1f);
+
+    }
+
+    private void updateHappinessDispositions()
+    {
+        int avgDisp = 0;
+        foreach(InteractionGraph.Relationship edge in employeeRelationships.getEdges())
+        {
+            avgDisp += edge.getDisposition();
+        }
+        avgDisp = avgDisp / employeeRelationships.getEdges().Count;
+
+        int incHappiness = avgDisp - 10;
+
+        Debug.Log("inc = " + incHappiness);
+
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness += incHappiness;
 
     }
 

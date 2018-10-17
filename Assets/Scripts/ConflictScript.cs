@@ -65,7 +65,7 @@ public class ConflictScript : MonoBehaviour {
                 transform.Find("Context").GetComponent<Text>().text = conflictEdge.source.name + " and " + conflictEdge.target.name + " are having a conflict.\n" 
                     + conflictEdge.source.name + conflictReasons[Random.Range(0, conflictReasons.Length)] + conflictEdge.target.name;
                 transform.Find("OptionsText").GetComponent<Text>().text = "Option 1: " + resolutionOptions[Random.Range(0, resolutionOptions.Length)] 
-                    + "\n\t(Costs: $" + cost + " but " + conflictEdge.source.name  + " and " + conflictEdge.target.name  + " like each other more)";
+                    + "\n\t(Costs: $" + cost + " but " + conflictEdge.source.name  + " and " + conflictEdge.target.name  + " like each other more so overall happiness increases)";
 
 
 
@@ -98,7 +98,7 @@ public class ConflictScript : MonoBehaviour {
 
             //Debug.Log("Dispo = " + conflictEdge.source.name + " -> " + conflictEdge.target.name + " = " + conflictEdge.disposition);
             //Debug.Log("Dispo = " + invEdge.source.name + " -> " + invEdge.target.name + " = " + invEdge.disposition);
-
+                
 
             this.gameObject.SetActive(false);
 
