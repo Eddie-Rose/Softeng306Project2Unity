@@ -77,13 +77,20 @@ public class Controller : MonoBehaviour {
 
     void doConflict()
     {
+        bool conflict = false;
         if(employeeRelationships.numNodes() > 1)
         {
             ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
-            script.generateConflict();
-            conflictPrefab.SetActive(true);
+            if (script.generateConflict())
+            {
+                conflict = true;
+                conflictPrefab.SetActive(true);
+            }
         }
-        
+        if(!conflict)
+        {
+            conflictEventTimer = 20f;
+        }
     }
 
 
@@ -136,7 +143,7 @@ public class Controller : MonoBehaviour {
         if (conflictEventTimer <= 0.0f)
         {
             doConflict();
-            conflictEventTimer = 20f;
+            conflictEventTimer = 100000f;
         }
 
 

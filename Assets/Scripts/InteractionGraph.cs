@@ -31,7 +31,6 @@ public class InteractionGraph {
                     Relationship disp = new Relationship(src, tgt);
                     disp.setDisposition(src.compatiblility(tgt)); // use the compatibility function to get a base disposition
                     edges.Add(disp);
-                    src.relationships.Add(disp);
                 }
             }
         }
@@ -45,11 +44,9 @@ public class InteractionGraph {
             Relationship outDisp = new Relationship(employee, tgt);
             Relationship inDisp = new Relationship(tgt, employee);
             outDisp.setDisposition(employee.compatiblility(tgt)); // use the compatibility function to get a base disposition
-            outDisp.setDisposition(tgt.compatiblility(employee)); // use the compatibility function to get a base disposition
+            inDisp.setDisposition(tgt.compatiblility(employee)); // use the compatibility function to get a base disposition
             edges.Add(outDisp);
             edges.Add(inDisp);
-            employee.relationships.Add(outDisp);
-            tgt.relationships.Add(inDisp);
 
         }
         nodes.Add(employee);
@@ -118,6 +115,8 @@ public class InteractionGraph {
                 disp = 0;
             }
             this.disposition = disp;
+
+            //Debug.Log("Dispo = " + source.name + " -> " + target.name + " = " + this.disposition);
         }
 
         public void incrementDisposition(int disp) {
@@ -127,6 +126,12 @@ public class InteractionGraph {
             } else if (this.disposition < 0) {
                 this.disposition = 0;
             }
+            //Debug.Log("New Disp = " + this.disposition);
+        }
+
+        public int getDisposition()
+        {
+            return this.disposition;
         }
 
         
