@@ -26,9 +26,11 @@ public class EndGame : MonoBehaviour
         //Check if the user has earned enough money to "win"
         if (ScoreScript.money > 100000 && !isPaused && !startScript.inMainMenu) {
             //Call the DoEndGame function to end the game
+            Debug.Log("Game won");
             gameWin = true;
             DoEndGame();
         } else if (ScoreScript.money < 0 && !isPaused && !startScript.inMainMenu) {
+            Debug.Log("Game lost");
             gameWin = false;
             DoEndGame();
         }

@@ -45,6 +45,10 @@ public class Controller : MonoBehaviour {
 
     public Dictionary<string, int> diversities = new Dictionary<string, int>();
     public List<Stats> charStats = new List<Stats>();
+    private GameObject notificationSoundObject;
+    private AudioSource notificationSound;
+    //private GameObject completeSoundObject;
+    //private AudioSource completeSound;
 
 
     void Start()
@@ -57,6 +61,10 @@ public class Controller : MonoBehaviour {
         conflictPrefab = GameObject.Find("EventCanvas/ConflictPrefab");
         conflictPrefab.SetActive(false);
         transferPrefab = GameObject.Find("EventCanvas/TransferPanel");
+        notificationSoundObject = GameObject.Find("MenuSounds/NotificationSound");
+        notificationSound = notificationSoundObject.GetComponent<AudioSource>();
+        //completeSoundObject = GameObject.Find("MenuSounds/CompleteSound");
+        //completeSound = completeSoundObject.GetComponent<AudioSource>();
         transferPrefab.SetActive(false);
         currentTaskPrefab.SetActive(false);
 
@@ -86,6 +94,7 @@ public class Controller : MonoBehaviour {
             {
                 conflict = true;
                 conflictPrefab.SetActive(true);
+                notificationSound.Play();
             }
         }
         if(!conflict)
@@ -118,6 +127,7 @@ public class Controller : MonoBehaviour {
         viewAdapter.OnRecieveNewProposals(pEvents);
         pEvents.Clear();
         proposalBoxPrefab.SetActive(true);
+        notificationSound.Play();
 
 
 

@@ -10,6 +10,10 @@ public class ProposalBoxScript : MonoBehaviour
     GameObject proposalCanvas;
     GameObject controller;
     GameObject currentTaskPrefab;
+    //GameObject notificationSoundObject;
+    //AudioSource notificationSound;
+    private GameObject completeSoundObject;
+    private AudioSource completeSound;
 
     public void doEvent(bool accept)
     {
@@ -18,6 +22,11 @@ public class ProposalBoxScript : MonoBehaviour
         proposalCanvas = GameObject.Find("EventCanvas/EventPanel");
         controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
+
+        //notificationSoundObject = GameObject.Find("MenuSounds/NotificationSound");
+        //notificationSound = notificationSoundObject.GetComponent<AudioSource>();
+        completeSoundObject = GameObject.Find("MenuSounds/CompleteSound");
+        completeSound = completeSoundObject.GetComponent<AudioSource>();
 
         controllerScript.currentTaskPrefab.SetActive(true);
         currentTaskPrefab = GameObject.Find("EventCanvas/CurrentTaskPrefab");
@@ -88,6 +97,8 @@ public class ProposalBoxScript : MonoBehaviour
 
         controllerScript.proposalTimer = 5.0f;
 
+        //AudioSource audioData = currentTaskPrefab.GetComponent<AudioSource>();
+        completeSound.Play();
         currentTaskPrefab.SetActive(false);
         
 

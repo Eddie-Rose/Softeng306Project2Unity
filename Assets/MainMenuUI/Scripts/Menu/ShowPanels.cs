@@ -13,6 +13,8 @@ public class ShowPanels : MonoBehaviour {
     public GameObject winGamePanel;
     public GameObject loseGamePanel;
     public GameObject storyPanels;
+    public GameObject winSound;
+    public GameObject loseSound;
 
     private Animator animatorTest;
     private Animation animatorTest1;
@@ -84,6 +86,8 @@ public class ShowPanels : MonoBehaviour {
 
     //Call this function to activate and display the end game panel during game play
     public void ShowWinGamePanel() {
+        AudioSource audioData = winSound.GetComponent<AudioSource>();
+        audioData.Play();
         winGamePanel.SetActive(true);
         optionsTint.SetActive(true);
         SetSelection(winGamePanel);
@@ -98,6 +102,8 @@ public class ShowPanels : MonoBehaviour {
     //Call this function to activate and display the end game panel during game play
     public void ShowLoseGamePanel()
     {
+        AudioSource audioData = loseSound.GetComponent<AudioSource>();
+        audioData.Play();
         loseGamePanel.SetActive(true);
         optionsTint.SetActive(true);
         SetSelection(loseGamePanel);
