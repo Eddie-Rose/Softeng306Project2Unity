@@ -95,9 +95,12 @@ public class Controller : MonoBehaviour {
     }
 
 
-    public void addAvailableEmployee(string employee)
+    public void addAvailableEmployee(List<string> employees)
     {
-        employeeNames.Add(employee);
+        foreach (string employee in employees)
+        {
+            employeeNames.Add(employee);
+        }
     }
 
   
@@ -287,6 +290,14 @@ public class Controller : MonoBehaviour {
         statsScript.position = position;
         statsScript.teamwork = teamwork;
         statsScript.skill = skill;
+
+        CVscript cv = new CVscript();
+        var seed = statsScript.seed;
+        seed.Add("gender", statsScript.getGenderSeed());
+        seed.Add("age", statsScript.getAgeSeed());
+        seed.Add("ethnicity", statsScript.getEthnicitySeed(cv.ethnicites));
+        statsScript.seed = seed;
+
         charStats.Add(statsScript);
         setHappinessIncrement();
         updateDiversity();
