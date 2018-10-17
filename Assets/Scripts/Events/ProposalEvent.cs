@@ -23,9 +23,6 @@ public class ProposalEvent : CustomEvent{
         _timeToLive = timeToLive;
         _timeToCompleteProposal = timeToCompleteProposal;
 
-
-        
-
     }
 
     public override void consequence() {
@@ -34,12 +31,9 @@ public class ProposalEvent : CustomEvent{
         if (diceRoll > _chance)
         {
             reward();
-
          }
         else {
-
             risk();
-
         }
     }
 
@@ -50,8 +44,8 @@ public class ProposalEvent : CustomEvent{
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
 
 
-            ScoreScript.money -= (int) (1000 * _risk * Random.Range(0f, 1f));
-            scoreScript.happiness -= (int) (10 * _risk * Random.Range(1f, 2f));
+            ScoreScript.money -= ((int) (1000 * _risk * Random.Range(0f, 1f)) + scoreScript.happiness / 5);
+            scoreScript.happiness -= (int) (10 * _risk * Random.Range(0.5f, 1.5f));
 
 
 
@@ -63,9 +57,7 @@ public class ProposalEvent : CustomEvent{
         GameObject score = GameObject.Find("Score");
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
 
-
-
-            ScoreScript.money += (int) (1000 * _reward * Random.Range(1f, 2f));
+            ScoreScript.money += ((int) (1000 * _reward * Random.Range(1f, 2f)) + scoreScript.happiness / 5);
             scoreScript.happiness += (int) (10 * _reward * Random.Range(1f, 2f));
 
 
