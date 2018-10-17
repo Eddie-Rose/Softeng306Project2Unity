@@ -423,4 +423,9 @@ public class Controller : MonoBehaviour {
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
         scoreScript.happiness -= 50;
     }
+
+    public InteractionGraph getGraph()
+    {
+        return employeeRelationships;
+    }
 }
