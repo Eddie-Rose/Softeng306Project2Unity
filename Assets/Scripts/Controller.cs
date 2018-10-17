@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
+    public float conflictEventTimer = 20f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
 
@@ -82,22 +83,14 @@ public class Controller : MonoBehaviour {
             lossTime = 4;
         }
     }
+    
 
-    float conflictTime = 20;
-
-    void ConflictTimer()
-    {
-        conflictTime -= Time.deltaTime;
-        if (conflictTime < 0)
-        {
-            doConflictEvent();
-            conflictTime = 20;
-        }
-    }
-
-    void doConflictEvent()
+    void doConflict()
     {
 
+        ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
+        script.generateConflict();
+        conflictPrefab.SetActive(true);
     }
 
 
@@ -143,6 +136,13 @@ public class Controller : MonoBehaviour {
             doProposalEvent();
             updateHappiness();
             timedEventA = 100000f;
+        }
+
+        conflictEventTimer -= Time.deltaTime;
+        if (conflictEventTimer <= 0.0f)
+        {
+            doConflict();
+            conflictEventTimer = 20f;
         }
 
     }

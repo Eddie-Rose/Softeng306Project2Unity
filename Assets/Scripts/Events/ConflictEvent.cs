@@ -14,9 +14,5 @@ public class ConflictEvent : CustomEvent
     }
     public override void consequence()
     {
-        GameObject score = GameObject.Find("Score");
-        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
-
-        ScoreScript.money -= _cost;
-    }
+            }
 }
