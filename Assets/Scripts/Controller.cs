@@ -160,8 +160,9 @@ public class Controller : MonoBehaviour {
         conflictEventTimer -= Time.deltaTime;
         if (conflictEventTimer <= 0.0f)
         {
-            doConflict();
             conflictEventTimer = 100000f;
+            doConflict();
+            
         }
 
 
