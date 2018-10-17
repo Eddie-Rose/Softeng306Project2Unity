@@ -27,7 +27,7 @@ public class Controller : MonoBehaviour {
     public GameObject scrollView;
 
     public int diversity;
-    public int happinessIncrement = 1;
+    public int happinessIncrement;
 
 
     // Track the tilemap:
@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour {
 
     public InteractionGraph employeeRelationships = new InteractionGraph();
 
-
+    public Dictionary<string, int> diversities = new Dictionary<string, int>();
     public List<Stats> charStats = new List<Stats>();
 
 
@@ -55,7 +55,7 @@ public class Controller : MonoBehaviour {
         transferPrefab.SetActive(false);
         currentTaskPrefab.SetActive(false);
 
-
+        happinessIncrement = 1;
 
         // Create the world controller:
         //worldControllerObj = new GameObject();
@@ -255,7 +255,6 @@ public class Controller : MonoBehaviour {
         //set data into npc stats
         Stats statsScript = randomNPC.GetComponent<Stats>();
         statsScript.name = name;
-        statsScript.name = name;
         statsScript.gender = gender;
         statsScript.ethnicity = ethnicity;
         statsScript.age = age;
@@ -263,8 +262,8 @@ public class Controller : MonoBehaviour {
         statsScript.teamwork = teamwork;
         statsScript.skill = skill;
         charStats.Add(statsScript);
+        setHappinessIncrement();
         updateDiversity();
-        setHapinessIncrement();
 
         randomNPC.name = name;
         statsScript.haircolor = random;
@@ -364,6 +363,8 @@ public class Controller : MonoBehaviour {
 
         if (happinessIncrement > 50) {
             happinessIncrement = 50;
+        } else if (diversity / 4 == 0) {
+            happinessIncrement += 1
         } else {
             happinessIncrement += diversity / 4;
         }
@@ -371,15 +372,18 @@ public class Controller : MonoBehaviour {
         GameObject score = GameObject.Find("Score");
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
         scoreScript.happiness += happinessIncrement;
+
     }
 
     public void updateDiversity() {
 
         diversity = 0;
-        Dictionary<string, int> diversities = new Dictionary<string, int>();
-        diversities.Add("Male", 0);
-        diversities.Add("Femaile", 0);
+
         CVscript cv = new CVscript();
+
+        foreach (string gender in cv.genders) {
+            diversities.Add(gender, 0);
+        }
 
         foreach (string country in cv.ethnicites) {
             diversities.Add(country, 0);
@@ -406,10 +410,10 @@ public class Controller : MonoBehaviour {
 
     }
 
-    public void setHapinessIncrement() {
+    public void setHappinessIncrement() {
 
-        happinessIncrement += 1;
-        happinessIncrement += (12 - diversity);
+        happinessIncrement = happinessIncrement + 1;
+        happinessIncrement = happinessIncrement + (12 - diversity);
         
     }
 }
