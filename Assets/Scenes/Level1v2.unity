@@ -6092,6 +6092,7 @@ GameObject:
   - component: {fileID: 877897625}
   - component: {fileID: 877897627}
   - component: {fileID: 877897626}
+  - component: {fileID: 877897628}
   m_Layer: 0
   m_Name: UpgradeWalls
   m_TagString: Untagged
@@ -6290,6 +6291,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &877897628
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 877897624}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
 --- !u!1 &885060045
 GameObject:
   m_ObjectHideFlags: 0
@@ -7536,6 +7550,7 @@ GameObject:
   - component: {fileID: 1060356215}
   - component: {fileID: 1060356217}
   - component: {fileID: 1060356216}
+  - component: {fileID: 1060356218}
   m_Layer: 0
   m_Name: UpSidewalls
   m_TagString: Untagged
@@ -7863,6 +7878,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1060356218
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1060356214}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
 --- !u!1 &1063276874
 GameObject:
   m_ObjectHideFlags: 0
@@ -12237,6 +12265,7 @@ GameObject:
   - component: {fileID: 1665976179}
   - component: {fileID: 1665976181}
   - component: {fileID: 1665976180}
+  - component: {fileID: 1665976182}
   m_Layer: 0
   m_Name: UpBottomWalls
   m_TagString: Untagged
@@ -12457,6 +12486,19 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &1665976182
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1665976178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
 --- !u!1 &1666896529
 GameObject:
   m_ObjectHideFlags: 0
