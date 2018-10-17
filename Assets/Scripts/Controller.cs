@@ -28,7 +28,8 @@ public class Controller : MonoBehaviour {
 
     public int diversity;
     public int happinessIncrement;
-
+    public int skillAve;
+    public int teamWorkAve;
 
     // Track the tilemap:
 
@@ -265,6 +266,7 @@ public class Controller : MonoBehaviour {
         charStats.Add(statsScript);
         setHappinessIncrement();
         updateDiversity();
+        setSkillTeamwork();
 
         randomNPC.name = name;
         statsScript.haircolor = random;
@@ -426,6 +428,8 @@ public class Controller : MonoBehaviour {
         {
             diversity -= 1;
         }
+
+        setSkillTeamwork();
     }
 
     private void setDiversities()  {
@@ -445,5 +449,16 @@ public class Controller : MonoBehaviour {
     public InteractionGraph getGraph()
     {
         return employeeRelationships;
+    }
+
+    public void setSkillTeamwork() {
+        int skill = 0;
+        int teamwork = 0;
+        foreach (Stats stat in charStats) {
+            skill += stat.skill;
+            teamwork += stat.teamwork;
+        }
+        skillAve = skill / charStats.Count;
+        teamWorkAve = teamwork / charStats.Count;
     }
 }
