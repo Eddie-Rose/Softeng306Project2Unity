@@ -8,7 +8,7 @@ public class EventManager{
 
         int eventRisk = Random.Range(1, 10);
         int eventReward = Random.Range(1, 10);
-        float eventChance = Random.Range(0f, 1f);
+        
         string[] projectArray = new string[] { "Release new innovative project.",
             "Outsource all phone opperations.",
             "Redesign current products.",
@@ -21,7 +21,7 @@ public class EventManager{
         string eventDescription = "";
         eventDescription += projectArray[Random.Range(0, projectArray.Length)] + "\n";
 
-
+        float eventChance = Random.Range(0f, 1f);
 
         if (eventChance <= 0.40)
         {

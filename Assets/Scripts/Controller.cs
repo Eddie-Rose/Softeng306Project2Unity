@@ -368,7 +368,7 @@ public class Controller : MonoBehaviour {
 
         CVscript cv = new CVscript();
 
-        /*
+        
         foreach (Stats stat in charStats) {
 
             if (diversities[stat.gender] == 0) {
@@ -378,15 +378,16 @@ public class Controller : MonoBehaviour {
 
         }
 
-        foreach (Stats stat in charStats) {
+        foreach (Stats stat in charStats)
+        {
 
-            if (diversities[stat.ethnicity] == 0) {
+            if (diversities[stat.ethnicity] == 0)
+            {
                 diversities[stat.ethnicity] += 1;
                 diversity += 1;
             }
 
         }
-        */
     }
 
     public void setHappinessIncrement() {

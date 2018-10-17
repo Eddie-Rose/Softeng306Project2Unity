@@ -1237,7 +1237,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1161651300302328, guid: 8efaa002c1fa17a44b4eb26e00a60cbb, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8efaa002c1fa17a44b4eb26e00a60cbb, type: 2}
@@ -1546,6 +1546,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &256399697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4478,8 +4498,13 @@ MonoBehaviour:
   transferPrefab: {fileID: 0}
   worldControllerObj: {fileID: 0}
   scrollView: {fileID: 661227666}
+  diversity: 0
+  happinessIncrement: 0
+  skillAve: 0
+  teamWorkAve: 0
   employeeNames:
   - CEO
+  charStats: []
 --- !u!4 &809113489
 Transform:
   m_ObjectHideFlags: 0
@@ -4944,7 +4969,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &860129533
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5078,6 +5103,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &870554412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5412,6 +5457,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &897791715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8101,6 +8166,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &1268581076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8307,6 +8392,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &1281907189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9021,7 +9126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1389187818
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10342,6 +10447,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &1643295893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10755,6 +10880,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &1704171135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12136,6 +12281,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4775694582b3d5469f4f77054f52c23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ethnicites:
+  - Japanese
+  - Chinese
+  - American
+  - European
+  - African
+  - Korean
+  - Australian
+  - Brazilian
+  - Palestinian
+  genders:
+  - Male
+  - Female
+  name: 
+  ethnicity: 
+  gender: 
+  age: 
+  position: 
+  teamwork: 0
+  skill: 0
 --- !u!114 &2062413429
 MonoBehaviour:
   m_ObjectHideFlags: 0
