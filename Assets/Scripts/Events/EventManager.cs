@@ -6,7 +6,7 @@ public class EventManager{
 
     List<string> employeesToBeDeleted = new List<string>();
 
-    public ProposalEvent getProposalEvent(string employee) {
+    public ProposalEvent getActualProposalEvent(List<string> employees) {
 
         int eventRisk = Random.Range(1, 10);
         int eventReward = Random.Range(1, 10);
@@ -177,36 +177,95 @@ public class EventManager{
 
         //-------------------------------------------------------------------------------------------
 
-        if (employee != null)
+        eventDescription += "Proposed by:";
+        foreach (string employee in employees)
         {
-            eventDescription += "Proposed by: " + employee;
-            eventDescription += "\n";
+            eventDescription += " " + employee;
         }
-        else
-        {
-            eventDescription += "Proposed by: CEO";
-            eventDescription += "\n";
-        }
+        eventDescription += "\n";
 
         eventDescription += "Estimated reward: $" + eventReward + "k\n";
         eventDescription += "Estimated loss: $" + eventRisk + "k\n";
 
 
-        ProposalEvent pEvent = new ProposalEvent(employee, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
+        ProposalEvent pEvent = new ProposalEvent(employees, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
         return pEvent;
     }
 
     public ProposalEvent getProposalEvent(List<string> employees)
     {
-        employeesToBeDeleted.Add(employees[0]);
-        return getProposalEvent(employees[0]);
+
+        foreach(string employee in employees)
+        {
+            if (employee == "CEO")
+            {
+                employeesToBeDeleted.Add(employee);
+                return getActualProposalEvent(employeesToBeDeleted);
+            }
+        }
+
+        if (employees.Count == 1)
+        {
+            employeesToBeDeleted.Add(employees[0]);
+            return getActualProposalEvent(employeesToBeDeleted);
+        }
+        else
+        {
+            GameObject employeeGameObject1 = GameObject.Find(employees[0]).gameObject;
+            Stats employeeScript1 = employeeGameObject1.GetComponent<Stats>();
+
+            employeesToBeDeleted.Add(employees[0]);
+            employees.Remove(employees[0]);
+
+            foreach(string employee in employees)
+            {
+                
+                GameObject employeeGameObject2 = GameObject.Find(employee).gameObject;
+                Stats employeeScript2 = employeeGameObject1.GetComponent<Stats>();
+
+                int chance = Random.Range(1, 11);
+                if (chance == 1)
+                {
+
+                    if (employeeScript1.seed["gender"] == employeeScript2.seed["gender"])
+                    {
+                        employeesToBeDeleted.Add(employee);
+                    }
+                }
+                else if ((chance > 1) && (chance <= 4))
+                {
+                    if (employeeScript1.seed["age"] == employeeScript2.seed["age"])
+                    {
+                        employeesToBeDeleted.Add(employee);
+                    }
+
+                }
+
+                else
+                {
+                    if (employeeScript1.seed["ethnicity"] == employeeScript2.seed["ethnicity"])
+                    {
+                        employeesToBeDeleted.Add(employee);
+                    }
+                } 
+
+            }
+
+            return getActualProposalEvent(employeesToBeDeleted);
+        }
+
+
+        
     }
 
     public List<string> getEmployeesToBeRemoved(List<string> employees)
     {
-        foreach(string employee in employeesToBeDeleted)
+        foreach (string employee in employeesToBeDeleted)
+        {
             employees.Remove(employee);
+        }
 
+        employeesToBeDeleted.Clear();
         return employees;
     }
 

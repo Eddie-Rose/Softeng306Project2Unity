@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-
-    public int seed;
+    public Dictionary<string, int> seed = new Dictionary<string, int>();
     public int happiness;
 
     // Sprite data
@@ -16,11 +16,11 @@ public class Stats : MonoBehaviour
     public string hairName = "";
 
     // Display data
-    public string name = "tom";
-    public string ethnicity = "african";
-    public string gender = "male";
+    public string name = "Tom";
+    public string ethnicity = "African";
+    public string gender = "Male";
     public string age = "29";
-    public string position = "entry";
+    public string position = "Entry";
     public int teamwork = 5;
     public int skill = 5;
 
@@ -86,4 +86,38 @@ public class Stats : MonoBehaviour
         transferScript.transferToHost(name,ethnicity,gender,age,position,teamwork,skill);
         killNPC();
     }
+
+    /**
+     * returns a gender seed which will be used to determine diversity of a team
+     */ 
+    public int getGenderSeed()
+    {
+        if (gender == "male")
+            return UnityEngine.Random.Range(4, 7);
+
+        else
+            return UnityEngine.Random.Range(0, 4);
+    }
+
+    /**
+     * returns a age seed which will be used to determine diversity of a team
+     */
+    public int getAgeSeed()
+    {
+        //Returns a range between 0 - 5
+        return ((int.Parse(age) / 7) - 2);
+    }
+
+    /**
+     * returns a age seed which will be used to determine diversity of a team
+     */
+    public int getEthnicitySeed(string[] ethnicities)
+    {
+        int pos = Array.IndexOf(ethnicities, ethnicity);
+        return pos;
+    }
+
+  
+
+    
 }

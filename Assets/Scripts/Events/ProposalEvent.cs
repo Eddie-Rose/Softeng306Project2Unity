@@ -13,10 +13,10 @@ public class ProposalEvent : CustomEvent{
     //identifies the chance of a risk/reward consequence occuring
     public float _chance;
 
-    public ProposalEvent(string name, string description, int risk, int reward,float chance, float timeToLive, float timeToCompleteProposal)
+    public ProposalEvent(List<string> names, string description, int risk, int reward,float chance, float timeToLive, float timeToCompleteProposal)
     {
         _chance = chance;
-        _name = name;
+        _name = names;
         _risk = risk;
         _reward = reward;
         _description = description;
