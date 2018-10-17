@@ -364,7 +364,7 @@ public class Controller : MonoBehaviour {
         if (happinessIncrement > 50) {
             happinessIncrement = 50;
         } else if (diversity / 4 == 0) {
-            happinessIncrement += 1
+            happinessIncrement += 1;
         } else {
             happinessIncrement += diversity / 4;
         }
