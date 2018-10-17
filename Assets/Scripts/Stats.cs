@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-    public Dictionary<string, int> seed = new Dictionary<string, int>();
+    public int genderSeed;
+    public int ageSeed;
+    public int ethnicitySeed;
     public int happiness;
 
     // Sprite data

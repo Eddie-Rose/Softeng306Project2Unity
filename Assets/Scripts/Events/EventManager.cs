@@ -224,20 +224,21 @@ public class EventManager{
             {
                 
                 GameObject employeeGameObject2 = GameObject.Find(employee).gameObject;
-                Stats employeeScript2 = employeeGameObject1.GetComponent<Stats>();
+                Stats employeeScript2 = employeeGameObject2.GetComponent<Stats>();
 
                 int chance = Random.Range(1, 11);
                 if (chance == 1)
                 {
-
-                    if (employeeScript1.seed["gender"] == employeeScript2.seed["gender"])
+                    Debug.Log(employeeScript1.genderSeed + "   " + employeeScript2.genderSeed);
+                    if (employeeScript1.genderSeed == employeeScript2.genderSeed)
                     {
                         employeesToBeDeleted.Add(employee);
                     }
                 }
                 else if ((chance > 1) && (chance <= 4))
                 {
-                    if (employeeScript1.seed["age"] == employeeScript2.seed["age"])
+                    Debug.Log(employeeScript1.ageSeed + "   " + employeeScript2.ageSeed);
+                    if (employeeScript1.ageSeed == employeeScript2.ageSeed)
                     {
                         employeesToBeDeleted.Add(employee);
                     }
@@ -246,7 +247,8 @@ public class EventManager{
 
                 else
                 {
-                    if (employeeScript1.seed["ethnicity"] == employeeScript2.seed["ethnicity"])
+                    Debug.Log(employeeScript1.ethnicitySeed + "   " + employeeScript2.ethnicitySeed);
+                    if (employeeScript1.ethnicitySeed == employeeScript2.ethnicitySeed)
                     {
                         employeesToBeDeleted.Add(employee);
                     }

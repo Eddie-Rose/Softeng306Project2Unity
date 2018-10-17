@@ -292,11 +292,11 @@ public class Controller : MonoBehaviour {
         statsScript.skill = skill;
 
         CVscript cv = new CVscript();
-        var seed = statsScript.seed;
-        seed.Add("gender", statsScript.getGenderSeed());
-        seed.Add("age", statsScript.getAgeSeed());
-        seed.Add("ethnicity", statsScript.getEthnicitySeed(cv.ethnicites));
-        statsScript.seed = seed;
+        
+
+        statsScript.genderSeed = statsScript.getGenderSeed();
+        statsScript.ageSeed = statsScript.getAgeSeed();
+        statsScript.ethnicitySeed = statsScript.getEthnicitySeed(cv.ethnicites);
 
         charStats.Add(statsScript);
         setHappinessIncrement();
