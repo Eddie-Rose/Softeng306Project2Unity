@@ -77,10 +77,13 @@ public class Controller : MonoBehaviour {
 
     void doConflict()
     {
-
-        ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
-        script.generateConflict();
-        conflictPrefab.SetActive(true);
+        if(employeeRelationships.numNodes() > 1)
+        {
+            ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
+            script.generateConflict();
+            conflictPrefab.SetActive(true);
+        }
+        
     }
 
 
