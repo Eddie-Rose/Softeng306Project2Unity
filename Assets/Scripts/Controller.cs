@@ -102,9 +102,10 @@ public class Controller : MonoBehaviour {
   
 
     void doProposalEvent() {
-
+        int i = 0;
         while (employeeNames.Count != 0)
         {
+            Debug.Log("" + i);
             pEvents.Add(eventManager.getProposalEvent(employeeNames));
             employeeNames = eventManager.getEmployeesToBeRemoved(employeeNames);
         }

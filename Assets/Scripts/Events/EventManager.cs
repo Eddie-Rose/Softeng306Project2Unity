@@ -209,6 +209,8 @@ public class EventManager{
         foreach(string employee in employeesToBeDeleted)
             employees.Remove(employee);
 
+        employeesToBeDeleted = new List<string>();
+
         return employees;
     }
 
