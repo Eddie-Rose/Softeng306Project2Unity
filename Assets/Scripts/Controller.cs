@@ -395,20 +395,25 @@ public class Controller : MonoBehaviour {
 
     private void updateHappinessDispositions()
     {
-        int avgDisp = 0;
-        foreach(InteractionGraph.Relationship edge in employeeRelationships.getEdges())
+        
+        if(employeeRelationships.numNodes() > 0)
         {
-            avgDisp += edge.getDisposition();
+            int avgDisp = 0;
+            foreach (InteractionGraph.Relationship edge in employeeRelationships.getEdges())
+            {
+                avgDisp += edge.getDisposition();
+            }
+            avgDisp = avgDisp / employeeRelationships.getEdges().Count;
+
+            int incHappiness = avgDisp - 10;
+
+            //Debug.Log("inc = " + incHappiness);
+
+            GameObject score = GameObject.Find("Score");
+            ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+            scoreScript.happiness += incHappiness;
         }
-        avgDisp = avgDisp / employeeRelationships.getEdges().Count;
-
-        int incHappiness = avgDisp - 10;
-
-        Debug.Log("inc = " + incHappiness);
-
-        GameObject score = GameObject.Find("Score");
-        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
-        scoreScript.happiness += incHappiness;
+        
 
     }
 
