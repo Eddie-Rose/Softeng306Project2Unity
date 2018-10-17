@@ -101,7 +101,7 @@ public class ScrollViewAdapter : MonoBehaviour
         view.name = name;
         view.initialTime = model._timeToLive;
         view.summary.text = model._description;
-        view.benefits.text = "Potential reward: $" + model._reward + "k";
+        //view.benefits.text = "Potential reward: $" + model._reward + "k";
         view.slider.value = 1f;
         
 
@@ -120,14 +120,14 @@ public class ScrollViewAdapter : MonoBehaviour
         public ProposalEvent proposalEvent;
         public float initialTime;
         public string name;
-        public Text summary, benefits;
-        public Button accept, reject;
+        public Text summary; //, benefits;
+       // public Button accept, reject;
         public Slider slider;
 
         public ProposalPrefabView(Transform rootView)
         {
             summary = rootView.Find("ProposalSummary").GetComponent<Text>();
-            benefits = rootView.Find("Benefits").GetComponent<Text>();
+            //benefits = rootView.Find("Benefits").GetComponent<Text>();
             slider = rootView.Find("Slider").GetComponent<Slider>();
          
         }
