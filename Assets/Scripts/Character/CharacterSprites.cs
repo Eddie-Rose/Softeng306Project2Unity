@@ -28,15 +28,8 @@ public class CharacterSprites : MonoBehaviour {
         bodyObject = character.transform.GetChild(1);
         hairObject = character.transform.GetChild(2);
         pantsObject = character.transform.GetChild(3);
-    }
 
-    void Update () {
-        currentTime += Time.deltaTime;
-
-        if (currentTime > 0.4)
-        {
-            currentTime = 0;
-        }
+        this.SetLeftSprite();
     }
 
     public void SetDownSprite()

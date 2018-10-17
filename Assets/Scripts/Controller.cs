@@ -205,9 +205,8 @@ public class Controller : MonoBehaviour {
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
-
         //Stats statScript = randomNPC.GetComponent<Stats>();
-        
+       
 
         string bodyName = "";
         string hairName = "";
@@ -275,6 +274,16 @@ public class Controller : MonoBehaviour {
         setSkillTeamwork();
 
         randomNPC.name = name;
+
+        randomNPC.transform.Find("Opperations Panel/Panel/Text").GetComponent<Text>().text =
+            "Name: " + name + "\n" +
+            "Gender " + gender + "\n" +
+            "Age: " + age + "\n" +
+            "Ethnicity: " + ethnicity + "\n" +
+            "Position: " + position + "\n" +
+            "Skill: " + skill.ToString() + "\n" +
+            "Teamwork: " + teamwork.ToString() + "\n";
+            
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
