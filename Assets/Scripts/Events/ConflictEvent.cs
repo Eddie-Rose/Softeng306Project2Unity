@@ -4,6 +4,7 @@ using UnityEngine;
 /**
  * An event which can show conflicts between employees.
  */
+
 public class ConflictEvent : CustomEvent
 {
     /* The digraph showing employee dispositions */

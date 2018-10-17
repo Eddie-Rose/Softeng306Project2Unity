@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // This is the main game controller.
+
 public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
@@ -25,6 +26,10 @@ public class Controller : MonoBehaviour {
 
     public GameObject scrollView;
 
+    public int diversity;
+    public int happinessIncrement = 1;
+
+
     // Track the tilemap:
 
     public List<ProposalEvent> pEvents = new List<ProposalEvent>();
@@ -34,9 +39,11 @@ public class Controller : MonoBehaviour {
     public InteractionGraph employeeRelationships = new InteractionGraph();
 
 
+    public List<Stats> charStats = new List<Stats>();
 
 
-    void Start () {
+    void Start()
+    {
 
         proposalBoxPrefab = GameObject.Find("EventCanvas/EventPanel");
         proposalBoxPrefab.SetActive(false);
@@ -57,7 +64,8 @@ public class Controller : MonoBehaviour {
 
     }
 
-    void Update () {
+    void Update()
+    {
         Timer();
         DeductMoney();
 	}
@@ -103,6 +111,7 @@ public class Controller : MonoBehaviour {
 
         List<string> employeeToBeDeleted = new List<string>();
         foreach(string employee in employeeNames)
+
         {
             pEvents.Add(eventManager.getProposalEvent(employee));
             employeeToBeDeleted.Add(employee);
@@ -117,27 +126,36 @@ public class Controller : MonoBehaviour {
         viewAdapter.OnRecieveNewProposals(pEvents);
         pEvents.Clear();
         proposalBoxPrefab.SetActive(true);
+
+
+
     }
 
-    void Timer() {
+    void Timer()
+    {
 
         timedEventA -= Time.deltaTime;
 
-        if (timedEventA <= 0.0f) {
-           // Debug.Log("Bye There");
+        if (timedEventA <= 0.0f)
+        {
+            // Debug.Log("Bye There");
             doProposalEvent();
+            updateHappiness();
             timedEventA = 100000f;
         }
 
     }
 
-    public void doEvent(bool execute) {
+    public void doEvent(bool execute)
+    {
         Debug.Log("clicked");
-        if (execute) {
+        if (execute)
+        {
             _currentEvent.consequence();
         }
-        else {
-            
+        else
+        {
+
         }
         proposalBoxPrefab.SetActive(false);
     }
@@ -150,7 +168,8 @@ public class Controller : MonoBehaviour {
             new Vector3(1, 0, 1),
             Quaternion.identity) as GameObject;
 
-        randomNPC.name = name;
+        //Stats statScript = randomNPC.GetComponent<Stats>();
+        
 
         Transform shirtObject = randomNPC.transform.GetChild(0);
         Transform bodyObject = randomNPC.transform.GetChild(1);
@@ -163,7 +182,7 @@ public class Controller : MonoBehaviour {
         string shirtName = "";
         string pantsName = "";
 
-        switch (Random.Range(1,3))
+        switch (Random.Range(1, 3))
         {
             case 1:
                 bodyName = "body_pale";
@@ -187,7 +206,8 @@ public class Controller : MonoBehaviour {
                     break;
             }
         }
-        else {
+        else
+        {
 
             switch (Random.Range(1, 2))
             {
@@ -235,13 +255,19 @@ public class Controller : MonoBehaviour {
         //set data into npc stats
         Stats statsScript = randomNPC.GetComponent<Stats>();
         statsScript.name = name;
-        statsScript.haircolor = random;
+        statsScript.name = name;
         statsScript.gender = gender;
-        statsScript.age = age;
         statsScript.ethnicity = ethnicity;
+        statsScript.age = age;
         statsScript.position = position;
-        statsScript.skill = skill;
         statsScript.teamwork = teamwork;
+        statsScript.skill = skill;
+        charStats.Add(statsScript);
+        updateDiversity();
+        setHapinessIncrement();
+
+        randomNPC.name = name;
+        statsScript.haircolor = random;
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
@@ -281,7 +307,8 @@ public class Controller : MonoBehaviour {
             employeeNames.Add("DarkFemale");
 
         }
-        else if(seed == 1) {
+        else if (seed == 1)
+        {
 
             tex = Resources.Load<Sprite>("GingerMale");
             npc.name = "Employee-GingerMale";
@@ -333,7 +360,56 @@ public class Controller : MonoBehaviour {
 
     }
 
-   
+    private void updateHappiness() {
+
+        if (happinessIncrement > 50) {
+            happinessIncrement = 50;
+        } else {
+            happinessIncrement += diversity / 4;
+        }
+        
+        GameObject score = GameObject.Find("Score");
+        ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
+        scoreScript.happiness += happinessIncrement;
+    }
+
+    public void updateDiversity() {
+
+        diversity = 0;
+        Dictionary<string, int> diversities = new Dictionary<string, int>();
+        diversities.Add("Male", 0);
+        diversities.Add("Femaile", 0);
+        CVscript cv = new CVscript();
+
+        foreach (string country in cv.ethnicites) {
+            diversities.Add(country, 0);
+        }
 
 
+        foreach (Stats stat in charStats) {
+
+            if (diversities[stat.gender] == 0) {
+                diversities[stat.gender] = 1;
+                diversity += 1;
+            }
+
+        }
+
+        foreach (Stats stat in charStats) {
+
+            if (diversities[stat.ethnicity] == 0) {
+                diversities[stat.ethnicity] = 1;
+                diversity += 1;
+            }
+
+        }
+
+    }
+
+    public void setHapinessIncrement() {
+
+        happinessIncrement += 1;
+        happinessIncrement += (12 - diversity);
+        
+    }
 }
