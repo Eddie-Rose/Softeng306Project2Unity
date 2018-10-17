@@ -179,9 +179,14 @@ public class EventManager{
 
 
         eventDescription += "Proposed by:";
+        int count = 0;
         foreach (string employee in employees)
         {
-            eventDescription += " " + employee;
+            if (count == 0)
+                eventDescription += " " + employee;
+            else
+                eventDescription += ", " + employee;
+            count++;
         }
         eventDescription += "\n";
 

@@ -86,11 +86,6 @@ public class ProposalBoxScript : MonoBehaviour
 
         }
         attachedEvent.consequence();
-        foreach(string e in attachedEvent._name)
-        {
-            Debug.Log(e);
-            Debug.Log("Hellooo");
-        }
         controllerScript.addAvailableEmployee(attachedEvent._name);
         scrollViewAdapter.DeleteProposalFromList(this.name);
         proposalCanvas.transform.localScale = new Vector3(0.87586f, 0.87586f, 0.87586f);
