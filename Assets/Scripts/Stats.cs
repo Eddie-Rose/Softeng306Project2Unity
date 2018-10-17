@@ -74,6 +74,7 @@ public class Stats : MonoBehaviour
         Debug.Log(controllerScript.NPCList.Count);
         controllerScript.NPCList.Remove(this.gameObject);
         controllerScript.employeeNames.Remove(this.name);
+        controllerScript.getGraph().removeNode(this);
         Debug.Log(controllerScript.NPCList.Count);
         DestroyImmediate(this.gameObject,true);
     }

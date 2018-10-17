@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
     public float timedEventA = 5f;
+    public float conflictEventTimer = 20f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
     float lossTime = 4;
@@ -74,21 +75,15 @@ public class Controller : MonoBehaviour {
 	}
 
 
-    float conflictTime = 20;
-
-    void ConflictTimer()
+    void doConflict()
     {
-        conflictTime -= Time.deltaTime;
-        if (conflictTime < 0)
+        if(employeeRelationships.numNodes() > 1)
         {
-            doConflictEvent();
-            conflictTime = 20;
+            ConflictScript script = conflictPrefab.GetComponent<ConflictScript>();
+            script.generateConflict();
+            conflictPrefab.SetActive(true);
         }
-    }
-
-    void doConflictEvent()
-    {
-
+        
     }
 
 
@@ -101,19 +96,12 @@ public class Controller : MonoBehaviour {
 
     void doProposalEvent() {
 
-        List<string> employeeToBeDeleted = new List<string>();
-        foreach(string employee in employeeNames)
-
+        while (employeeNames.Count != 0)
         {
-            pEvents.Add(eventManager.getProposalEvent(employee));
-            employeeToBeDeleted.Add(employee);
+            pEvents.Add(eventManager.getProposalEvent(employeeNames));
+            employeeNames = eventManager.getEmployeesToBeRemoved(employeeNames);
+        }
 
-        }
-        foreach(string employee in employeeToBeDeleted)
-        {
-            employeeNames.Remove(employee);
-        }
-        employeeToBeDeleted.Clear();
         ScrollViewAdapter viewAdapter = (ScrollViewAdapter)scrollView.GetComponent(typeof(ScrollViewAdapter));
         viewAdapter.OnRecieveNewProposals(pEvents);
         pEvents.Clear();
@@ -136,10 +124,41 @@ public class Controller : MonoBehaviour {
             timedEventA = 100000f;
         }
 
+
+        conflictEventTimer -= Time.deltaTime;
+        if (conflictEventTimer <= 0.0f)
+        {
+            doConflict();
+            conflictEventTimer = 20f;
+        }
+
+
         lossTime -= Time.deltaTime;
         if (lossTime < 0)
         {
-            ScoreScript.money -= (NPCList.Count + 1) * 20;
+            //Lose in captial over time
+            foreach (GameObject npc in NPCList)
+            {
+                Stats statsScript = npc.GetComponent<Stats>();
+                switch(statsScript.position.ToString())
+                {
+                    case "Intern" :
+                        ScoreScript.money -= 10;
+                        break;
+                    case "Entry":
+                        ScoreScript.money -= 20;
+                        break;
+                    case "Junior":
+                        ScoreScript.money -= 40;
+                        break;
+                    case "Senior":
+                        ScoreScript.money -= 60;
+                        break;
+                    case "Specialist":
+                        ScoreScript.money -= 80;
+                        break;
+                }
+            }
             lossTime = 4;
         }
 
