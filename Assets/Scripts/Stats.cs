@@ -68,12 +68,12 @@ public class Stats : MonoBehaviour
         
         GameObject controller = GameObject.Find("ControllerObject");
         Controller controllerScript = (Controller)controller.GetComponent(typeof(Controller));
+        controllerScript.fireEmployee(this);
         Debug.Log(controllerScript.NPCList.Count);
         controllerScript.NPCList.Remove(this.gameObject);
         controllerScript.employeeNames.Remove(this.name);
         Debug.Log(controllerScript.NPCList.Count);
         DestroyImmediate(this.gameObject,true);
-        controllerScript.fireHappiness();
 
     }
 

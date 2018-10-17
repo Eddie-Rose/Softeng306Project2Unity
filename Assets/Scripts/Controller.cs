@@ -55,6 +55,7 @@ public class Controller : MonoBehaviour {
         transferPrefab.SetActive(false);
         currentTaskPrefab.SetActive(false);
 
+        setDiversities();
         happinessIncrement = 1;
 
         // Create the world controller:
@@ -381,19 +382,10 @@ public class Controller : MonoBehaviour {
 
         CVscript cv = new CVscript();
 
-        foreach (string gender in cv.genders) {
-            diversities.Add(gender, 0);
-        }
-
-        foreach (string country in cv.ethnicites) {
-            diversities.Add(country, 0);
-        }
-
-
         foreach (Stats stat in charStats) {
 
             if (diversities[stat.gender] == 0) {
-                diversities[stat.gender] = 1;
+                diversities[stat.gender] += 1;
                 diversity += 1;
             }
 
@@ -402,7 +394,7 @@ public class Controller : MonoBehaviour {
         foreach (Stats stat in charStats) {
 
             if (diversities[stat.ethnicity] == 0) {
-                diversities[stat.ethnicity] = 1;
+                diversities[stat.ethnicity] += 1;
                 diversity += 1;
             }
 
@@ -417,10 +409,36 @@ public class Controller : MonoBehaviour {
         
     }
 
-    public void fireHappiness()
+    public void fireEmployee(Stats firee)
     {
         GameObject score = GameObject.Find("Score");
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
         scoreScript.happiness -= 50;
+
+        diversities[firee.gender] -= 1;
+        diversities[firee.ethnicity] -= 1;
+
+        if (diversities[firee.gender] == 0) {
+            diversity -= 1;
+        }
+
+        if (diversities[firee.ethnicity] == 0)
+        {
+            diversity -= 1;
+        }
+    }
+
+    private void setDiversities()  {
+        CVscript cv = new CVscript();
+
+        foreach (string gender in cv.genders)
+        {
+            diversities.Add(gender, 0);
+        }
+
+        foreach (string country in cv.ethnicites)
+        {
+            diversities.Add(country, 0);
+        }
     }
 }
