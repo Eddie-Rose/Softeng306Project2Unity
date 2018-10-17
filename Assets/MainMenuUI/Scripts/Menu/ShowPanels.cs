@@ -11,6 +11,7 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject pausePanel;                           //Store a reference to the Game Object PausePanel 
     public GameObject helpPanel;
     public GameObject endGamePanel;
+    public GameObject storyPanels;
 
     private Animator animatorTest;
     private Animation animatorTest1;
@@ -21,26 +22,22 @@ public class ShowPanels : MonoBehaviour {
 
 
     // Function to indicate the panel currently selected
-    private void SetSelection(GameObject panelToSetSelected)
-    {
+    private void SetSelection(GameObject panelToSetSelected) {
 
         activePanel = panelToSetSelected;
         activePanelMenuObject = activePanel.GetComponent<MenuObject>();
-        if (activePanelMenuObject != null)
-        {
+        if (activePanelMenuObject != null) {
             activePanelMenuObject.SetFirstSelected();
         }
     }
 
-    public void Start()
-    {
+    public void Start() {
         SetSelection(menuPanel);
 
     }
 
     //Call this function to activate and display the Options panel during the main menu
-    public void ShowOptionsPanel()
-	{
+    public void ShowOptionsPanel() {
         optionsPanel.SetActive(true);
         optionsTint.SetActive(true);
         //menuPanel.SetActive(false);
@@ -51,8 +48,7 @@ public class ShowPanels : MonoBehaviour {
     }
 
 	//Call this function to deactivate and hide the Options panel during the main menu
-	public void HideOptionsPanel()
-	{
+	public void HideOptionsPanel() {
         //EventSystem.current.SetSelectedGameObject(null);
         //menuPanel.SetActive(true);
         optionsPanel.SetActive(false);
@@ -60,54 +56,47 @@ public class ShowPanels : MonoBehaviour {
 	}
 
 	//Call this function to activate and display the main menu panel during the main menu
-	public void ShowMenu()
-	{
+	public void ShowMenu() {
 		menuPanel.SetActive (true);
         SetSelection(menuPanel);
     }
 
 	//Call this function to deactivate and hide the main menu panel during the main menu
-	public void HideMenu()
-	{
+	public void HideMenu() {
         menuPanel.SetActive (false);
 
 	}
 	
 	//Call this function to activate and display the Pause panel during game play
-	public void ShowPausePanel()
-	{
+	public void ShowPausePanel() {
 		pausePanel.SetActive (true);
 		optionsTint.SetActive(true);
         SetSelection(pausePanel);
     }
 
 	//Call this function to deactivate and hide the Pause panel during game play
-	public void HidePausePanel()
-	{
+	public void HidePausePanel() {
 		pausePanel.SetActive (false);
 		optionsTint.SetActive(false);
 
 	}
 
     //Call this function to activate and display the end game panel during game play
-    public void ShowEndGamePanel()
-    {
+    public void ShowEndGamePanel() {
         endGamePanel.SetActive(true);
         optionsTint.SetActive(true);
         SetSelection(endGamePanel);
     }
 
     //Call this function to deactivate and hide the end game panel during game play
-    public void HideEndGamePanel()
-    {
+    public void HideEndGamePanel() {
         endGamePanel.SetActive(false);
         optionsTint.SetActive(false);
 
     }
 
     //Call this function to activate and display the Help panel during game play
-    public void ShowHelpPanel()
-    {
+    public void ShowHelpPanel() {
         helpPanel.SetActive(true);
         optionsTint.SetActive(true);
         //menuPanel.SetActive(false);
@@ -115,11 +104,52 @@ public class ShowPanels : MonoBehaviour {
     }
 
     //Call this function to deactivate and hide the Help panel during game play
-    public void HideHelpPanel()
-    {
+    public void HideHelpPanel() {
         //menuPanel.SetActive(true);
         helpPanel.SetActive(false);
         optionsTint.SetActive(false);
 
+    }
+
+    //Call this function to activate and display the Help panel during game play
+    public void ShowStoryPanel() {
+        //storyPanels.SetActive(true);
+        //optionsTint.SetActive(true);
+        //menuPanel.SetActive(false);
+        //SetSelection(storyPanels);
+        StartCoroutine(ShowStoryAfterTime(1));
+    }
+
+    //Call this function to deactivate and hide the Help panel during game play
+    public void HideStoryPanel() {
+        StartCoroutine(HideStoryAfterTime(1));
+        //menuPanel.SetActive(true);
+        //storyPanels.SetActive(false);
+        //optionsTint.SetActive(false);
+
+    }
+
+    public void HideStoryPanelImmediate() {
+        menuPanel.SetActive(true);
+        storyPanels.SetActive(false);
+        optionsTint.SetActive(false);
+    }
+
+    IEnumerator HideStoryAfterTime(float time) {
+        yield return new WaitForSeconds(0.5f);
+
+        menuPanel.SetActive(true);
+        storyPanels.SetActive(false);
+        optionsTint.SetActive(false);
+    }
+
+    IEnumerator ShowStoryAfterTime(float time) {
+        yield return new WaitForSeconds(0.5f);
+
+        // Code to execute after the delay
+        storyPanels.SetActive(true);
+        optionsTint.SetActive(true);
+        menuPanel.SetActive(false);
+        SetSelection(storyPanels);
     }
 }
