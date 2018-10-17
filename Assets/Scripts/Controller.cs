@@ -11,6 +11,8 @@ public class Controller : MonoBehaviour {
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
+    float lossTime = 4;
+    float CVupdate = 7;
 
     // Tracks he currently active event.
     private CustomEvent _currentEvent;
@@ -68,20 +70,8 @@ public class Controller : MonoBehaviour {
     void Update()
     {
         Timer();
-        DeductMoney();
 	}
 
-    float lossTime = 4;
-
-    void DeductMoney()
-    {
-        lossTime -= Time.deltaTime;
-        if(lossTime < 0)
-        {
-            ScoreScript.money -= (NPCList.Count + 1) * 200;
-            lossTime = 4;
-        }
-    }
 
     float conflictTime = 20;
 
@@ -145,6 +135,33 @@ public class Controller : MonoBehaviour {
             timedEventA = 100000f;
         }
 
+        lossTime -= Time.deltaTime;
+        if (lossTime < 0)
+        {
+            ScoreScript.money -= (NPCList.Count + 1) * 20;
+            lossTime = 4;
+        }
+
+        CVupdate -= Time.deltaTime;
+        if (CVupdate < 0 && hireBoxPrefab != null)
+        {
+
+            int CVcount = hireBoxPrefab.transform.childCount;
+            for (int x = 1; x < CVcount; x++) {
+
+                GameObject cvChild = hireBoxPrefab.transform.GetChild(x).gameObject;
+
+                if (cvChild.activeInHierarchy == false) {
+
+                    cvChild.GetComponent<CVscript>().GenerateCV();
+                    cvChild.SetActive(true);
+                    break;
+
+                }
+
+            }
+            CVupdate = 7;
+        }
     }
 
     public void doEvent(bool execute)
@@ -163,7 +180,7 @@ public class Controller : MonoBehaviour {
 
     public void createProceduralNPC(string name, string gender, string age, string ethnicity, string position, int skill, int teamwork)
     {
-
+        hireBoxPrefab = GameObject.Find("HirePanel");
         GameObject randomNPC =
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
