@@ -23,7 +23,7 @@ public class EndGame : MonoBehaviour
     {
 
         //Check if the user has earned enough money to "win"
-        if (ScoreScript.money > 10000 && !isPaused && !startScript.inMainMenu)
+        if (ScoreScript.money > 1000000 && !isPaused && !startScript.inMainMenu)
         {
             //Call the DoEndGame function to end the game
             DoEndGame();
@@ -61,8 +61,9 @@ public class EndGame : MonoBehaviour
 
         //Set time.timescale to 1, this will cause animations and physics to continue updating at regular speed
         Time.timeScale = 1;
-        
+
         // Removies the end game panels
+        showPanels.HidePausePanel();
         showPanels.HideEndGamePanel();
     }
 

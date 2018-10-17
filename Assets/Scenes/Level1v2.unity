@@ -4592,6 +4592,8 @@ MonoBehaviour:
   scrollView: {fileID: 661227666}
   diversity: 0
   happinessIncrement: 0
+  skillAve: 0
+  teamWorkAve: 0
   employeeNames:
   - CEO
   charStats: []

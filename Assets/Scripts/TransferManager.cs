@@ -24,9 +24,11 @@ public class TransferManager : MonoBehaviour {
         int cvCount = TransferPanel.transform.childCount;
         for (int x = 1; x < cvCount; x++) {
 
-            CVscript cv = TransferPanel.transform.GetChild(x).GetComponent<CVscript>();
-            cv.injectGenerationData("loading...", "loading...", "loading...", "loading...", "loading...", -1, -1);
-
+            Transform cv = TransferPanel.transform.GetChild(x);
+            CVscript cvScript = cv.gameObject.GetComponent<CVscript>();
+            cvScript.injectGenerationData("loading...", "loading...", "loading...", "loading...", "loading...", -1, -1);
+            cv.position = new Vector3(cv.position.x,cv.position.y,-200);
+            
         }
 
         string url = "https://kerwinsuniscoolafamirite.000webhostapp.com/retrieveTransfer.php";
@@ -51,10 +53,12 @@ public class TransferManager : MonoBehaviour {
                 if (line != "" && index < cvCount)
                 {
                     Debug.Log(line);
-                    CVscript cv = TransferPanel.transform.GetChild(index).GetComponent<CVscript>();
+                    Transform cv = TransferPanel.transform.GetChild(index);
+                    CVscript cvScript = cv.gameObject.GetComponent<CVscript>();
                     string[] data = line.Split(':');
-                    cv.injectGenerationData(data[0],data[3],data[1],data[2], data[4], int.Parse(data[5]), int.Parse(data[6]));
-                    TransferPanel.transform.GetChild(index).gameObject.SetActive(true);
+                    cvScript.injectGenerationData(data[0],data[3],data[1],data[2], data[4], int.Parse(data[5]), int.Parse(data[6]));
+                    cv.position =  new Vector3(cv.position.x,cv.position.y,0);
+
                     index++;
                 }
             }
