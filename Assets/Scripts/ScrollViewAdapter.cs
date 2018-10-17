@@ -53,7 +53,7 @@ public class ScrollViewAdapter : MonoBehaviour
         if (views.Count == 0)
         {
             controllerScript.proposalBoxPrefab.SetActive(false);
-            controllerScript.timedEventA = 5f;
+            controllerScript.proposalTimer = 5f;
         }
     }
 

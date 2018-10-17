@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class Controller : MonoBehaviour {
 
     public List<GameObject> NPCList = new List<GameObject>();
-    public float timedEventA = 5f;
+    public float proposalTimer = 5f;
+    public float happinessTimer = 5f;
     public float conflictEventTimer = 20f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
@@ -122,15 +123,24 @@ public class Controller : MonoBehaviour {
     void Timer()
     {
 
-        timedEventA -= Time.deltaTime;
+        proposalTimer -= Time.deltaTime;
 
-        if (timedEventA <= 0.0f)
+        if (proposalTimer <= 0.0f)
+        {
+            // Debug.Log("Bye There");
+            doProposalEvent();
+            proposalTimer = 100000f;
+        }
+
+
+        happinessTimer -= Time.deltaTime;
+
+        if (happinessTimer <= 0.0f)
         {
             // Debug.Log("Bye There");
             updateHappinessDispositions();
-            doProposalEvent();
-            updateHappiness();
-            timedEventA = 100000f;
+            //updateHappiness();
+            happinessTimer = 5f;
         }
 
 
