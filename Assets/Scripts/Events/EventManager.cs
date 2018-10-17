@@ -208,7 +208,7 @@ public class EventManager{
 
 
         //Create and return the new event
-        ProposalEvent pEvent = new ProposalEvent(employees, eventDescription, eventRisk,eventReward,eventChance, 15.0f, 10.0f);
+        ProposalEvent pEvent = new ProposalEvent(employees, eventDescription, eventRisk,eventReward,eventChance, 35.0f, 10.0f);
         return pEvent;
     }
 
