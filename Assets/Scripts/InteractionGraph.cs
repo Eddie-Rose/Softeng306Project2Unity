@@ -57,12 +57,16 @@ public class InteractionGraph {
      */
     public void removeNode(Stats employee) {
         if(this.nodes.Contains(employee)) {
-            foreach(Relationship edge in edges) {
+            List<Relationship> toRemove = new List<Relationship>();
+
+            foreach (Relationship edge in edges) {
                 if(edge.source.Equals(employee) || edge.target.Equals(employee)) { 
-                    edges.Remove(edge); // remove edges to or from the employee
+                    toRemove.Add(edge); // remove edges to or from the employee
                 }
             }
-
+            foreach(Relationship rem in toRemove) {
+                edges.Remove(rem);
+            }
             nodes.Remove(employee);
         }
         

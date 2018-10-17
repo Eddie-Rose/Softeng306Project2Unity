@@ -15,6 +15,8 @@ public class StartOptions : MonoBehaviour {
     public CanvasGroup fadeOutImageCanvasGroup;                         //Canvas group used to fade alpha of image which fades in before changing scenes
     public Image fadeImage;                                             //Reference to image used to fade out before changing scenes
     public GameObject sfScene;
+    public GameObject bgPC;
+    public GameObject storyPanel;
 
 
 	[HideInInspector] public bool inMainMenu = true;					//If true, pause button disabled in main menu (Cancel in input manager, default escape key)
@@ -98,7 +100,8 @@ public class StartOptions : MonoBehaviour {
 
 		//Hide the main menu UI element
 		showPanels.HideMenu ();
-        sfScene.SetActive(false);
+        showPanels.HideStoryPanelImmediate();
+        //sfScene.SetActive(false);
 
 		//Load the selected scene, by scene index number in build settings
 		SceneManager.LoadScene (sceneToStart);
@@ -109,6 +112,7 @@ public class StartOptions : MonoBehaviour {
 	{
 		//Hide the main menu UI element after fading out menu for start game in scene
 		showPanels.HideMenu();
+        bgPC.SetActive(false);
 	}
 
     // Starts game in current scene if we don't want a scene change
