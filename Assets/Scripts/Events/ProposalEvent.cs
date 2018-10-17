@@ -50,7 +50,7 @@ public class ProposalEvent : CustomEvent{
         ScoreScript scoreScript = (ScoreScript)score.GetComponent(typeof(ScoreScript));
 
 
-            ScoreScript.money -= (int) (1000 * _risk * Random.Range(1f, 2f));
+            ScoreScript.money -= (int) (1000 * _risk * Random.Range(0f, 1f));
             scoreScript.happiness -= (int) (10 * _risk * Random.Range(1f, 2f));
 
 

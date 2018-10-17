@@ -23,13 +23,13 @@ public class EventManager{
 
 
 
-        if (eventChance <= 0.33)
+        if (eventChance <= 0.40)
         {
 
             eventDescription += "this is low risk project with a low chance of failure";
 
         }
-        else if (eventChance > 0.33 && eventChance <= 0.66)
+        else if (eventChance > 0.60 && eventChance <= 0.80)
         {
 
             eventDescription += "this is moderatly risky project with a good chance of failing";
