@@ -28,7 +28,7 @@ public class ProposalEvent : CustomEvent{
 
     public override void consequence() {
 
-        float diceRoll = Random.Range(0.1f, 1f);
+        float diceRoll = Random.Range(0.2f, 1f);
         if (diceRoll > _chance)
         {
             reward();
