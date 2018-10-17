@@ -10,7 +10,7 @@ public class Controller : MonoBehaviour {
     public List<GameObject> NPCList = new List<GameObject>();
     public float proposalTimer = 5f;
     public float happinessTimer = 5f;
-    public float conflictEventTimer = 20f;
+    public float conflictEventTimer = 30f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
     float lossTime = 4;
@@ -90,7 +90,7 @@ public class Controller : MonoBehaviour {
         }
         if(!conflict)
         {
-            conflictEventTimer = 20f;
+            conflictEventTimer = 30f;
         }
     }
 
