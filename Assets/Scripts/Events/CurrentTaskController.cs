@@ -25,7 +25,7 @@ public class CurrentTaskController : MonoBehaviour {
         string str = attachedEvent._description;
         string mainDescriptionLine = new System.IO.StringReader(str).ReadLine();
         Summary.text = mainDescriptionLine;
-        ProposedBy.text = "Proposed by" + attachedEvent._name;
+        ProposedBy.text = "Proposed by " + attachedEvent._name;
         PotentialReward.text = "Potential reward: " + attachedEvent._reward + "k";
     }
 
