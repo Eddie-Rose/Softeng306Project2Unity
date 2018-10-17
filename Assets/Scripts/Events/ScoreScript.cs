@@ -14,7 +14,7 @@ public class ScoreScript : MonoBehaviour {
     void Start () {
         //showPanels = GetComponent<ShowPanels>();
         scoreText = GetComponent<Text>();
-        money = 0;
+        money = 10000;
         happiness = 0;
 	}
 	

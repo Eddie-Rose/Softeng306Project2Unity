@@ -10,7 +10,8 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;                           //Store a reference to the Game Object PausePanel 
     public GameObject helpPanel;
-    public GameObject endGamePanel;
+    public GameObject winGamePanel;
+    public GameObject loseGamePanel;
     public GameObject storyPanels;
 
     private Animator animatorTest;
@@ -82,15 +83,30 @@ public class ShowPanels : MonoBehaviour {
 	}
 
     //Call this function to activate and display the end game panel during game play
-    public void ShowEndGamePanel() {
-        endGamePanel.SetActive(true);
+    public void ShowWinGamePanel() {
+        winGamePanel.SetActive(true);
         optionsTint.SetActive(true);
-        SetSelection(endGamePanel);
+        SetSelection(winGamePanel);
     }
 
     //Call this function to deactivate and hide the end game panel during game play
-    public void HideEndGamePanel() {
-        endGamePanel.SetActive(false);
+    public void HideWinGamePanel() {
+        winGamePanel.SetActive(false);
+        optionsTint.SetActive(false);
+    }
+
+    //Call this function to activate and display the end game panel during game play
+    public void ShowLoseGamePanel()
+    {
+        loseGamePanel.SetActive(true);
+        optionsTint.SetActive(true);
+        SetSelection(loseGamePanel);
+    }
+
+    //Call this function to deactivate and hide the end game panel during game play
+    public void HideLoseGamePanel()
+    {
+        loseGamePanel.SetActive(false);
         optionsTint.SetActive(false);
 
     }

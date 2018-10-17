@@ -8,6 +8,7 @@ public class EndGame : MonoBehaviour
     private ShowPanels showPanels;                      //Reference to the ShowPanels script used to hide and show UI panels
     private bool isPaused;                              //Boolean to check if the game is paused or not
     private StartOptions startScript;                   //Reference to the StartButton script
+    private bool gameWin = false;
 
     //Awake is called before Start()
     void Awake()
@@ -23,9 +24,12 @@ public class EndGame : MonoBehaviour
     {
 
         //Check if the user has earned enough money to "win"
-        if (ScoreScript.money > 1000000 && !isPaused && !startScript.inMainMenu)
-        {
+        if (ScoreScript.money > 100000 && !isPaused && !startScript.inMainMenu) {
             //Call the DoEndGame function to end the game
+            gameWin = true;
+            DoEndGame();
+        } else if (ScoreScript.money < 0 && !isPaused && !startScript.inMainMenu) {
+            gameWin = false;
             DoEndGame();
         }
         //If the button is pressed and the game is paused and not in main menu
@@ -44,8 +48,13 @@ public class EndGame : MonoBehaviour
         isPaused = true;
         //Set time.timescale to 0, this will cause animations and physics to stop updating
         Time.timeScale = 0;
+        if (gameWin) {
+            showPanels.ShowWinGamePanel();
+        } else {
+            showPanels.ShowLoseGamePanel();
+        }
         //call the ShowPausePanel function of the ShowPanels script
-        showPanels.ShowEndGamePanel();
+        //showPanels.ShowEndGamePanel();
     }
 
     // Restarts the game
@@ -64,7 +73,8 @@ public class EndGame : MonoBehaviour
 
         // Removies the end game panels
         showPanels.HidePausePanel();
-        showPanels.HideEndGamePanel();
+        showPanels.HideWinGamePanel();
+        showPanels.HideLoseGamePanel();
     }
 
     public void Continue() {
