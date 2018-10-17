@@ -34,7 +34,7 @@ public class CVscript : MonoBehaviour {
 		
 	}
 
-    void GenerateCV() {
+    public void GenerateCV() {
 
 
         name = names[Random.Range(0, names.Length)] + " " + names[Random.Range(0, names.Length)];

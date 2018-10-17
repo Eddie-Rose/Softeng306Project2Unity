@@ -11,6 +11,8 @@ public class Controller : MonoBehaviour {
     public float timedEventA = 5f;
     EventManager eventManager = new EventManager();
     int numEmployees = 1;
+    float lossTime = 4;
+    float CVupdate = 7;
 
     // Tracks he currently active event.
     private CustomEvent _currentEvent;
@@ -69,20 +71,8 @@ public class Controller : MonoBehaviour {
     void Update()
     {
         Timer();
-        DeductMoney();
 	}
 
-    float lossTime = 4;
-
-    void DeductMoney()
-    {
-        lossTime -= Time.deltaTime;
-        if(lossTime < 0)
-        {
-            ScoreScript.money -= (NPCList.Count + 1) * 200;
-            lossTime = 4;
-        }
-    }
 
     float conflictTime = 20;
 
@@ -146,6 +136,33 @@ public class Controller : MonoBehaviour {
             timedEventA = 100000f;
         }
 
+        lossTime -= Time.deltaTime;
+        if (lossTime < 0)
+        {
+            ScoreScript.money -= (NPCList.Count + 1) * 20;
+            lossTime = 4;
+        }
+
+        CVupdate -= Time.deltaTime;
+        if (CVupdate < 0 && hireBoxPrefab != null)
+        {
+
+            int CVcount = hireBoxPrefab.transform.childCount;
+            for (int x = 1; x < CVcount; x++) {
+
+                GameObject cvChild = hireBoxPrefab.transform.GetChild(x).gameObject;
+
+                if (cvChild.activeInHierarchy == false) {
+
+                    cvChild.GetComponent<CVscript>().GenerateCV();
+                    cvChild.SetActive(true);
+                    break;
+
+                }
+
+            }
+            CVupdate = 7;
+        }
     }
 
     public void doEvent(bool execute)
@@ -164,7 +181,7 @@ public class Controller : MonoBehaviour {
 
     public void createProceduralNPC(string name, string gender, string age, string ethnicity, string position, int skill, int teamwork)
     {
-
+        hireBoxPrefab = GameObject.Find("HirePanel");
         GameObject randomNPC =
             Instantiate(Resources.Load("CharacterGeneration/CustomCharacter"),
             new Vector3(1, 0, 1),
@@ -173,18 +190,11 @@ public class Controller : MonoBehaviour {
         //Stats statScript = randomNPC.GetComponent<Stats>();
         
 
-        Transform shirtObject = randomNPC.transform.GetChild(0);
-        Transform bodyObject = randomNPC.transform.GetChild(1);
-        Transform hairObject = randomNPC.transform.GetChild(2);
-        Transform pantsObject = randomNPC.transform.GetChild(3);
-
-
         string bodyName = "";
         string hairName = "";
-        string shirtName = "";
-        string pantsName = "";
 
-        switch (Random.Range(1, 3))
+        // Load the body
+        switch (Random.Range(1,3))
         {
             case 1:
                 bodyName = "body_pale";
@@ -193,9 +203,8 @@ public class Controller : MonoBehaviour {
                 bodyName = "body_dark";
                 break;
         }
-        bodyObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Bodies/" + bodyName);
-
-
+        
+        // Load the hair
         if (gender == "Male")
         {
             switch (Random.Range(1, 3))
@@ -219,44 +228,22 @@ public class Controller : MonoBehaviour {
             }
 
         }
-        hairObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Hairs/" + hairName);
-        Color random = new Color(Random.value, Random.value, Random.value, 1.0f);
-        hairObject.GetComponent<SpriteRenderer>().color = random;
-
-        switch (Random.Range(1, 5))
-        {
-            case 1:
-                shirtName = "shirt_blue";
-                break;
-            case 2:
-                shirtName = "shirt_limegreen";
-                break;
-            case 3:
-                shirtName = "shirt_pink";
-                break;
-            case 4:
-                shirtName = "shirt_white";
-                break;
-        }
-        shirtObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Shirts/" + shirtName);
-        shirtObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-
-
-        switch (Random.Range(1, 3))
-        {
-            case 1:
-                pantsName = "pants_blue";
-                break;
-            case 2:
-                pantsName = "pant_dark";
-                break;
-        }
-        pantsObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("CharacterGeneration/Pants/" + pantsName);
-        pantsObject.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value, 1.0f);
-
-        //set data into npc stats
+        Color hairColor = new Color(Random.value, Random.value, Random.value, 1.0f);
+        
+        //  Setup the shirt
+        Color shirtColor = new Color(Random.value, Random.value, Random.value, 1.0f);
+        
+        // Setup the pants
+        Color pantsColor = new Color(Random.value, Random.value, Random.value, 1.0f);
+        
+        // Set data into character stats
         Stats statsScript = randomNPC.GetComponent<Stats>();
         statsScript.name = name;
+        statsScript.pantsColor = pantsColor;
+        statsScript.shirtColor = shirtColor;
+        statsScript.hairColor = hairColor;
+        statsScript.bodyName = bodyName;
+        statsScript.hairName = hairName;
         statsScript.gender = gender;
         statsScript.ethnicity = ethnicity;
         statsScript.age = age;
@@ -269,13 +256,10 @@ public class Controller : MonoBehaviour {
         setSkillTeamwork();
 
         randomNPC.name = name;
-        statsScript.haircolor = random;
 
         NPCList.Add(randomNPC);
         employeeNames.Add(name);
         employeeRelationships.addNode(statsScript);
-
-
     }
 
     // Create a new NPC
@@ -384,6 +368,7 @@ public class Controller : MonoBehaviour {
 
         CVscript cv = new CVscript();
 
+        /*
         foreach (Stats stat in charStats) {
 
             if (diversities[stat.gender] == 0) {
@@ -401,7 +386,7 @@ public class Controller : MonoBehaviour {
             }
 
         }
-
+        */
     }
 
     public void setHappinessIncrement() {
