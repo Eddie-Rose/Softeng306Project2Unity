@@ -24,7 +24,7 @@ public class NPCMovement : MonoBehaviour
     private float passiveWalkTime;
     //If >0 passive , if 0 active
     enum walking {passive,active};
-    private walking Status;
+    private walking Status = walking.active;
     string[] projectArray = new string[] {
         "How's it going?",
         "This project is difficult",
@@ -91,10 +91,21 @@ public class NPCMovement : MonoBehaviour
         {
             TurnOnMessage(other);
         }
-        else if(other.name.Contains("ChairTrigger")) 
+        else if(other.name.Contains("ChairTriggerFront")) 
         {
             this.gameObject.transform.position = other.transform.position;
             characterSprites.SetDownSprite();
+            this.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
+            this.spriteRenderer.sortingLayerName = "OnChair";
+            Status = walking.passive;
+            passiveWalkTime = 5f;
+        }
+        else if (other.name.Contains("ChairTriggerBack"))
+        {
+            this.gameObject.transform.position = new Vector3(other.transform.position.x,
+                    other.gameObject.transform.position.y + 0.070f, other.transform.position.x);
+            characterSprites.SetUpSprite();
+            this.gameObject.GetComponent<EdgeCollider2D>().enabled = false;
             this.spriteRenderer.sortingLayerName = "OnChair";
             Status = walking.passive;
             passiveWalkTime = 5f;
@@ -187,7 +198,10 @@ public class NPCMovement : MonoBehaviour
             passiveWalkTime -= Time.deltaTime;
             if(passiveWalkTime < 0)
             {
+                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x + 0.5f,
+                    this.gameObject.transform.position.y + 0.5f, this.gameObject.transform.position.x);
                 Status = walking.active;
+                this.gameObject.GetComponent<EdgeCollider2D>().enabled = true;
             }
         }
 		
