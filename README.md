@@ -25,4 +25,4 @@ The final build can be found under 'releases'.
 
 ## Running the game
 
-Note that the selected game resolution should be 1600x900. The final prototype can be found under 'releases'.
+Note that the selected game resolution should be 1600x900. The final build can be found under 'releases'.
